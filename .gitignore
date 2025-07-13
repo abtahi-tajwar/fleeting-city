@@ -1,0 +1,22 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Godot-specific ignore
+.import/
+.export/
+export.cfg
+export_presets.cfg
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional: C# builds
+mono/
+*.csproj
+*.sln
+*.dll
+
+# Heavy files
+vendor/
