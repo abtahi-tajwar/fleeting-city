@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://chi3y0vwccbwo"]
+[gd_scene load_steps=19 format=4 uid="uid://chi3y0vwccbwo"]
 
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="Script" uid="uid://c03g6osspg3nk" path="res://Units/Player/CharacterMovement.cs" id="3_i2i0q"]
+[ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
 [ext_resource type="Texture2D" uid="uid://coxvaww2qi78x" path="res://assets/game/player/demo_player.png" id="4_o6a0g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6unwm"]
@@ -603,7 +604,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqiun"]
-size = Vector2(16, 29)
+size = Vector2(16, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2i0q"]
+size = Vector2(48, 32)
 
 [node name="PlayerMoveSandbox" type="Node2D"]
 
@@ -614,20 +618,39 @@ tile_map_data = PackedByteArray("AAD8//z/AAACAAEAAAD8//3/AAACAAIAAAD8//7/AAACAAM
 tile_set = SubResource("TileSet_o6a0g")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Ground")]
-position = Vector2(106, 67)
+z_index = 100
+position = Vector2(120, 64)
 script = ExtResource("3_i2i0q")
 Ground = NodePath("../Environment/Ground")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -4)
+scale = Vector2(1, 0.875)
 sprite_frames = SubResource("SpriteFrames_wydw0")
 animation = &"walk_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0, -2.5)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_kqiun")
+metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(106, 64)
 scale = Vector2(0.44, 1)
 zoom = Vector2(3.5, 3.5)
+
+[node name="Rocks" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Rocks" groups=["movement_obstacles"]]
+position = Vector2(50, 50)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/StaticBody2D"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_i2i0q")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/StaticBody2D"]
+position = Vector2(-1, 0)
+scale = Vector2(0.304688, 0.304688)
+texture = ExtResource("4_6unwm")
