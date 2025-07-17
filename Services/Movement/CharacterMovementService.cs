@@ -64,10 +64,6 @@ public class CharacterMovementService
 				}
 			}
 
-			// Vector2I obstaclePos = _ground.LocalToMap(node.GlobalPosition);
-			// GD.Print("Obstacle Position: ", obstaclePos);
-
-			// grid.SetPointSolid(obstaclePos, true);
 
 
 		}
@@ -77,11 +73,8 @@ public class CharacterMovementService
 	{
 		Vector2I targetPos = _ground.LocalToMap(_context.GetGlobalMousePosition());
 		Vector2I playerPos = _ground.LocalToMap(_context.GlobalPosition);
-		GD.Print("Player Position: ", playerPos);
-		GD.Print("Global Mouse Position: ", targetPos);
 
 		_idPath = _grid.GetIdPath(playerPos, targetPos);
-		GD.Print("Path found: ", _idPath);
 		if (_idPath.Count > 0)
 		{
 			_idPath.RemoveAt(0); // Remove the first element which is the current position
@@ -106,7 +99,6 @@ public class CharacterMovementService
 				if (_idPath.Count == 0)
 					_idPath = null;
 			}
-			GD.Print("Current ID Path: ", targetPosition, _idPath);
 		}
 	}
 }

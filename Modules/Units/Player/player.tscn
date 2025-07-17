@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bsrv5uef8ua7e"]
 
-[ext_resource type="Script" uid="uid://c03g6osspg3nk" path="res://Modules/Units/Player/PlayerMovement.cs" id="1_trhtq"]
+[ext_resource type="Script" uid="uid://crk333j8aaiks" path="res://Modules/Units/Player/Player.cs" id="1_trhtq"]
 [ext_resource type="Texture2D" uid="uid://coxvaww2qi78x" path="res://assets/game/player/demo_player.png" id="2_1n4l5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krt23"]

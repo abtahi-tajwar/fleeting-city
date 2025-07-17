@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerMovement : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
 	private CharacterMovementService _movementService;
 
