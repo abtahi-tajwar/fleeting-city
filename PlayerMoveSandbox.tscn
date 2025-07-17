@@ -546,6 +546,7 @@ tile_set = SubResource("TileSet_o6a0g")
 
 [node name="Player" parent="." instance=ExtResource("2_v553w")]
 position = Vector2(120, 64)
+input_pickable = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(106, 64)
