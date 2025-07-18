@@ -14,8 +14,8 @@ Thumbs.db
 
 # Optional: C# builds
 mono/
-*.csproj
-*.sln
+# *.csproj
+# *.sln
 *.dll
 
 # Heavy files

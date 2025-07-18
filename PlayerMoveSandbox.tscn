@@ -555,15 +555,15 @@ zoom = Vector2(3.5, 3.5)
 
 [node name="Rocks" type="Node2D" parent="."]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Rocks" groups=["movement_obstacles"]]
+[node name="Rock1" type="StaticBody2D" parent="Rocks" groups=["movement_obstacles"]]
 position = Vector2(50, 50)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock1"]
 position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_i2i0q")
 
-[node name="Sprite2D" type="Sprite2D" parent="Rocks/StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock1"]
 position = Vector2(-1, 0)
 scale = Vector2(0.304688, 0.304688)
 texture = ExtResource("4_6unwm")
