@@ -13,6 +13,18 @@ public partial class Player : CharacterBody2D
 	{
 		_movementService.Update(delta);
 	}
+	public override void _Process(double delta)
+    {
+        // Additional processing logic can be added here if needed
+        if (UnitSelectionManager.IsPlayerSelected)
+        {
+            SetOutline(true);
+        }
+        else
+        {
+            SetOutline(false);
+        }
+    }
 
 	public override void _Input(InputEvent @event)
 	{
@@ -24,10 +36,21 @@ public partial class Player : CharacterBody2D
 	}
 
 	public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
+	{
+		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+		{
+			UnitSelectionManager.SelectUnit(this);
+		}
+	}
+	
+	public void SetOutline(bool enabled)
     {
-        if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+        var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        var material = sprite.Material as ShaderMaterial;
+
+        if (material != null)
         {
-            UnitSelectionManager.SelectUnit(this);
+            material.SetShaderParameter("show_outline", enabled);
         }
     }
 }

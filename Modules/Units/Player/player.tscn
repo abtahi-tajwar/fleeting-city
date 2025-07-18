@@ -1,7 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsrv5uef8ua7e"]
+[gd_scene load_steps=16 format=3 uid="uid://bsrv5uef8ua7e"]
 
 [ext_resource type="Script" uid="uid://crk333j8aaiks" path="res://Modules/Units/Player/Player.cs" id="1_trhtq"]
+[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://shaders/TestShader.gdshader" id="1_vk3r0"]
 [ext_resource type="Texture2D" uid="uid://coxvaww2qi78x" path="res://assets/game/player/demo_player.png" id="2_1n4l5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vk3r0"]
+shader = ExtResource("1_vk3r0")
+shader_parameter/show_outline = true
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krt23"]
 atlas = ExtResource("2_1n4l5")
@@ -78,11 +85,11 @@ animations = [{
 size = Vector2(16, 34)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-z_index = 100
 script = ExtResource("1_trhtq")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_vk3r0")
 position = Vector2(0, -4)
 scale = Vector2(1, 0.875)
 sprite_frames = SubResource("SpriteFrames_wydw0")
