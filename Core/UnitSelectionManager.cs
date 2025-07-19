@@ -29,4 +29,15 @@ public partial class UnitSelectionManager : Node
             GD.Print("Unit selection failed. Not a valid unit type.");
         }
     }
+
+    public static void SetOutline(Node2D node, bool enabled)
+    {
+        var sprite = node.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        var material = sprite.Material as ShaderMaterial;
+
+        if (material != null)
+        {
+            material.SetShaderParameter("show_outline", enabled);
+        }
+    }
 }

@@ -13,7 +13,7 @@ public partial class Settler : CharacterBody2D
         UniqueId = Guid.NewGuid().ToString(); // Assign a unique ID to the settler
         GD.Print($"Settler created with UniqueId: {UniqueId}");
         _movementService = new CharacterMovementService(this);
-        SetOutline(false);
+        UnitSelectionManager.SetOutline(this, false);
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -24,11 +24,12 @@ public partial class Settler : CharacterBody2D
         // Additional processing logic can be added here if needed
         if (UnitSelectionManager.SelectedSettlerId == UniqueId)
         {
-            SetOutline(true);
+            GD.Print($"Processing Settler with UniqueId: {UniqueId}, Selected Settler ID: {UnitSelectionManager.SelectedSettlerId}");
+            UnitSelectionManager.SetOutline(this, true);
         }
         else
         {
-            SetOutline(false);
+            UnitSelectionManager.SetOutline(this, false);
         }
     }
     public override void _Input(InputEvent @event)
@@ -46,14 +47,5 @@ public partial class Settler : CharacterBody2D
         }
     }
 
-    public void SetOutline(bool enabled)
-    {
-        var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        var material = sprite.Material as ShaderMaterial;
-
-        if (material != null)
-        {
-            material.SetShaderParameter("show_outline", enabled);
-        }
-    }
+    
 }

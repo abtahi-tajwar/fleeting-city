@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv44yulhj65ys"
-path="res://.godot/imported/Vampires1_Idle_body.png-139c911f932272bea9cdcd5639e9f2c4.ctex"
+uid="uid://stltll7ydd5p"
+path="res://.godot/imported/player_walk_toggle.png-05e2d772948a486c653cb654998d8ef3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Utils/texture_trimmer/input/Vampires1_Idle_body.png"
-dest_files=["res://.godot/imported/Vampires1_Idle_body.png-139c911f932272bea9cdcd5639e9f2c4.ctex"]
+source_file="res://assets/game/UI/player_walk_toggle.png"
+dest_files=["res://.godot/imported/player_walk_toggle.png-05e2d772948a486c653cb654998d8ef3.ctex"]
 
 [params]
 

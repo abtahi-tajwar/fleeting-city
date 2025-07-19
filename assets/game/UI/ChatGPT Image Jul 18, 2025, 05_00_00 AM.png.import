@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv44yulhj65ys"
-path="res://.godot/imported/Vampires1_Idle_body.png-139c911f932272bea9cdcd5639e9f2c4.ctex"
+uid="uid://doywxv4g44ctp"
+path="res://.godot/imported/ChatGPT Image Jul 18, 2025, 05_00_00 AM.png-c297a780462f5715df7419d07963a258.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Utils/texture_trimmer/input/Vampires1_Idle_body.png"
-dest_files=["res://.godot/imported/Vampires1_Idle_body.png-139c911f932272bea9cdcd5639e9f2c4.ctex"]
+source_file="res://assets/game/UI/ChatGPT Image Jul 18, 2025, 05_00_00 AM.png"
+dest_files=["res://.godot/imported/ChatGPT Image Jul 18, 2025, 05_00_00 AM.png-c297a780462f5715df7419d07963a258.ctex"]
 
 [params]
 

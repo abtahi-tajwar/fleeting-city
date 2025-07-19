@@ -5,6 +5,8 @@ public partial class GameManager : Node
 {
     [Export]
     public PackedScene SettlerScene;
+    [Export]
+    public Node2D SettlersHolder;
 
 
     // Privates
@@ -13,7 +15,7 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         var settlerManager = new SettlerManager();
-        settlerManager.Init(SettlerScene);
+        settlerManager.Init(SettlersHolder, SettlerScene);
         _settlerManager = settlerManager;
     }
 }

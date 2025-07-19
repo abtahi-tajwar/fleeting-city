@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bsrv5uef8ua7e"]
 
 [ext_resource type="Script" uid="uid://crk333j8aaiks" path="res://Modules/Units/Player/Player.cs" id="1_trhtq"]
-[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://shaders/TestShader.gdshader" id="1_vk3r0"]
+[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://Shaders/TestShader.gdshader" id="1_vk3r0"]
 [ext_resource type="Texture2D" uid="uid://coxvaww2qi78x" path="res://assets/game/player/demo_player.png" id="2_1n4l5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vk3r0"]

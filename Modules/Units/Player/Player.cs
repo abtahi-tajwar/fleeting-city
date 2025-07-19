@@ -18,11 +18,11 @@ public partial class Player : CharacterBody2D
         // Additional processing logic can be added here if needed
         if (UnitSelectionManager.IsPlayerSelected)
         {
-            SetOutline(true);
+            UnitSelectionManager.SetOutline(this, true);
         }
         else
         {
-            SetOutline(false);
+            UnitSelectionManager.SetOutline(this, false);
         }
     }
 
@@ -42,15 +42,4 @@ public partial class Player : CharacterBody2D
 			UnitSelectionManager.SelectUnit(this);
 		}
 	}
-	
-	public void SetOutline(bool enabled)
-    {
-        var sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-        var material = sprite.Material as ShaderMaterial;
-
-        if (material != null)
-        {
-            material.SetShaderParameter("show_outline", enabled);
-        }
-    }
 }

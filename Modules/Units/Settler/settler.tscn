@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://dy6308whqr3cl"]
 
-[ext_resource type="Shader" uid="uid://8xhcxptn0236" path="res://shaders/GlowingOutline2D.gdshader" id="1_7dj6d"]
+[ext_resource type="Shader" uid="uid://8xhcxptn0236" path="res://Shaders/GlowingOutline2D.gdshader" id="1_7dj6d"]
 [ext_resource type="Script" uid="uid://cmhohcnhsqfjr" path="res://Modules/Units/Settler/Settler.cs" id="1_j1b6g"]
 [ext_resource type="Texture2D" uid="uid://c1wd2j3dv354u" path="res://assets/game/Settlers/settler_spritesheet.png" id="2_7dj6d"]
-[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://shaders/TestShader.gdshader" id="3_u8hul"]
+[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://Shaders/TestShader.gdshader" id="3_u8hul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u8hul"]
 shader = ExtResource("1_7dj6d")
