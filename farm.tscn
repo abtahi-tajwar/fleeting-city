@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dos066vasmb2p"]
+
+[ext_resource type="PackedScene" uid="uid://ng1jq5xmcyt2" path="res://crop_plot.tscn" id="1_bj28v"]
+
+[node name="Farm" type="Node2D"]
+
+[node name="CropPlot" parent="." instance=ExtResource("1_bj28v")]
+
+[node name="CropPlot2" parent="." instance=ExtResource("1_bj28v")]
+position = Vector2(64, 0)
+
+[node name="CropPlot3" parent="." instance=ExtResource("1_bj28v")]
+position = Vector2(128, 0)
+
+[node name="CropPlot4" parent="." instance=ExtResource("1_bj28v")]
+position = Vector2(0, 64)
+
+[node name="CropPlot5" parent="." instance=ExtResource("1_bj28v")]
+position = Vector2(64, 64)

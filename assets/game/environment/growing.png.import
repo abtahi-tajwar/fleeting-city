@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8j73gpga6kh3"
-path="res://.godot/imported/Tilemap_Flat.png-c2e0d39b2f03da0d439a7c34c8898a15.ctex"
+uid="uid://2u7g2rfvycod"
+path="res://.godot/imported/growing.png-d4f766e637ccadbdefcd04229d72f79b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/environment/Tilemap_Flat.png"
-dest_files=["res://.godot/imported/Tilemap_Flat.png-c2e0d39b2f03da0d439a7c34c8898a15.ctex"]
+source_file="res://assets/game/environment/growing.png"
+dest_files=["res://.godot/imported/growing.png-d4f766e637ccadbdefcd04229d72f79b.ctex"]
 
 [params]
 

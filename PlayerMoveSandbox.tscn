@@ -1,13 +1,15 @@
 [gd_scene load_steps=9 format=4 uid="uid://chi3y0vwccbwo"]
 
-[ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_v553w"]
 [ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
 [ext_resource type="PackedScene" uid="uid://dy6308whqr3cl" path="res://Modules/Units/Settler/settler.tscn" id="4_i2i0q"]
-[ext_resource type="Script" uid="uid://crcionj47rx2t" path="res://Core/GameManager.cs" id="5_i2i0q"]
+[ext_resource type="Script" path="res://Core/GameManager.cs" id="5_i2i0q"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fqlbv"]
+load_path = "res://.godot/imported/Tilemap_Flat.png-c2e0d39b2f03da0d439a7c34c8898a15.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6unwm"]
-texture = ExtResource("1_gl34e")
+texture = SubResource("CompressedTexture2D_fqlbv")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
