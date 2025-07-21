@@ -1,3 +1,4 @@
+using FleetingCity.Enums;
 using Godot;
 using System;
 using System.Linq;
@@ -26,7 +27,7 @@ public class CharacterMovementService
 		Rect2I groundCoords = _ground.GetUsedRect();
 		_grid.Region = groundCoords;
 		_grid.CellSize = new Vector2I(_ground.RenderingQuadrantSize, _ground.RenderingQuadrantSize);
-		_grid.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Always;
+		_grid.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Never;
 		_grid.Update();
 		MarkObstacles(_grid);
 	}
@@ -80,14 +81,16 @@ public class CharacterMovementService
 			_idPath.RemoveAt(0); // Remove the first element which is the current position
 		}
 	}
-	public void Update(double delta)
+	public MOVEMENT_DIRECTION_ENUM Update(double delta)
 	{
-		if (_idPath != null)
+		if (_idPath == null)
 		{
-			if (_idPath.Count == 0)
+			return MOVEMENT_DIRECTION_ENUM.NONE;
+		}
+		if (_idPath.Count == 0)
 			{
 				_idPath = null; // Clear the path when done
-				return;
+				return MOVEMENT_DIRECTION_ENUM.NONE;
 			}
 
 			Vector2I nextPosition = _idPath[0];
@@ -99,7 +102,7 @@ public class CharacterMovementService
 				if (_idPath.Count == 0)
 					_idPath = null;
 			}
-		}
+			return Helper.GetMovementDirection(_context.GlobalPosition, targetPosition);
 	}
 
 }

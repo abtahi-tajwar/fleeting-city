@@ -5,14 +5,17 @@ using System;
 public partial class Player : CharacterBody2D
 {
 	private CharacterMovementService _movementService;
+	private CharacterAnimationService _animationService;
 
 	public override void _Ready()
 	{
 		_movementService = new CharacterMovementService(this);
+		_animationService = new CharacterAnimationService(this);
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		_movementService.Update(delta);
+		MOVEMENT_DIRECTION_ENUM movementDirection = _movementService.Update(delta);
+		_animationService.PlayWalkAnimation(movementDirection);
 	}
 	public override void _Process(double delta)
     {

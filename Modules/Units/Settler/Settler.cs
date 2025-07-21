@@ -8,6 +8,7 @@ public partial class Settler : CharacterBody2D
 
     // Services
     private CharacterMovementService _movementService;
+    private CharacterAnimationService _animationService;
 
     public override void _Ready()
     {
@@ -15,10 +16,13 @@ public partial class Settler : CharacterBody2D
         GD.Print($"Settler created with UniqueId: {UniqueId}");
         _movementService = new CharacterMovementService(this);
         UnitSelectionManager.SetOutline(this, false);
+
+        _animationService = new CharacterAnimationService(this);
     }
     public override void _PhysicsProcess(double delta)
     {
-        _movementService.Update(delta);
+        MOVEMENT_DIRECTION_ENUM moveDirection = _movementService.Update(delta);
+        _animationService.PlayWalkAnimation(moveDirection);
     }
     public override void _Process(double delta)
     {
