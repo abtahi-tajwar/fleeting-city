@@ -1,22 +1,13 @@
 using Godot;
 using System;
 
-public partial class SettlerManager : Node
+public partial class SettlerManager : Node2D
 {
-	private PackedScene _settlerScene;
-	private Node2D _context;
+	[Export]
+	public PackedScene SettlerScene;
 
-	public void Init(Node2D context, PackedScene settlerScene)
+	public override void _Ready()
 	{
-		// Constructor logic if needed
-		if (settlerScene == null)
-		{
-			GD.PrintErr("SettlerScene is not assigned in the inspector.");
-			return;
-		}
-		_settlerScene = settlerScene;
-		_context = context;
-
 		SpawnSettler(new Vector2(10, 20)); // Example position, can be changed
 		SpawnSettler(new Vector2(30, 40)); // Example position, can be changed
 		SpawnSettler(new Vector2(100, 100)); // Example position, can be changed
@@ -24,8 +15,8 @@ public partial class SettlerManager : Node
 
 	public void SpawnSettler(Vector2 position)
 	{
-		Settler settler = _settlerScene.Instantiate<Settler>();
-		_context.AddChild(settler);
+		Settler settler = SettlerScene.Instantiate<Settler>();
+		this.AddChild(settler);
 		settler.Position = position; // Set initial position
 
 		// Assign unique ShaderMaterial to this settler's sprite

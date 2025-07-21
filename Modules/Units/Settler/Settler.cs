@@ -1,3 +1,4 @@
+using FleetingCity.Enums;
 using Godot;
 using System;
 
@@ -34,7 +35,12 @@ public partial class Settler : CharacterBody2D
     }
     public override void _Input(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.IsPressed() && UnitSelectionManager.SelectedSettlerId == UniqueId)
+        if (
+            @event is InputEventMouseButton mouseButtonEvent
+            && mouseButtonEvent.IsPressed()
+            && UnitSelectionManager.SelectedSettlerId == UniqueId
+            && ActionManager.CurrentAction == ACTION_ENUM.MOVE
+        )
         {
             _movementService.StartMovementOnClick(GetGlobalMousePosition());
         }

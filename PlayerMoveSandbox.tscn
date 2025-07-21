@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=4 uid="uid://chi3y0vwccbwo"]
+[gd_scene load_steps=15 format=4 uid="uid://chi3y0vwccbwo"]
 
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="Texture2D" uid="uid://0i8vsy46guxx" path="res://assets/game/environment/Water.png" id="1_o6a0g"]
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_v553w"]
 [ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
-[ext_resource type="PackedScene" uid="uid://dy6308whqr3cl" path="res://Modules/Units/Settler/settler.tscn" id="4_i2i0q"]
-[ext_resource type="Script" uid="uid://crcionj47rx2t" path="res://Core/GameManager.cs" id="5_i2i0q"]
+[ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="5_6u36r"]
 [ext_resource type="Script" uid="uid://be5qpxbq6shqq" path="res://Core/UIManager.cs" id="7_6u36r"]
 [ext_resource type="PackedScene" uid="uid://c02ftndx254vm" path="res://Modules/UI/ActionSelectors/ActionSelectors.tscn" id="8_krt23"]
+[ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="9_3piqb"]
+[ext_resource type="PackedScene" uid="uid://bmy5u5b2vikxa" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j10ru"]
 texture = ExtResource("1_o6a0g")
@@ -597,14 +598,11 @@ position = Vector2(-1, 0)
 scale = Vector2(0.304688, 0.304688)
 texture = ExtResource("4_6unwm")
 
-[node name="Settlers" type="Node2D" parent="."]
-
-[node name="GameManager" type="Node2D" parent="." node_paths=PackedStringArray("SettlersHolder")]
-script = ExtResource("5_i2i0q")
-SettlerScene = ExtResource("4_i2i0q")
-SettlersHolder = NodePath("../Settlers")
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("5_6u36r")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 script = ExtResource("7_6u36r")
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
@@ -622,3 +620,7 @@ metadata/_edit_group_ = true
 
 [node name="HBoxContainer" parent="CanvasLayer/PanelContainer" instance=ExtResource("8_krt23")]
 layout_mode = 2
+
+[node name="EventBus" parent="." instance=ExtResource("9_krt23")]
+
+[node name="Settlers" parent="." instance=ExtResource("9_3piqb")]

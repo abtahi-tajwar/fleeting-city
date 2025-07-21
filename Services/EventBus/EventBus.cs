@@ -3,11 +3,18 @@ using System;
 
 public partial class EventBus : Node
 {
+    //Singleton instance
+    public static EventBus Instance { get; private set; }
+    // Singals
     [Signal]
     public delegate void ActionChangeEventHandler(string actionType);
-
-    public void EmitActionChange(string actionType)
+    
+    public override void _Ready()
     {
-        EmitSignal(SignalName.ActionChange, actionType);
+        Instance = this;
+    }
+    public void EmitActionChange(string actionType, bool value)
+    {
+        EmitSignal(SignalName.ActionChange, actionType, value);
     }
 }

@@ -5,6 +5,7 @@ public partial class ActionSelector : Node
 {   
     public override void _Ready()
     {
+
         foreach (Node child in GetChildren())
         {
             if (child.IsInGroup("ActionButton"))
@@ -16,6 +17,7 @@ public partial class ActionSelector : Node
                         if (button.HasMeta("ActionType"))
                         {
                             string actionType = button.GetMeta("ActionType").ToString();
+                            EventBus.Instance.EmitActionChange(actionType, button.ButtonPressed);
                         }
                     };
                 }

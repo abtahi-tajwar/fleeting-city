@@ -1,3 +1,4 @@
+using FleetingCity.Enums;
 using Godot;
 using System;
 
@@ -28,7 +29,12 @@ public partial class Player : CharacterBody2D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.IsPressed() && UnitSelectionManager.IsPlayerSelected)
+		if (
+			@event is InputEventMouseButton mouseButtonEvent
+			&& mouseButtonEvent.IsPressed()
+			&& UnitSelectionManager.IsPlayerSelected
+			&& ActionManager.CurrentAction == ACTION_ENUM.MOVE
+		)
 		{
 			_movementService.StartMovementOnClick(GetGlobalMousePosition());
 		}

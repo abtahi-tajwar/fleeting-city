@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4exletsx3xcr"]
+
+[ext_resource type="Script" uid="uid://bo5unlfuquo0l" path="res://Core/SettlerManager/SettlerManager.cs" id="1_deuwx"]
+[ext_resource type="PackedScene" uid="uid://dy6308whqr3cl" path="res://Modules/Units/Settler/settler.tscn" id="2_2ny5g"]
+
+[node name="Settlers" type="Node2D"]
+script = ExtResource("1_deuwx")
+SettlerScene = ExtResource("2_2ny5g")
