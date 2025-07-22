@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dos066vasmb2p"]
+[gd_scene load_steps=2 format=3 uid="uid://dh2pykb706jt1"]
 
-[ext_resource type="PackedScene" uid="uid://ng1jq5xmcyt2" path="res://crop_plot.tscn" id="1_bj28v"]
+[ext_resource type="PackedScene" uid="uid://bfxahjkn0s2k8" path="res://Playground/crop_plot.tscn" id="1_bj28v"]
 
 [node name="Farm" type="Node2D"]
 

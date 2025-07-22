@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ng1jq5xmcyt2"]
+[gd_scene load_steps=4 format=3 uid="uid://bfxahjkn0s2k8"]
 
-[ext_resource type="Script" path="res://CropPlot.cs" id="1_lbtf3"]
+[ext_resource type="Script" uid="uid://bb3xjcg62pki8" path="res://Playground/CropPlot.cs" id="1_lbtf3"]
 [ext_resource type="Texture2D" uid="uid://bre3i4lkpb3bt" path="res://assets/game/environment/empty.png" id="2_uis2s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ang"]

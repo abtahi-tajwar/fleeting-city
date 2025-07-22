@@ -30,8 +30,8 @@ public partial class UnitSelectionManager : Node
 		else if (_unit is Settler settler)
 		{
 			IsPlayerSelected = false;
-			SelectedSettlerId = settler.UniqueId;
-			GD.Print($"Settler unit selected with UniqueId: {settler.UniqueId}");
+			SelectedSettlerId = settler.Model.UniqueId;
+			GD.Print($"Settler unit selected with UniqueId: {settler.Model.UniqueId}");
 		}
 		else
 		{

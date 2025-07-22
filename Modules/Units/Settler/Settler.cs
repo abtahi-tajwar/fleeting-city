@@ -1,10 +1,14 @@
+using FleetingCity.BAL.Modules;
 using FleetingCity.Enums;
 using Godot;
 using System;
 
 public partial class Settler : CharacterBody2D
 {
-    public string UniqueId { get; set; }
+    // public string UniqueId { get; set; }
+
+    // Model
+    public SettlerModel Model;
 
     // Services
     private CharacterMovementService _movementService;
@@ -13,8 +17,7 @@ public partial class Settler : CharacterBody2D
 
     public override void _Ready()
     {
-        UniqueId = Guid.NewGuid().ToString(); // Assign a unique ID to the settler
-        GD.Print($"Settler created with UniqueId: {UniqueId}");
+        Model = new SettlerModel();
         _movementService = new CharacterMovementService(this);
         UnitSelectionManager.SetOutline(this, false);
 
@@ -29,7 +32,7 @@ public partial class Settler : CharacterBody2D
     public override void _Process(double delta)
     {
         // Additional processing logic can be added here if needed
-        if (UnitSelectionManager.SelectedSettlerId == UniqueId)
+        if (UnitSelectionManager.SelectedSettlerId == Model.UniqueId)
         {
             UnitSelectionManager.SetOutline(this, true);
         }
@@ -49,7 +52,7 @@ public partial class Settler : CharacterBody2D
         {
             if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
 			{
-				if (UnitSelectionManager.SelectedSettlerId == UniqueId)
+				if (UnitSelectionManager.SelectedSettlerId == Model.UniqueId)
 				{
 					_movementService.StartMovementOnClick(GetGlobalMousePosition());
 				}
