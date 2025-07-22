@@ -6,17 +6,28 @@ public partial class UnitSelectionManager : Node
 	// Statics
 	public static bool IsPlayerSelected { get; set; } = false;
 	public static string? SelectedSettlerId { get; set; } = null;
+	public Node2D _unit { get; set; }
 
-	// Methods
-	public static void SelectUnit(Node unit)
+	public UnitSelectionManager(Node2D unit)
 	{
-		if (unit is Player player)
+		if (unit == null) throw new ArgumentNullException(nameof(unit), "Unit cannot be null.");
+		_unit = unit;
+	}
+
+	public void SelectPointedUnit(Vector2 mousePos)
+	{
+		var isMouseOver = Helper.IsMouseOverCollider(_unit, mousePos);
+		if (!isMouseOver)
+		{
+			return;
+		}
+		if (_unit is Player player)
 		{
 			IsPlayerSelected = true;
 			SelectedSettlerId = null; // Clear any selected settler ID
 			GD.Print("Player unit selected.");
 		}
-		else if (unit is Settler settler)
+		else if (_unit is Settler settler)
 		{
 			IsPlayerSelected = false;
 			SelectedSettlerId = settler.UniqueId;

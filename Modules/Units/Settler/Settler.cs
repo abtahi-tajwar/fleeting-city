@@ -9,6 +9,7 @@ public partial class Settler : CharacterBody2D
     // Services
     private CharacterMovementService _movementService;
     private CharacterAnimationService _animationService;
+    private UnitSelectionManager _unitSelectionManager;
 
     public override void _Ready()
     {
@@ -18,6 +19,7 @@ public partial class Settler : CharacterBody2D
         UnitSelectionManager.SetOutline(this, false);
 
         _animationService = new CharacterAnimationService(this);
+        _unitSelectionManager = new UnitSelectionManager(this);
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -29,7 +31,6 @@ public partial class Settler : CharacterBody2D
         // Additional processing logic can be added here if needed
         if (UnitSelectionManager.SelectedSettlerId == UniqueId)
         {
-            GD.Print($"Processing Settler with UniqueId: {UniqueId}, Selected Settler ID: {UnitSelectionManager.SelectedSettlerId}");
             UnitSelectionManager.SetOutline(this, true);
         }
         else
@@ -37,25 +38,35 @@ public partial class Settler : CharacterBody2D
             UnitSelectionManager.SetOutline(this, false);
         }
     }
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (
             @event is InputEventMouseButton mouseButtonEvent
             && mouseButtonEvent.IsPressed()
-            && UnitSelectionManager.SelectedSettlerId == UniqueId
-            && ActionManager.CurrentAction == ACTION_ENUM.MOVE
+            // && UnitSelectionManager.SelectedSettlerId == UniqueId
+            // && ActionManager.CurrentAction == ACTION_ENUM.MOVE
         )
         {
-            _movementService.StartMovementOnClick(GetGlobalMousePosition());
+            if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
+			{
+				if (UnitSelectionManager.SelectedSettlerId == UniqueId)
+				{
+					_movementService.StartMovementOnClick(GetGlobalMousePosition());
+				}
+			}
+			else
+			{
+				_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
+			}
         }
     }
-    public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
-    {
-        if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
-        {
-            UnitSelectionManager.SelectUnit(this);
-        }
-    }
+    // public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
+    // {
+    //     if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+    //     {
+    //         UnitSelectionManager.SelectUnit(this);
+    //     }
+    // }
 
     
 }
