@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://be5qpxbq6shqq" path="res://Core/UIManager.cs" id="7_6u36r"]
 [ext_resource type="PackedScene" uid="uid://c02ftndx254vm" path="res://Modules/UI/ActionSelectors/ActionSelectors.tscn" id="8_krt23"]
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="9_3piqb"]
-[ext_resource type="PackedScene" uid="uid://bmy5u5b2vikxa" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
+[ext_resource type="PackedScene" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j10ru"]
 texture = ExtResource("1_o6a0g")
