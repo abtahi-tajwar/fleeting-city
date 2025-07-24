@@ -5,6 +5,6 @@
     <RootNamespace>FleetingCity</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="FleetingCity.BAL/FleetingCity.BAL.csproj" />
+    <ProjectReference Include="FleetingCity.BAL/FleetingCity.BAL/FleetingCity.BAL.csproj" />
   </ItemGroup>
 </Project>
