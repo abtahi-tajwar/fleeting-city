@@ -18,29 +18,30 @@ public partial class InputManager : Node
 		}
 	}
 
-	public override void _Input(InputEvent @event)
+	private MOVEMENT_DIRECTION_ENUM _lastDirection = MOVEMENT_DIRECTION_ENUM.NONE;
+
+	public override void _PhysicsProcess(double delta)
 	{
-		if (@event.IsActionPressed("move_up"))
+		Vector2 vec = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+
+		MOVEMENT_DIRECTION_ENUM newDir = MOVEMENT_DIRECTION_ENUM.NONE;
+
+		if (vec.LengthSquared() > 0.01f) // ignore slight stick noise
 		{
-			EventBus.Instance.EmitPlayerMove(MOVEMENT_DIRECTION_ENUM.UP);
+			if (Mathf.Abs(vec.X) > Mathf.Abs(vec.Y))
+			{
+				newDir = vec.X > 0 ? MOVEMENT_DIRECTION_ENUM.RIGHT : MOVEMENT_DIRECTION_ENUM.LEFT;
+			}
+			else
+			{
+				newDir = vec.Y > 0 ? MOVEMENT_DIRECTION_ENUM.DOWN : MOVEMENT_DIRECTION_ENUM.UP;
+			}
 		}
-		else if (@event.IsActionPressed("move_down"))
+
+		if (newDir != _lastDirection)
 		{
-			EventBus.Instance.EmitPlayerMove(MOVEMENT_DIRECTION_ENUM.DOWN);
-		}
-		else if (@event.IsActionPressed("move_left"))
-		{
-			EventBus.Instance.EmitPlayerMove(MOVEMENT_DIRECTION_ENUM.LEFT);
-		}
-		else if (@event.IsActionPressed("move_right"))
-		{
-			EventBus.Instance.EmitPlayerMove(MOVEMENT_DIRECTION_ENUM.RIGHT);
-		} else if(@event.IsActionReleased("move_up") ||
-				  @event.IsActionReleased("move_down") ||
-				  @event.IsActionReleased("move_left") ||
-				  @event.IsActionReleased("move_right"))
-		{
-			EventBus.Instance.EmitPlayerMove(MOVEMENT_DIRECTION_ENUM.NONE);
+			_lastDirection = newDir;
+			EventBus.Instance.EmitPlayerMove(newDir);
 		}
 	}
 }

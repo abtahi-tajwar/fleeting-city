@@ -1,3 +1,4 @@
+using FleetingCity.BAL.Modules;
 using FleetingCity.Enums;
 using Godot;
 using System;
@@ -7,10 +8,8 @@ public partial class Player : CharacterBody2D
 {
 	private CharacterAnimationService _animationService;
 	private UnitSelectionManager _unitSelectionManager;
-
-	// Exports
 	[Export]
-	public float MovementSpeed = 100f; // Speed of the player movement
+	public float MovementSpeed; // Speed of the player movement
 
 	// privates
 	private MOVEMENT_DIRECTION_ENUM _currentDirection = MOVEMENT_DIRECTION_ENUM.NONE;
@@ -19,6 +18,7 @@ public partial class Player : CharacterBody2D
 	{
 		_animationService = new CharacterAnimationService(this);
 		_unitSelectionManager = new UnitSelectionManager(this);
+		MovementSpeed = PlayerModel.MovementSpeed;
 		GameManager.SetPlayer(this); // Register the player with GameManager
 
 		CallDeferred(nameof(ConnectToEventBus));
@@ -26,7 +26,7 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		_animationService.PlayWalkAnimation(_currentDirection);
-		HandlePlayerMove(delta);
+		Move(delta);
 	}
 	public override void _Process(double delta)
 	{
@@ -59,7 +59,7 @@ public partial class Player : CharacterBody2D
 		_currentDirection = Enum.Parse<MOVEMENT_DIRECTION_ENUM>(directionStr, true);
 	}
 
-	public void HandlePlayerMove(double delta)
+	private void Move(double delta)
 	{
 		if (_currentDirection == MOVEMENT_DIRECTION_ENUM.NONE)
 		{

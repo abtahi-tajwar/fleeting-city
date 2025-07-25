@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
-[ext_resource type="PackedScene" uid="uid://bdnqhpg6xjsr3" path="res://Modules/UI/ActionSelectors/Joystick/Joystick.tscn" id="2_xmm6o"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_s7k6r"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -28,12 +28,18 @@ script = ExtResource("1_s7k6r")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Container/ActionButtonsContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Joystick" parent="Container/ActionButtonsContainer/MarginContainer2" instance=ExtResource("2_xmm6o")]
+[node name="Virtual Joystick" parent="Container/ActionButtonsContainer/MarginContainer2" instance=ExtResource("3_s7k6r")]
 layout_mode = 2
+joystick_mode = 1
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
 
 [node name="MarginContainer" type="MarginContainer" parent="Container/ActionButtonsContainer"]
 layout_mode = 2
