@@ -30,7 +30,10 @@ public partial class Settler : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		// Additional processing logic can be added here if needed
-		if (UnitSelectionManager.SelectedSettlerId == Model.UniqueId)
+		if (
+			UnitSelectionManager.SelectedSettler != null
+			&& UnitSelectionManager.SelectedSettler.Model.Id == Model.Id
+		)
 		{
 			UnitSelectionManager.SetOutline(this, true);
 		}
@@ -44,13 +47,11 @@ public partial class Settler : CharacterBody2D
 		if (
 			@event is InputEventMouseButton mouseButtonEvent
 			&& mouseButtonEvent.IsPressed()
-			// && UnitSelectionManager.SelectedSettlerId == UniqueId
-			// && ActionManager.CurrentAction == ACTION_ENUM.MOVE
 		)
 		{
 			if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
 			{
-				if (UnitSelectionManager.SelectedSettlerId == Model.UniqueId)
+				if (UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
 				{
 					_movementService.StartMovementOnClick(GetGlobalMousePosition());
 				}

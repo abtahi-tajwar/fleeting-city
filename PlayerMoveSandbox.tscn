@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://chi3y0vwccbwo"]
+[gd_scene load_steps=16 format=4 uid="uid://chi3y0vwccbwo"]
 
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="Texture2D" uid="uid://0i8vsy46guxx" path="res://assets/game/environment/Water.png" id="1_o6a0g"]
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_v553w"]
+[ext_resource type="Script" uid="uid://bgbwmstb7ix3w" path="res://Modules/Camera/Camera.cs" id="4_3piqb"]
 [ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="5_6u36r"]
 [ext_resource type="Script" uid="uid://be5qpxbq6shqq" path="res://Core/UIManager.cs" id="7_6u36r"]
@@ -582,6 +583,7 @@ input_pickable = true
 position = Vector2(106, 64)
 scale = Vector2(0.44, 1)
 zoom = Vector2(3.5, 3.5)
+script = ExtResource("4_3piqb")
 
 [node name="Rocks" type="Node2D" parent="."]
 
@@ -625,3 +627,5 @@ layout_mode = 2
 [node name="EventBus" parent="." instance=ExtResource("9_krt23")]
 
 [node name="Settlers" parent="." instance=ExtResource("9_3piqb")]
+
+[node name="ChickenCoup" type="Node2D" parent="."]

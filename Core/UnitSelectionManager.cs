@@ -5,12 +5,13 @@ public partial class UnitSelectionManager : Node
 {
 	// Statics
 	public static bool IsPlayerSelected { get; set; } = false;
-	public static string SelectedSettlerId { get; set; } = null;
+	public static Settler SelectedSettler { get; set; } = null;
 	public Node2D _unit { get; set; }
 
 	public UnitSelectionManager(Node2D unit)
 	{
 		if (unit == null) throw new ArgumentNullException(nameof(unit), "Unit cannot be null.");
+		
 		_unit = unit;
 	}
 
@@ -21,22 +22,22 @@ public partial class UnitSelectionManager : Node
 		{
 			return;
 		}
-		if (_unit is Player player)
+		if (_unit is Player)
 		{
 			IsPlayerSelected = true;
-			SelectedSettlerId = null; // Clear any selected settler ID
+			SelectedSettler = null;
 			GD.Print("Player unit selected.");
 		}
 		else if (_unit is Settler settler)
 		{
 			IsPlayerSelected = false;
-			SelectedSettlerId = settler.Model.UniqueId;
-			GD.Print($"Settler unit selected with UniqueId: {settler.Model.UniqueId}");
+			SelectedSettler = settler;
+			GD.Print($"Settler unit selected with UniqueId: {settler.Model.Id}");
 		}
 		else
 		{
 			IsPlayerSelected = false;
-			SelectedSettlerId = null;
+			SelectedSettler = null;
 			GD.Print("Unit selection failed. Not a valid unit type.");
 		}
 	}

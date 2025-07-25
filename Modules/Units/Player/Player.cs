@@ -13,6 +13,7 @@ public partial class Player : CharacterBody2D
 		_movementService = new CharacterMovementService(this);
 		_animationService = new CharacterAnimationService(this);
 		_unitSelectionManager = new UnitSelectionManager(this);
+		GameManager.SetPlayer(this); // Register the player with GameManager
 	}
 	public override void _PhysicsProcess(double delta)
 	{
