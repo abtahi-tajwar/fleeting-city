@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_v553w"]
 [ext_resource type="Script" uid="uid://bgbwmstb7ix3w" path="res://Modules/Camera/Camera.cs" id="4_3piqb"]
 [ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
-[ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="5_6u36r"]
+[ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="6_krt23"]
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="9_3piqb"]
 [ext_resource type="PackedScene" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
 [ext_resource type="PackedScene" uid="uid://cvnw0jfd4pyif" path="res://Modules/UI/HUD.tscn" id="11_irye5"]
@@ -599,8 +599,7 @@ position = Vector2(-1, 0)
 scale = Vector2(0.304688, 0.304688)
 texture = ExtResource("4_6unwm")
 
-[node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("5_6u36r")
+[node name="GameManager" parent="." instance=ExtResource("6_krt23")]
 
 [node name="EventBus" parent="." instance=ExtResource("9_krt23")]
 

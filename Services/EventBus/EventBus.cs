@@ -8,8 +8,10 @@ public partial class EventBus : Node
     public static EventBus Instance { get; private set; }
     // Singals
     [Signal]
-    public delegate void ActionChangeEventHandler(string actionType);
-    
+    public delegate void ActionChangeEventHandler(string actionType, bool value);
+    [Signal]
+    public delegate void PlayerMoveEventHandler(string actionType);
+
     public override void _Ready()
     {
         Instance = this;
@@ -18,4 +20,9 @@ public partial class EventBus : Node
     {
         EmitSignal(SignalName.ActionChange, actionType.ToString(), value);
     }
+
+    public void EmitPlayerMove(MOVEMENT_DIRECTION_ENUM actionType)
+    {
+        EmitSignal(SignalName.PlayerMove, actionType.ToString());
+    }   
 }

@@ -1,24 +1,32 @@
 using FleetingCity.Enums;
 using Godot;
 using System;
+using System.Reflection.Metadata;
 
 public partial class Player : CharacterBody2D
 {
-	private CharacterMovementService _movementService;
 	private CharacterAnimationService _animationService;
 	private UnitSelectionManager _unitSelectionManager;
 
+	// Exports
+	[Export]
+	public float MovementSpeed = 100f; // Speed of the player movement
+
+	// privates
+	private MOVEMENT_DIRECTION_ENUM _currentDirection = MOVEMENT_DIRECTION_ENUM.NONE;
+
 	public override void _Ready()
 	{
-		_movementService = new CharacterMovementService(this);
 		_animationService = new CharacterAnimationService(this);
 		_unitSelectionManager = new UnitSelectionManager(this);
 		GameManager.SetPlayer(this); // Register the player with GameManager
+
+		CallDeferred(nameof(ConnectToEventBus));
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		MOVEMENT_DIRECTION_ENUM movementDirection = _movementService.Update(delta);
-		_animationService.PlayWalkAnimation(movementDirection);
+		_animationService.PlayWalkAnimation(_currentDirection);
+		HandlePlayerMove(delta);
 	}
 	public override void _Process(double delta)
 	{
@@ -38,23 +46,54 @@ public partial class Player : CharacterBody2D
 		if (
 			@event is InputEventMouseButton mouseButtonEvent
 			&& mouseButtonEvent.IsPressed()
-			// && UnitSelectionManager.IsPlayerSelected
-			// && ActionManager.CurrentAction == ACTION_ENUM.MOVE
+			&& ActionManager.CurrentAction == ACTION_ENUM.POINT
 		)
 		{
-			if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
-			{
-				if (UnitSelectionManager.IsPlayerSelected)
-				{
-					_movementService.StartMovementOnClick(GetGlobalMousePosition());
-				}
-			}
-			else
-			{
-				_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
-			}
-
+			_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
 		}
 
+	}
+
+	public void UpdateCurrentDirection(string directionStr)
+	{
+		_currentDirection = Enum.Parse<MOVEMENT_DIRECTION_ENUM>(directionStr, true);
+	}
+
+	public void HandlePlayerMove(double delta)
+	{
+		if (_currentDirection == MOVEMENT_DIRECTION_ENUM.NONE)
+		{
+			return;
+		} else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.UP)
+		{
+			Position += new Vector2(0, -MovementSpeed * (float)delta);
+		}
+		else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.DOWN)
+		{
+			Position += new Vector2(0, MovementSpeed * (float)delta);
+		}
+		else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.LEFT)
+		{
+			Position += new Vector2(-MovementSpeed * (float)delta, 0);
+		}
+		else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.RIGHT)
+		{
+			Position += new Vector2(MovementSpeed * (float)delta, 0);
+		}
+	}
+
+	private void ConnectToEventBus()
+	{
+		if (EventBus.Instance == null)
+		{
+			GD.PrintErr("EventBus instance is still null even after deferring.");
+			return;
+		}
+
+		EventBus.Instance.Connect(
+			"PlayerMove",
+			new Callable(this, nameof(UpdateCurrentDirection))
+		);
+		GD.Print("Connected to EventBus for PlayerMove events.");
 	}
 }

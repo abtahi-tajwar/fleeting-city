@@ -23,7 +23,7 @@ public partial class ActionManager : Node
 			"ActionChange",
 			new Callable(this, nameof(OnActionChanged))
 		);
-		GD.Print("Connect result: " + result); // 0 is OK
+		GD.Print("Connect result: " +    result); // 0 is OK
 	}
 
 	private void OnActionChanged(string actionType, bool value)

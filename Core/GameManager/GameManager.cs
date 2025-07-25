@@ -15,4 +15,5 @@ public partial class GameManager : Node
         Player = player;
         GD.Print("Player has been set in GameManager.");
     }
+
 }
