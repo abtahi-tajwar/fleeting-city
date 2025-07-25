@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3kdrsp3ft3o6"]
+
+[ext_resource type="Script" uid="uid://b7fmeyogm6hng" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.cs" id="1_dstxq"]
+[ext_resource type="Texture2D" uid="uid://5sskp4urgy8m" path="res://assets/game/UI/HUD_Panel.png" id="2_504ry"]
+[ext_resource type="Texture2D" uid="uid://stltll7ydd5p" path="res://assets/game/UI/player_walk_toggle.png" id="2_js3fr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dstxq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vkgac"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wkokh"]
+texture = ExtResource("2_504ry")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_js3fr"]
+
+[node name="MoveToggleButton" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 200)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dstxq")
+script = ExtResource("1_dstxq")
+ActionType = 1
+Scope = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vkgac")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wkokh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_js3fr")
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_js3fr")
+expand_mode = 3

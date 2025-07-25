@@ -2,6 +2,13 @@ namespace FleetingCity.Enums;
 
 public enum ACTION_ENUM
 {
-    POINT, 
+    POINT,
     MOVE
+}
+
+public enum ACTION_BUTTON_SCOPE
+{
+    HERO,
+    SETTLER,
+    BOTH
 }

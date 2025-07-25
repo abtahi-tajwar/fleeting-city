@@ -57,12 +57,4 @@ public partial class Player : CharacterBody2D
 		}
 
 	}
-
-	// public override void _InputEvent(Viewport viewport, InputEvent @event, int shapeIdx)
-	// {
-	// 	if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
-	// 	{
-	// 		UnitSelectionManager.SelectUnit(this);
-	// 	}
-	// }
 }

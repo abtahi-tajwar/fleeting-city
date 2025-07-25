@@ -1,3 +1,4 @@
+using FleetingCity.Enums;
 using Godot;
 using System;
 
@@ -13,8 +14,8 @@ public partial class EventBus : Node
     {
         Instance = this;
     }
-    public void EmitActionChange(string actionType, bool value)
+    public void EmitActionChange(ACTION_ENUM actionType, bool value)
     {
-        EmitSignal(SignalName.ActionChange, actionType, value);
+        EmitSignal(SignalName.ActionChange, actionType.ToString(), value);
     }
 }

@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvnw0jfd4pyif"]
+
+[ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
+[ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
+[ext_resource type="PackedScene" uid="uid://bdnqhpg6xjsr3" path="res://Modules/UI/ActionSelectors/Joystick/Joystick.tscn" id="2_xmm6o"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ActionButtonsContainer" type="HBoxContainer" parent="Container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_s7k6r")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Container/ActionButtonsContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Joystick" parent="Container/ActionButtonsContainer/MarginContainer2" instance=ExtResource("2_xmm6o")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/ActionButtonsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MoveToggleButton" parent="Container/ActionButtonsContainer/MarginContainer" instance=ExtResource("2_s7k6r")]
+layout_mode = 2
