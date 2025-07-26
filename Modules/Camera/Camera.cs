@@ -28,7 +28,7 @@ public partial class Camera : Node2D
             _followTarget = false;
 
             // Instead of scaling delta directly, normalize it and scale manually
-            Vector2 deltaTime = InputManager.Instance.MouseMoveDelta;
+            Vector2 deltaTime = InputManager.Instance.MouseDragDelta;
 
             if (deltaTime.Length() > 0.01f)
             {
@@ -46,7 +46,7 @@ public partial class Camera : Node2D
             }
 
             // Reset delta
-            InputManager.Instance.MouseMoveDelta = Vector2.Zero;
+            InputManager.Instance.MouseDragDelta = Vector2.Zero;
 
         }
     }

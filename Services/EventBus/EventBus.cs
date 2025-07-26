@@ -11,6 +11,9 @@ public partial class EventBus : Node
     public delegate void ActionChangeEventHandler(string actionType, bool value);
     [Signal]
     public delegate void PlayerMoveEventHandler(string actionType);
+    [Signal]
+    public delegate void SettlerSelectOrMoveEventHandler(Vector2 touchPos);
+
 
     public override void _Ready()
     {
@@ -25,4 +28,9 @@ public partial class EventBus : Node
     {
         EmitSignal(SignalName.PlayerMove, actionType.ToString());
     }   
+
+    public void EmitSettlerSelectOrMove(Vector2 touchPos)
+    {
+        EmitSignal(SignalName.SettlerSelectOrMove, touchPos);
+    } 
 }

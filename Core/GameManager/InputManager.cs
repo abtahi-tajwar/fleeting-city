@@ -2,12 +2,14 @@ using FleetingCity.Enums;
 using Godot;
 using System;
 
-public partial class InputManager : Node
+public partial class InputManager : Node2D
 {
 	// Singleton instance
 	public static InputManager Instance { get; private set; }
 	public bool IsDragging { get; set; } = false;
-	public Vector2 MouseMoveDelta = Vector2.Zero;
+	private bool IsMousePressed = false;
+	private bool DraggingJustFinished = false;
+	public Vector2 MouseDragDelta = Vector2.Zero;
 
 	// privates
 	private Vector2 _lastMousePosition;
@@ -29,6 +31,69 @@ public partial class InputManager : Node
 	private MOVEMENT_DIRECTION_ENUM _lastDirection = MOVEMENT_DIRECTION_ENUM.NONE;
 
 	public override void _PhysicsProcess(double delta)
+	{
+		CapturePlayerMovementInput(delta);
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event is InputEventMouseButton mouseEvent)
+		{
+			if (mouseEvent.Pressed)
+			{
+				OnMouseDown();
+			}
+			else
+			{
+				OnMouseUp();
+			}
+		}
+		else if (@event is InputEventScreenTouch touchEvent)
+		{
+			if (touchEvent.Pressed)
+			{
+				OnMouseDown();
+			}
+			else
+			{
+				OnMouseDown();
+			}
+		}
+
+
+		// Detect motion
+		if (@event is InputEventMouseMotion motion && IsMousePressed)
+		{
+			if (IsMousePressed)
+			{
+				IsDragging = true;
+				// Capture mouse movement delta
+				var currentMousePosition = GetViewport().GetMousePosition();
+				MouseDragDelta = currentMousePosition - _lastMousePosition;
+				_lastMousePosition = currentMousePosition;
+			}
+			// Don't reset dragging here
+		}
+
+	}
+
+	private void OnMouseDown()
+	{
+		IsMousePressed = true;
+		_lastMousePosition = GetViewport().GetMousePosition();
+	}
+	private void OnMouseUp()
+	{
+		IsMousePressed = false;
+		if (!IsDragging)
+		{
+			EventBus.Instance.EmitSettlerSelectOrMove(GetGlobalMousePosition());
+			GD.Print("Move settler please");
+		}
+		IsDragging = false;
+	}
+
+	private void CapturePlayerMovementInput(double delta)
 	{
 		Vector2 vec = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
@@ -53,40 +118,4 @@ public partial class InputManager : Node
 		}
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event is InputEventMouseButton mouseButtonEvent)
-		{
-			if (mouseButtonEvent.IsPressed())
-			{
-
-				IsDragging = true;
-				_lastMousePosition = GetViewport().GetMousePosition();
-			}
-			else if (!mouseButtonEvent.IsPressed())
-			{
-				IsDragging = false;
-			}
-		}
-		else if (@event is InputEventScreenTouch screenTouchEvent)
-		{
-			if (screenTouchEvent.IsPressed())
-			{
-
-				IsDragging = true;
-				_lastMousePosition = GetViewport().GetMousePosition();
-			}
-			else if (!screenTouchEvent.IsPressed())
-			{
-				IsDragging = false;
-			}
-		}
-		if (@event is InputEventMouseMotion motion && IsDragging)
-		{
-			var currentMousePosition = GetViewport().GetMousePosition();
-			MouseMoveDelta = currentMousePosition - _lastMousePosition;
-			_lastMousePosition = currentMousePosition;
-		}
-
-	}
 }
