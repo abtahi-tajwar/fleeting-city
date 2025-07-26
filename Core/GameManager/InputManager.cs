@@ -85,6 +85,7 @@ public partial class InputManager : Node
 		{
 			var currentMousePosition = GetViewport().GetMousePosition();
 			MouseMoveDelta = currentMousePosition - _lastMousePosition;
+			_lastMousePosition = currentMousePosition;
 		}
 
 	}
