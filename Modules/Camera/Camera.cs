@@ -5,44 +5,25 @@ public partial class Camera : Node2D
 {
     // Privates
     private Node2D _target = null;
+    public override void _Ready()
+    {
+        CallDeferred(nameof(SetDefaultTargetToPlayer));
+    }
+
     public override void _Process(double delta)
     {
-        if (UnitSelectionManager.SelectedSettler != null)
-        {
-            if (_target != null)
-            {
-                if (UnitSelectionManager.IsPlayerSelected)
-                {
-                    _target = GameManager.Player;
-                }
-                else
-                {
-                    _target = UnitSelectionManager.SelectedSettler;
-                }
-            }
-            else
-            {
-                if (UnitSelectionManager.IsPlayerSelected)
-                {
-                    if (_target != GameManager.Player)
-                    {
-                        _target = GameManager.Player;
-                    }
-                }
-                else
-                {
-                    if (_target != UnitSelectionManager.SelectedSettler)
-                    {
+        Position = _target != null ? _target.GlobalPosition : Position;
+    }
 
-                        _target = UnitSelectionManager.SelectedSettler;
-                    }
-                }
-            }
+    private void SetDefaultTargetToPlayer()
+    {
+        if (GameManager.Player != null)
+        {
+            _target = GameManager.Player;
         }
-
-        if (_target != null)
+        else
         {
-            GlobalPosition = _target.GlobalPosition;
+            GD.PrintErr("Player is not set in GameManager. Cannot set camera target.");
         }
     }
 }

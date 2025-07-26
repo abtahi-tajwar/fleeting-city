@@ -44,22 +44,26 @@ public partial class Settler : CharacterBody2D
 	}
 	public override void _UnhandledInput(InputEvent @event)
 	{
+
 		if (
-			@event is InputEventMouseButton mouseButtonEvent
-			&& mouseButtonEvent.IsPressed()
+			(@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.IsPressed())
+			|| (@event is InputEventScreenTouch screenTouchEvent && screenTouchEvent.Pressed)
 		)
 		{
+			Vector2 touchPos = GetGlobalMousePosition();
+
 			if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
 			{
 				if (UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
 				{
-					_movementService.StartMovementOnClick(GetGlobalMousePosition());
+					_movementService.StartMovementOnClick(touchPos);
 				}
 			}
 			else
 			{
-				_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
+				_unitSelectionManager.SelectPointedUnit(touchPos);
 			}
 		}
+
 	}
 }

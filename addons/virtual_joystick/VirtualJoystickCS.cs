@@ -184,6 +184,6 @@ public partial class VirtualJoystickCS : Control
 			}
 		}
 	}
-	
+
 
 }
