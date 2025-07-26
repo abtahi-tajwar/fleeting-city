@@ -4,7 +4,7 @@ using System;
 public partial class UnitSelectionManager : Node
 {
 	// Statics
-	public static bool IsPlayerSelected { get; set; } = false;
+	public static bool IsPlayerSelected { get; set; } = true;
 	public static Settler SelectedSettler { get; set; } = null;
 	public Node2D _unit { get; set; }
 

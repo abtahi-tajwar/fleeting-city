@@ -61,25 +61,26 @@ public partial class Player : CharacterBody2D
 
 	private void Move(double delta)
 	{
-		if (_currentDirection == MOVEMENT_DIRECTION_ENUM.NONE)
+		Vector2 velocity = Vector2.Zero;
+
+		switch (_currentDirection)
 		{
-			return;
-		} else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.UP)
-		{
-			Position += new Vector2(0, -MovementSpeed * (float)delta);
+			case MOVEMENT_DIRECTION_ENUM.UP:
+				velocity = Vector2.Up;
+				break;
+			case MOVEMENT_DIRECTION_ENUM.DOWN:
+				velocity = Vector2.Down;
+				break;
+			case MOVEMENT_DIRECTION_ENUM.LEFT:
+				velocity = Vector2.Left;
+				break;
+			case MOVEMENT_DIRECTION_ENUM.RIGHT:
+				velocity = Vector2.Right;
+				break;
 		}
-		else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.DOWN)
-		{
-			Position += new Vector2(0, MovementSpeed * (float)delta);
-		}
-		else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.LEFT)
-		{
-			Position += new Vector2(-MovementSpeed * (float)delta, 0);
-		}
-		else if (_currentDirection == MOVEMENT_DIRECTION_ENUM.RIGHT)
-		{
-			Position += new Vector2(MovementSpeed * (float)delta, 0);
-		}
+
+		Velocity = velocity * MovementSpeed;
+		MoveAndSlide();
 	}
 
 	private void ConnectToEventBus()
