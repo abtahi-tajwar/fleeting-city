@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx0naigkjpfc0"]
+
+[ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_5k1yx"]
+[ext_resource type="Script" uid="uid://borgw6xosg3wd" path="res://Core/GameManager/InputManager.cs" id="2_xeqsm"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_5k1yx")
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("2_xeqsm")

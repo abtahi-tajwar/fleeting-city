@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhr44w7i2cwxo"]
+
+[ext_resource type="Script" uid="uid://cs0nilfsyinm1" path="res://Modules/World/WorldBound.cs" id="1_ocasf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krt23"]
+size = Vector2(589, 427)
+
+[node name="WorldBound" type="Area2D"]
+collision_layer = 2147483649
+script = ExtResource("1_ocasf")
+
+[node name="BoundaryShape" type="CollisionShape2D" parent="."]
+position = Vector2(132.5, 81.5)
+shape = SubResource("RectangleShape2D_krt23")

@@ -1,15 +1,16 @@
-[gd_scene load_steps=16 format=4 uid="uid://chi3y0vwccbwo"]
+[gd_scene load_steps=17 format=4 uid="uid://chi3y0vwccbwo"]
 
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="Texture2D" uid="uid://0i8vsy46guxx" path="res://assets/game/environment/Water.png" id="1_o6a0g"]
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_v553w"]
 [ext_resource type="Script" uid="uid://bgbwmstb7ix3w" path="res://Modules/Camera/Camera.cs" id="4_3piqb"]
 [ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
-[ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="5_6u36r"]
-[ext_resource type="Script" uid="uid://be5qpxbq6shqq" path="res://Core/UIManager.cs" id="7_6u36r"]
-[ext_resource type="PackedScene" uid="uid://c02ftndx254vm" path="res://Modules/UI/ActionSelectors/ActionSelectors.tscn" id="8_krt23"]
+[ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="6_krt23"]
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="9_3piqb"]
 [ext_resource type="PackedScene" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
+[ext_resource type="PackedScene" uid="uid://bhr44w7i2cwxo" path="res://Modules/World/WorldBound.tscn" id="10_3piqb"]
+[ext_resource type="PackedScene" uid="uid://cvnw0jfd4pyif" path="res://Modules/UI/HUD.tscn" id="11_irye5"]
+[ext_resource type="Script" uid="uid://cs0nilfsyinm1" path="res://Modules/World/WorldBound.cs" id="11_njh7i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j10ru"]
 texture = ExtResource("1_o6a0g")
@@ -600,32 +601,15 @@ position = Vector2(-1, 0)
 scale = Vector2(0.304688, 0.304688)
 texture = ExtResource("4_6unwm")
 
-[node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("5_6u36r")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-script = ExtResource("7_6u36r")
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = -160.0
-offset_right = 163.0
-offset_bottom = -6.0
-grow_vertical = 0
-size_flags_horizontal = 2
-size_flags_vertical = 6
-mouse_filter = 2
-metadata/_edit_group_ = true
-
-[node name="HBoxContainer" parent="CanvasLayer/PanelContainer" instance=ExtResource("8_krt23")]
-layout_mode = 2
+[node name="GameManager" parent="." instance=ExtResource("6_krt23")]
 
 [node name="EventBus" parent="." instance=ExtResource("9_krt23")]
 
 [node name="Settlers" parent="." instance=ExtResource("9_3piqb")]
 
 [node name="ChickenCoup" type="Node2D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("11_irye5")]
+
+[node name="WorldBound" parent="." instance=ExtResource("10_3piqb")]
+script = ExtResource("11_njh7i")

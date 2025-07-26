@@ -21,6 +21,8 @@ public partial class Settler : CharacterBody2D
 
 		_animationService = new CharacterAnimationService(this);
 		_unitSelectionManager = new UnitSelectionManager(this);
+
+		CallDeferred(nameof(ConnectToEventBus));
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -42,24 +44,33 @@ public partial class Settler : CharacterBody2D
 			UnitSelectionManager.SetOutline(this, false);
 		}
 	}
-	public override void _UnhandledInput(InputEvent @event)
+
+	private void OnSettlerSelectOrMove(Vector2 touchPos)
 	{
-		if (
-			@event is InputEventMouseButton mouseButtonEvent
-			&& mouseButtonEvent.IsPressed()
-		)
+		if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
 		{
-			if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
+			if (UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
 			{
-				if (UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
-				{
-					_movementService.StartMovementOnClick(GetGlobalMousePosition());
-				}
-			}
-			else
-			{
-				_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
+				_movementService.StartMovementOnClick(touchPos);
 			}
 		}
+		else
+		{
+			_unitSelectionManager.SelectPointedUnit(touchPos);
+		}
+	}
+
+	private void ConnectToEventBus()
+	{
+		if (EventBus.Instance == null)
+		{
+			GD.PrintErr("EventBus instance is still null even after deferring.");
+			return;
+		}
+
+		EventBus.Instance.Connect(
+			EventBus.SignalName.SettlerSelectOrMove,
+			new Callable(this, nameof(OnSettlerSelectOrMove))
+		);
 	}
 }
