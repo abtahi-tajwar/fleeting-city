@@ -46,8 +46,8 @@ public partial class Settler : CharacterBody2D
 	{
 
 		if (
-			(@event is InputEventMouseButton mouseButtonEvent && mouseButtonEvent.IsPressed())
-			|| (@event is InputEventScreenTouch screenTouchEvent && screenTouchEvent.Pressed)
+			@event is InputEventMouseButton mouseButtonEvent && !mouseButtonEvent.IsPressed()
+			|| @event is InputEventScreenTouch screenTouchEvent && !screenTouchEvent.Pressed
 		)
 		{
 			Vector2 touchPos = GetGlobalMousePosition();
@@ -64,6 +64,5 @@ public partial class Settler : CharacterBody2D
 				_unitSelectionManager.SelectPointedUnit(touchPos);
 			}
 		}
-
 	}
 }

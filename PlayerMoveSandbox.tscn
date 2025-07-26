@@ -583,6 +583,7 @@ position = Vector2(106, 64)
 scale = Vector2(0.44, 1)
 zoom = Vector2(3.5, 3.5)
 script = ExtResource("4_3piqb")
+CameraSpeed = 0.1
 
 [node name="Rocks" type="Node2D" parent="."]
 
