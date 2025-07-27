@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://chi3y0vwccbwo"]
+[gd_scene load_steps=16 format=4 uid="uid://chi3y0vwccbwo"]
 
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="Texture2D" uid="uid://0i8vsy46guxx" path="res://assets/game/environment/Water.png" id="1_o6a0g"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
 [ext_resource type="PackedScene" uid="uid://bhr44w7i2cwxo" path="res://Modules/World/WorldBound.tscn" id="10_3piqb"]
 [ext_resource type="PackedScene" uid="uid://cvnw0jfd4pyif" path="res://Modules/UI/HUD.tscn" id="11_irye5"]
-[ext_resource type="Script" uid="uid://cs0nilfsyinm1" path="res://Modules/World/WorldBound.cs" id="11_njh7i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j10ru"]
 texture = ExtResource("1_o6a0g")
@@ -612,4 +611,3 @@ texture = ExtResource("4_6unwm")
 [node name="HUD" parent="." instance=ExtResource("11_irye5")]
 
 [node name="WorldBound" parent="." instance=ExtResource("10_3piqb")]
-script = ExtResource("11_njh7i")

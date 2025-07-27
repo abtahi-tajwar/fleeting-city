@@ -37,6 +37,18 @@ public class CharacterAnimationService
             case MOVEMENT_DIRECTION_ENUM.RIGHT:
                 _animatedSprite.Play("walk_right");
                 break;
+            case MOVEMENT_DIRECTION_ENUM.UP_RIGHT:
+                _animatedSprite.Play("walk_up_right");
+                break;
+            case MOVEMENT_DIRECTION_ENUM.UP_LEFT:
+                _animatedSprite.Play("walk_up_left");
+                break;
+            case MOVEMENT_DIRECTION_ENUM.DOWN_LEFT:
+                _animatedSprite.Play("walk_down_left");
+                break;
+            case MOVEMENT_DIRECTION_ENUM.DOWN_RIGHT:
+                _animatedSprite.Play("walk_down_right");
+                break;
             default:
                 _animatedSprite.Stop();
                 break;

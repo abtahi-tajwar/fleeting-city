@@ -77,6 +77,19 @@ public partial class Player : CharacterBody2D
 			case MOVEMENT_DIRECTION_ENUM.RIGHT:
 				velocity = Vector2.Right;
 				break;
+			case MOVEMENT_DIRECTION_ENUM.UP_LEFT:
+				velocity = (Vector2.Up + Vector2.Left).Normalized();
+				break;
+			case MOVEMENT_DIRECTION_ENUM.UP_RIGHT:
+				velocity = (Vector2.Up + Vector2.Right).Normalized();
+				break;
+			case MOVEMENT_DIRECTION_ENUM.DOWN_LEFT:
+				velocity = (Vector2.Down + Vector2.Left).Normalized();
+				break;
+			case MOVEMENT_DIRECTION_ENUM.DOWN_RIGHT:
+				velocity = (Vector2.Down + Vector2.Right).Normalized();
+				break;
+
 		}
 
 		Velocity = velocity * MovementSpeed;

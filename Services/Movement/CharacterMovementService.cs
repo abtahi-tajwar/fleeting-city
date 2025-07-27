@@ -27,7 +27,7 @@ public class CharacterMovementService
 		Rect2I groundCoords = _ground.GetUsedRect();
 		_grid.Region = groundCoords;
 		_grid.CellSize = new Vector2I(_ground.RenderingQuadrantSize, _ground.RenderingQuadrantSize);
-		_grid.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Never;
+		_grid.DiagonalMode = AStarGrid2D.DiagonalModeEnum.Always;
 		_grid.Update();
 		MarkObstacles(_grid);
 	}

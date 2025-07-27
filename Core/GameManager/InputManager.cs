@@ -96,19 +96,29 @@ public partial class InputManager : Node2D
 	private void CapturePlayerMovementInput(double delta)
 	{
 		Vector2 vec = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
 		MOVEMENT_DIRECTION_ENUM newDir = MOVEMENT_DIRECTION_ENUM.NONE;
 
-		if (vec.LengthSquared() > 0.01f) // ignore slight stick noise
+		if (vec.LengthSquared() > 0.01f) // Ignore slight stick noise
 		{
-			if (Mathf.Abs(vec.X) > Mathf.Abs(vec.Y))
-			{
-				newDir = vec.X > 0 ? MOVEMENT_DIRECTION_ENUM.RIGHT : MOVEMENT_DIRECTION_ENUM.LEFT;
-			}
-			else
-			{
-				newDir = vec.Y > 0 ? MOVEMENT_DIRECTION_ENUM.DOWN : MOVEMENT_DIRECTION_ENUM.UP;
-			}
+			float angle = vec.Angle(); // Radians
+
+			// Convert angle into direction
+			if (angle >= -Mathf.Pi / 8 && angle < Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.RIGHT;
+			else if (angle >= Mathf.Pi / 8 && angle < 3 * Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.DOWN_RIGHT;
+			else if (angle >= 3 * Mathf.Pi / 8 && angle < 5 * Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.DOWN;
+			else if (angle >= 5 * Mathf.Pi / 8 && angle < 7 * Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.DOWN_LEFT;
+			else if (angle >= 7 * Mathf.Pi / 8 || angle < -7 * Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.LEFT;
+			else if (angle >= -7 * Mathf.Pi / 8 && angle < -5 * Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.UP_LEFT;
+			else if (angle >= -5 * Mathf.Pi / 8 && angle < -3 * Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.UP;
+			else if (angle >= -3 * Mathf.Pi / 8 && angle < -Mathf.Pi / 8)
+				newDir = MOVEMENT_DIRECTION_ENUM.UP_RIGHT;
 		}
 
 		if (newDir != _lastDirection)
