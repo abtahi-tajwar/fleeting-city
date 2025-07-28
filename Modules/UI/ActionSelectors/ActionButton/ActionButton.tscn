@@ -1,30 +1,34 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3kdrsp3ft3o6"]
+[gd_scene load_steps=10 format=3 uid="uid://d3kdrsp3ft3o6"]
 
 [ext_resource type="Script" uid="uid://b7fmeyogm6hng" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.cs" id="1_dstxq"]
-[ext_resource type="Texture2D" uid="uid://5sskp4urgy8m" path="res://assets/game/UI/HUD_Panel.png" id="2_504ry"]
+[ext_resource type="Texture2D" uid="uid://cmyodl1hrh0kx" path="res://assets/game/UI/Buttons/Button_Blue_9Slides.png" id="2_hukjd"]
 [ext_resource type="Texture2D" uid="uid://stltll7ydd5p" path="res://assets/game/UI/player_walk_toggle.png" id="2_js3fr"]
+[ext_resource type="Texture2D" uid="uid://c7abfkqcb2713" path="res://assets/game/UI/Buttons/Button_Blue_9Slides_Pressed.png" id="3_831e6"]
+[ext_resource type="Texture2D" uid="uid://b8jxgo4hrhxc3" path="res://assets/game/UI/Buttons/Button_Hover_9Slides.png" id="3_hukjd"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dstxq"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlvd5"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vkgac"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hkl4p"]
+texture = ExtResource("3_831e6")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wkokh"]
-texture = ExtResource("2_504ry")
+texture = ExtResource("3_hukjd")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_js3fr"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hukjd"]
+texture = ExtResource("2_hukjd")
 
 [node name="MoveToggleButton" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 200)
-theme_override_styles/panel = SubResource("StyleBoxEmpty_dstxq")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dlvd5")
 script = ExtResource("1_dstxq")
 ActionType = 1
 Scope = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_vkgac")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hkl4p")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_wkokh")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_js3fr")
+theme_override_styles/normal = SubResource("StyleBoxTexture_hukjd")
 toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="."]

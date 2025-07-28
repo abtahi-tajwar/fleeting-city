@@ -28,10 +28,6 @@ script = ExtResource("1_s7k6r")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Container/ActionButtonsContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
 
 [node name="Virtual Joystick" parent="Container/ActionButtonsContainer/MarginContainer2" instance=ExtResource("3_s7k6r")]
 custom_minimum_size = Vector2(200, 200)

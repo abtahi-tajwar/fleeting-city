@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Fleeting City"
-run/main_scene="uid://chi3y0vwccbwo"
+run/main_scene="uid://c5b7lv7hnyl4d"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=10

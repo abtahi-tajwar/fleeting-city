@@ -94,6 +94,9 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity * MovementSpeed;
 		MoveAndSlide();
+		var boundRect = WorldBound.WorldShape.GetRect();
+
+		Position = Position.Clamp(boundRect.Position, boundRect.End);
 	}
 
 	private void ConnectToEventBus()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://chi3y0vwccbwo"]
+[gd_scene load_steps=17 format=4 uid="uid://chi3y0vwccbwo"]
 
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="1_gl34e"]
 [ext_resource type="Texture2D" uid="uid://0i8vsy46guxx" path="res://assets/game/environment/Water.png" id="1_o6a0g"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ivoe34x68il" path="res://assets/game/environment/GoldMine_Active.png" id="4_6unwm"]
 [ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="6_krt23"]
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="9_3piqb"]
+[ext_resource type="PackedScene" uid="uid://dug7sthowth45" path="res://Modules/Farm/ChickenCoup.tscn" id="9_irye5"]
 [ext_resource type="PackedScene" path="res://Services/EventBus/EventBus.tscn" id="9_krt23"]
 [ext_resource type="PackedScene" uid="uid://bhr44w7i2cwxo" path="res://Modules/World/WorldBound.tscn" id="10_3piqb"]
 [ext_resource type="PackedScene" uid="uid://cvnw0jfd4pyif" path="res://Modules/UI/HUD.tscn" id="11_irye5"]
@@ -561,9 +562,12 @@ texture = ExtResource("1_gl34e")
 sources/0 = SubResource("TileSetAtlasSource_6unwm")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i2i0q"]
-size = Vector2(48, 32)
+size = Vector2(48, 13)
 
 [node name="PlayerMoveSandbox" type="Node2D"]
+y_sort_enabled = true
+
+[node name="WorldBound" parent="." instance=ExtResource("10_3piqb")]
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -576,6 +580,8 @@ tile_map_data = PackedByteArray("AAD8//z/AAACAAEAAAD8//3/AAACAAIAAAD8//7/AAACAAM
 tile_set = SubResource("TileSet_o6a0g")
 
 [node name="Player" parent="." instance=ExtResource("2_v553w")]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(120, 64)
 input_pickable = true
 
@@ -586,28 +592,37 @@ zoom = Vector2(3.5, 3.5)
 script = ExtResource("4_3piqb")
 
 [node name="Rocks" type="Node2D" parent="."]
+z_index = 1
 
 [node name="Rock1" type="StaticBody2D" parent="Rocks" groups=["movement_obstacles"]]
-position = Vector2(50, 50)
+z_index = 1
+y_sort_enabled = true
+position = Vector2(45, 43)
 metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock1"]
-position = Vector2(-1, -2)
-shape = SubResource("RectangleShape2D_i2i0q")
 
 [node name="Sprite2D" type="Sprite2D" parent="Rocks/Rock1"]
 position = Vector2(-1, 0)
 scale = Vector2(0.304688, 0.304688)
 texture = ExtResource("4_6unwm")
+offset = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocks/Rock1"]
+position = Vector2(-1, -2.5)
+shape = SubResource("RectangleShape2D_i2i0q")
 
 [node name="GameManager" parent="." instance=ExtResource("6_krt23")]
 
 [node name="EventBus" parent="." instance=ExtResource("9_krt23")]
 
-[node name="Settlers" parent="." instance=ExtResource("9_3piqb")]
+[node name="Settlers" parent="." node_paths=PackedStringArray("SpawnPoints") instance=ExtResource("9_3piqb")]
+SpawnPoints = NodePath("SpawnLocations")
 
-[node name="ChickenCoup" type="Node2D" parent="."]
+[node name="SpawnLocations" type="Node2D" parent="Settlers"]
+
+[node name="Node2D" type="Node2D" parent="Settlers/SpawnLocations"]
+position = Vector2(137, -23)
+
+[node name="ChickenCoup" parent="." instance=ExtResource("9_irye5")]
+position = Vector2(189, 141)
 
 [node name="HUD" parent="." instance=ExtResource("11_irye5")]
-
-[node name="WorldBound" parent="." instance=ExtResource("10_3piqb")]

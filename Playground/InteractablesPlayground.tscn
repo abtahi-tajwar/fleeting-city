@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5b7lv7hnyl4d"]
+
+[ext_resource type="PackedScene" uid="uid://b5u14wmn35ijq" path="res://Scenes/BaseScene.tscn" id="1_tvckn"]
+[ext_resource type="PackedScene" uid="uid://dug7sthowth45" path="res://Modules/Farm/ChickenCoup.tscn" id="2_jyrq1"]
+
+[node name="BaseScene" instance=ExtResource("1_tvckn")]
+
+[node name="ChickenCoup" parent="." index="8" instance=ExtResource("2_jyrq1")]
+z_index = 1
+position = Vector2(-161, -49)
+
+[editable path="WorldBound"]
