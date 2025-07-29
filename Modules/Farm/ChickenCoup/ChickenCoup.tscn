@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0dnn0vgtyml0"]
+
+[ext_resource type="PackedScene" uid="uid://dvhp2qr7mba1q" path="res://Subsystems/Farm/AnimalFarm/AnimalFarm.tscn" id="1_efxtn"]
+
+[node name="AnimalFarm" instance=ExtResource("1_efxtn")]
+
+[editable path="Interactable"]

@@ -1,12 +1,28 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5b7lv7hnyl4d"]
 
 [ext_resource type="PackedScene" uid="uid://b5u14wmn35ijq" path="res://Scenes/BaseScene.tscn" id="1_tvckn"]
-[ext_resource type="PackedScene" uid="uid://dug7sthowth45" path="res://Modules/Farm/ChickenCoup.tscn" id="2_jyrq1"]
+[ext_resource type="PackedScene" uid="uid://b0dnn0vgtyml0" path="res://Modules/Farm/ChickenCoup/ChickenCoup.tscn" id="2_jyrq1"]
 
 [node name="BaseScene" instance=ExtResource("1_tvckn")]
 
-[node name="ChickenCoup" parent="." index="8" instance=ExtResource("2_jyrq1")]
+[node name="Settlers" parent="." index="5" node_paths=PackedStringArray("SpawnPoints")]
 z_index = 1
-position = Vector2(-161, -49)
+SpawnPoints = NodePath("SettlerSpawns")
+
+[node name="SettlerSpawns" type="Node2D" parent="Settlers" index="0"]
+z_index = 1
+
+[node name="Loc1" type="Node2D" parent="Settlers/SettlerSpawns" index="0"]
+position = Vector2(60, 60)
+
+[node name="Loc2" type="Node2D" parent="Settlers/SettlerSpawns" index="1"]
+position = Vector2(60, 0)
+
+[node name="AnimalFarm" parent="." index="7" instance=ExtResource("2_jyrq1")]
+position = Vector2(-142, -25)
+
+[node name="Environment" parent="." index="8"]
+position = Vector2(-5, 13)
+metadata/_edit_group_ = true
 
 [editable path="WorldBound"]
