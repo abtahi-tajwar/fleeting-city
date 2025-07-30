@@ -1,5 +1,5 @@
 using System;
-using FleetingCity.Enums;
+using FleetingCity.BAL.Enums;
 using Godot;
 
 public class Helper

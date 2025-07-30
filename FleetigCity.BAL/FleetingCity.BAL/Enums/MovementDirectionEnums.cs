@@ -1,4 +1,4 @@
-namespace FleetingCity.Enums;
+namespace FleetingCity.BAL.Enums;
 
 public enum MOVEMENT_DIRECTION_ENUM
 {

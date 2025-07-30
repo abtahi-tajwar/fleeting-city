@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvnw0jfd4pyif"]
+[gd_scene load_steps=5 format=3 uid="uid://cvnw0jfd4pyif"]
 
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_s7k6r"]
+[ext_resource type="PackedScene" uid="uid://dl570yu5fjx30" path="res://Modules/UI/InteractionButton/InteractionButton.tscn" id="4_s7k6r"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -43,4 +44,7 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="MoveToggleButton" parent="Container/ActionButtonsContainer/MarginContainer" instance=ExtResource("2_s7k6r")]
+layout_mode = 2
+
+[node name="InteractionButton" parent="Container/ActionButtonsContainer" instance=ExtResource("4_s7k6r")]
 layout_mode = 2

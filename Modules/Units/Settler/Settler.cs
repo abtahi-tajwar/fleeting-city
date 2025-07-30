@@ -1,5 +1,5 @@
 using FleetingCity.BAL.Modules;
-using FleetingCity.Enums;
+using FleetingCity.BAL.Enums;
 using Godot;
 using System;
 
