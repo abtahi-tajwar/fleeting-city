@@ -30,9 +30,10 @@ public partial class InputManager : Node2D
 
 	private MOVEMENT_DIRECTION_ENUM _lastDirection = MOVEMENT_DIRECTION_ENUM.NONE;
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
 		CapturePlayerMovementInput(delta);
+		CaptureMovementCommand();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -93,6 +94,21 @@ public partial class InputManager : Node2D
 		IsDragging = false;
 	}
 
+	private void CaptureMovementCommand()
+	{
+		if (Input.IsActionPressed("move_command"))
+		{
+			ActionManager.CurrentAction = ACTION_ENUM.MOVE;
+		}
+		else if (Input.IsActionJustReleased("move_command"))
+		{
+			ActionManager.CurrentAction = ACTION_ENUM.POINT;
+		}
+		else
+		{
+			return; // No action change
+		}
+	}
 	private void CapturePlayerMovementInput(double delta)
 	{
 		Vector2 vec = Input.GetVector("move_left", "move_right", "move_up", "move_down");

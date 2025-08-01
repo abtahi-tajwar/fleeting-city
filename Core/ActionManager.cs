@@ -4,7 +4,7 @@ using Godot;
 
 public partial class ActionManager : Node
 {
-	public static ACTION_ENUM CurrentAction { get; private set; } = ACTION_ENUM.POINT;
+	public static ACTION_ENUM CurrentAction { get; set; } = ACTION_ENUM.POINT;
 
 	public override void _Ready()
 	{

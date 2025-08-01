@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="7_56e3h"]
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="8_eumj5"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sbiut"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eumj5"]
 texture = ExtResource("8_eumj5")
 0:0/0 = 0
 1:0/0 = 0
@@ -534,7 +534,7 @@ texture = ExtResource("8_eumj5")
 35:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_56e3h"]
-sources/0 = SubResource("TileSetAtlasSource_sbiut")
+sources/0 = SubResource("TileSetAtlasSource_eumj5")
 
 [node name="BaseScene" type="Node2D"]
 y_sort_enabled = true

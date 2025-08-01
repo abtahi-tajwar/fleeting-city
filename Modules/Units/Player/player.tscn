@@ -295,14 +295,14 @@ size = Vector2(12, 11)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_trhtq")
 MovementSpeed = 200.0
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_vk3r0")
 position = Vector2(0, -4)
 scale = Vector2(1, 0.875)
 sprite_frames = SubResource("SpriteFrames_wydw0")
-animation = &"walk_up_right"
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.5)

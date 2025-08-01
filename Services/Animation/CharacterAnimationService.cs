@@ -23,36 +23,48 @@ public class CharacterAnimationService
         switch (direction)
         {
             case MOVEMENT_DIRECTION_ENUM.NONE:
-                _animatedSprite.Play("idle");
+                PlayAnimationWithFallback("idle", "walk");
                 break;
             case MOVEMENT_DIRECTION_ENUM.UP:
-                _animatedSprite.Play("walk_up");
+                PlayAnimationWithFallback("walk_up");
                 break;
             case MOVEMENT_DIRECTION_ENUM.DOWN:
-                _animatedSprite.Play("walk_down");
+                PlayAnimationWithFallback("walk_down");
                 break;
             case MOVEMENT_DIRECTION_ENUM.LEFT:
-                _animatedSprite.Play("walk_left");
+                PlayAnimationWithFallback("walk_left");
                 break;
             case MOVEMENT_DIRECTION_ENUM.RIGHT:
-                _animatedSprite.Play("walk_right");
+                PlayAnimationWithFallback("walk_right");
                 break;
             case MOVEMENT_DIRECTION_ENUM.UP_RIGHT:
-                _animatedSprite.Play("walk_up_right");
+                PlayAnimationWithFallback("walk_up_right");
                 break;
             case MOVEMENT_DIRECTION_ENUM.UP_LEFT:
-                _animatedSprite.Play("walk_up_left");
+                PlayAnimationWithFallback("walk_up_left");
                 break;
             case MOVEMENT_DIRECTION_ENUM.DOWN_LEFT:
-                _animatedSprite.Play("walk_down_left");
+                PlayAnimationWithFallback("walk_down_left");
                 break;
             case MOVEMENT_DIRECTION_ENUM.DOWN_RIGHT:
-                _animatedSprite.Play("walk_down_right");
+                PlayAnimationWithFallback("walk_down_right");
                 break;
             default:
                 _animatedSprite.Stop();
                 break;
         }
+
+    }
+
+    private void PlayAnimationWithFallback(string animName, string fallback = "walk")
+    {
+        // Check if the animation exists in the sprite's frames
+        if (_animatedSprite.SpriteFrames.HasAnimation(animName))
+            _animatedSprite.Play(animName);
+        else if (_animatedSprite.SpriteFrames.HasAnimation(fallback))
+            _animatedSprite.Play(fallback);
+        else
+            GD.PrintErr($"Neither '{animName}' nor fallback '{fallback}' animation found!");
     }
 
 }
