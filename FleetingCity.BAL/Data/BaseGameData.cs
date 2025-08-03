@@ -5,7 +5,7 @@ using FleetingCity.BAL.Utils;
 
 namespace FleetingCity.BAL.Data;
 
-public abstract class BaseGameData<T, TModel> 
+public abstract class BaseGameData<T, TModel> : IGameDataMarker
 	where T : BaseGameData<T, TModel>
 	where TModel : IGameDataModel
 {
@@ -37,3 +37,6 @@ public abstract class BaseGameData<T, TModel>
 		}
 	}
 }
+
+
+public interface IGameDataMarker { }

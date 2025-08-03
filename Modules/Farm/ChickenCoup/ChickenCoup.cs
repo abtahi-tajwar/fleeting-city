@@ -8,5 +8,9 @@ public partial class ChickenCoup : AnimalFarm
     public override void _Ready()
     {
         _model = new ChickenCoupModel();
+        foreach (var item in _model.ProducedResource)
+        {
+            GD.Print($"Produced item", item.Resource.Name);
+        }
     }
 }
