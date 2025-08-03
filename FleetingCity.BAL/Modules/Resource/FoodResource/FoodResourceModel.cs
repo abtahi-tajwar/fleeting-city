@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using FleetingCity.BAL.Enum;
+using FleetingCity.BAL.Utils;
 
 namespace FleetingCity.BAL.Model;
 
-public class FoodResourceModel
+public class FoodResourceModel : IGameDataModel
 {
     // Properties
     public string Name { get; set; }

@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "chicken",
+    "Name": "Chicken",
+    "ProductionRatePerMinute": 3.5
+  },
+  {
+    "Id": "cow",
+    "Name": "Cow",
+    "ProductionRatePerMinute": 1.2
+  },
+  {
+    "Id": "sheep",
+    "Name": "Sheep",
+    "ProductionRatePerMinute": 2.0
+  }
+]

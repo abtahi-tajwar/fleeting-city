@@ -1,8 +1,9 @@
 using System.Data.Common;
+using FleetingCity.BAL.Utils;
 
 namespace FleetingCity.BAL.Model;
 
-public class AnimalFarmUnitModel
+public class AnimalFarmUnitModel : IGameDataModel
 {
     public string Id { get; set; }
     public string Name { get; set; }
