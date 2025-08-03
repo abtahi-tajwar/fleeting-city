@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv44yulhj65ys"
-path="res://.godot/imported/Vampires1_Idle_body.png-139c911f932272bea9cdcd5639e9f2c4.ctex"
+path="res://.godot/imported/Vampires1_Idle_body.png-69f33d5df705a4639d6bb581f6a69562.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Utils/texture_trimmer/input/Vampires1_Idle_body.png"
-dest_files=["res://.godot/imported/Vampires1_Idle_body.png-139c911f932272bea9cdcd5639e9f2c4.ctex"]
+source_file="res://utils/texture_trimmer/input/Vampires1_Idle_body.png"
+dest_files=["res://.godot/imported/Vampires1_Idle_body.png-69f33d5df705a4639d6bb581f6a69562.ctex"]
 
 [params]
 

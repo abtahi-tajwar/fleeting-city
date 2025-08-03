@@ -3,8 +3,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>FleetingCity</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="FleetingCity.BAL/FleetingCity.BAL/FleetingCity.BAL.csproj" />
+    <ProjectReference Include="FleetingCity.BAL/FleetingCity.BAL.csproj" />
   </ItemGroup>
 </Project>

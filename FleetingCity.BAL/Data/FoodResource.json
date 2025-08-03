@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "Egg",
+    "Id": "egg",
+    "NutritionalComposition": {
+      "PROTEIN": 50,
+      "CARBS": 45,
+      "VITAMIN": 5
+    }
+  },
+  {
+    "Name": "Milk",
+    "Id": "milk",
+    "NutritionalComposition": {
+      "PROTEIN": 25,
+      "CARBS": 40,
+      "VITAMIN": 35
+    }
+  },
+  {
+    "Name": "Chicken Meat",
+    "Id": "chicken_meat",
+    "NutritionalComposition": {
+      "PROTEIN": 85,
+      "CARBS": 0,
+      "VITAMIN": 15
+    }
+  },
+  {
+    "Name": "Beef",
+    "Id": "beef",
+    "NutritionalComposition": {
+      "PROTEIN": 70,
+      "CARBS": 0,
+      "VITAMIN": 30
+    }
+  }
+]

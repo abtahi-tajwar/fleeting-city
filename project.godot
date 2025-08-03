@@ -19,6 +19,7 @@ boot_splash/minimum_display_time=10
 [autoload]
 
 EventBus="*res://Services/EventBus/EventBus.cs"
+GameDataLoader="*res://Core/GameDataLoader.cs"
 
 [display]
 

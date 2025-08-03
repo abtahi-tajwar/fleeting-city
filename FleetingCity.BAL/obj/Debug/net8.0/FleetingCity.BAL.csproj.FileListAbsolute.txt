@@ -1,0 +1,13 @@
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/FleetingCity.BAL.deps.json
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/FleetingCity.BAL.dll
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/FleetingCity.BAL.pdb
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.GeneratedMSBuildEditorConfig.editorconfig
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.AssemblyInfoInputs.cache
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.AssemblyInfo.cs
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.csproj.CoreCompileInputs.cache
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.sourcelink.json
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.dll
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/refint/FleetingCity.BAL.dll
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/FleetingCity.BAL.pdb
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/obj/Debug/net8.0/ref/FleetingCity.BAL.dll
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/Data/FoodResource.json
