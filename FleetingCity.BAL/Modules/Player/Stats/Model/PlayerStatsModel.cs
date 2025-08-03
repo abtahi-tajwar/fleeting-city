@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using FleetingCity.BAL.Enum;
 
-namespace FleetingCity.BAL;
+namespace FleetingCity.BAL.Model;
 
 public class PlayerStatsModel
 {

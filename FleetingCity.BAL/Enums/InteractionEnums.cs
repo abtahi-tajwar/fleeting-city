@@ -1,4 +1,4 @@
-namespace FleetingCity.BAL.Enums;
+namespace FleetingCity.BAL.Enum;
 
 public enum INTERACTION
 {

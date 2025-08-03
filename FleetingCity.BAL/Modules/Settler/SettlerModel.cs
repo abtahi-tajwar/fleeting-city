@@ -1,6 +1,6 @@
 using System;
 
-namespace FleetingCity.BAL.Modules;
+namespace FleetingCity.BAL.Model;
 
 public class SettlerModel
 {

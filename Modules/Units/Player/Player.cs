@@ -1,9 +1,6 @@
-using FleetingCity.BAL.Modules;
-using FleetingCity.BAL.Enums;
+using FleetingCity.BAL.Model;
+using FleetingCity.BAL.Enum;
 using Godot;
-using System;
-using System.Reflection.Metadata;
-
 public partial class Player : CharacterBody2D
 {
 	private CharacterAnimationService _animationService;

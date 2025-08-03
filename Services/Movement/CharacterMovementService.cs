@@ -1,4 +1,4 @@
-using FleetingCity.BAL.Enums;
+using FleetingCity.BAL.Enum;
 using Godot;
 using System;
 using System.Linq;

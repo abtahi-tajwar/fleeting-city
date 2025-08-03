@@ -1,4 +1,4 @@
-namespace FleetingCity.BAL;
+namespace FleetingCity.BAL.Model;
 
 public class AnimalFarmResourceModel
 {

@@ -1,6 +1,6 @@
 using System.Data.Common;
 
-namespace FleetingCity.BAL;
+namespace FleetingCity.BAL.Model;
 
 public class AnimalFarmUnitModel
 {

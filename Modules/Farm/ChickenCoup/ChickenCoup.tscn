@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0dnn0vgtyml0"]
+[gd_scene load_steps=3 format=3 uid="uid://b0dnn0vgtyml0"]
 
 [ext_resource type="PackedScene" uid="uid://dvhp2qr7mba1q" path="res://Subsystems/Farm/AnimalFarm/AnimalFarm.tscn" id="1_efxtn"]
+[ext_resource type="Script" uid="uid://b7ucaus6sxrxl" path="res://Modules/Farm/ChickenCoup/ChickenCoup.cs" id="2_kftm8"]
 
-[node name="AnimalFarm" instance=ExtResource("1_efxtn")]
+[node name="ChickenCoup" instance=ExtResource("1_efxtn")]
+script = ExtResource("2_kftm8")
 
 [editable path="Interactable"]
