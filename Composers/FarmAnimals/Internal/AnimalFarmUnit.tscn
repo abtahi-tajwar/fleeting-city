@@ -1,0 +1,106 @@
+[gd_scene load_steps=14 format=3 uid="uid://bmu3ljoyrto61"]
+
+[ext_resource type="Script" uid="uid://c0sogffrwfunw" path="res://Composers/FarmAnimals/Internal/AnimalFarmUnit.cs" id="1_j7mr4"]
+[ext_resource type="Texture2D" uid="uid://nhjljjylmau" path="res://assets/game/npc/Chicken.png" id="2_7idp1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu5df"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w054x"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4f242"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgip1"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wpfx"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j85pj"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apkt3"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swfos"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muvpu"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgwfo"]
+atlas = ExtResource("2_7idp1")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_snxfv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu5df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w054x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4f242")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgip1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wpfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j85pj")
+}],
+"loop": true,
+"name": &"sitting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apkt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swfos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muvpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgwfo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Unit" type="Node2D"]
+script = ExtResource("1_j7mr4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_snxfv")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -5)
+
+[node name="MovementTimer" type="Timer" parent="."]
+autostart = true

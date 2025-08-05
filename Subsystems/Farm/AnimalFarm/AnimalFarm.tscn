@@ -1,10 +1,10 @@
-[gd_scene load_steps=22 format=4 uid="uid://dvhp2qr7mba1q"]
+[gd_scene load_steps=11 format=4 uid="uid://dvhp2qr7mba1q"]
 
 [ext_resource type="PackedScene" uid="uid://p2yey6ny634o" path="res://Composers/Interactable/Interactable.tscn" id="1_epc8u"]
 [ext_resource type="Script" uid="uid://bywj36xhwylpm" path="res://Subsystems/Farm/AnimalFarm/AnimalFarm.cs" id="1_u4i51"]
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="2_u4i51"]
 [ext_resource type="Texture2D" uid="uid://dack1lph6y44t" path="res://assets/game/environment/fence.png" id="3_snxfv"]
-[ext_resource type="Texture2D" uid="uid://nhjljjylmau" path="res://assets/game/npc/Chicken.png" id="4_mlheq"]
+[ext_resource type="PackedScene" uid="uid://cc605kur0hks2" path="res://Composers/FarmAnimals/FarmUnits.tscn" id="5_u4i51"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtrpy"]
 texture = ExtResource("2_u4i51")
@@ -549,94 +549,6 @@ texture_region_size = Vector2i(12, 12)
 [sub_resource type="TileSet" id="TileSet_w376c"]
 sources/0 = SubResource("TileSetAtlasSource_uosp7")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vu5df"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w054x"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4f242"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dgip1"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wpfx"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(32, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j85pj"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(80, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_apkt3"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(0, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_swfos"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_muvpu"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(48, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgwfo"]
-atlas = ExtResource("4_mlheq")
-region = Rect2(64, 16, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ih827"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vu5df")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w054x")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4f242")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dgip1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7wpfx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j85pj")
-}],
-"loop": true,
-"name": &"sitting",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_apkt3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_swfos")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_muvpu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgwfo")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxtqc"]
 size = Vector2(169, 117)
 
@@ -663,15 +575,9 @@ tile_set = SubResource("TileSet_ffvaa")
 tile_map_data = PackedByteArray("AAD9//3/AAABAAAAAAD///3/AAABAAAAAAABAP3/AAABAAAAAAADAP3/AAABAAAAAAD7//3/AAABAAAAAAAEAP3/AAAFAAAAAAAEAP7/AAAFAAEAAAAEAP//AAAFAAIAAAAEAAEAAAAFAAIAAAAEAAMAAAAFAAIAAAADAAQAAAABAAAAAAABAAQAAAABAAAAAAD//wQAAAABAAAAAAD9/wQAAAABAAAAAAD7/wQAAAABAAAAAAD6/wMAAAAFAAIAAAD6/wEAAAAFAAIAAAD6////AAAFAAIAAAD6//7/AAAFAAIAAAA=")
 tile_set = SubResource("TileSet_w376c")
 
-[node name="Animals" type="Node2D" parent="Object"]
-
-[node name="animal" type="AnimatedSprite2D" parent="Object/Animals"]
-z_index = 1
-y_sort_enabled = true
-sprite_frames = SubResource("SpriteFrames_ih827")
-animation = &"idle"
-autoplay = "idle"
-offset = Vector2(0, -5)
+[node name="Units" parent="Object" instance=ExtResource("5_u4i51")]
+position = Vector2(-80, -27)
+scale = Vector2(1, 0.973744)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Object"]
 

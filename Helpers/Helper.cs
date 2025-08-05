@@ -58,4 +58,32 @@ public class Helper
         return false;
 
     }
+
+    public static Rect2 GetCollisionShapeBounds(CollisionShape2D shapeNode)
+    {
+        var shape = shapeNode.Shape;
+        var transform = shapeNode.GlobalTransform;
+
+        if (shape is RectangleShape2D rect)
+        {
+            Vector2 extents = rect.Size / 2f;
+            Vector2 topLeft = transform.Origin - extents * shapeNode.GlobalScale;
+            Vector2 size = rect.Size * shapeNode.GlobalScale;
+
+            return new Rect2(topLeft, size);
+        }
+        else if (shape is CircleShape2D circle)
+        {
+            float radius = circle.Radius * shapeNode.GlobalScale.X;
+            Vector2 topLeft = shapeNode.GlobalPosition - new Vector2(radius, radius);
+            return new Rect2(topLeft, new Vector2(radius * 2, radius * 2));
+        }
+        else
+        {
+            GD.Print("Unhandled shape: " + shape);
+        }
+
+        return new Rect2();
+    }
+
 }

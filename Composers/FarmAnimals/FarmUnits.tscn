@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc605kur0hks2"]
+
+[ext_resource type="Script" uid="uid://br5df6bapem3x" path="res://Composers/FarmAnimals/FarmUnits.cs" id="1_36q7p"]
+[ext_resource type="PackedScene" uid="uid://bmu3ljoyrto61" path="res://Composers/FarmAnimals/Internal/AnimalFarmUnit.tscn" id="2_36q7p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4i51"]
+size = Vector2(146, 95)
+
+[node name="FarmUnits" type="Node2D"]
+script = ExtResource("1_36q7p")
+Unit = ExtResource("2_36q7p")
+
+[node name="RoamingArea" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="RoamingArea"]
+position = Vector2(73, 48)
+shape = SubResource("RectangleShape2D_u4i51")
+
+[node name="Unit" parent="." instance=ExtResource("2_36q7p")]
+visible = false
