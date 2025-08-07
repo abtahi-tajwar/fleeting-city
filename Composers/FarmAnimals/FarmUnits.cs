@@ -6,6 +6,8 @@ public partial class FarmUnits : Node2D
 	// Exports
 	[Export]
 	public PackedScene Unit;
+	[Export]
+	public TileMapLayer Ground;
 	// publics
 	public int TotalUnits = 3;
 
@@ -23,18 +25,6 @@ public partial class FarmUnits : Node2D
 
 		SpawnChickens();
 
-		// Debug
-		var spawned = Unit.Instantiate<AnimalFarmUnit>();
-		// var spawnPosition = GenerateUnitRandomRoamingLocation();
-		this.AddChild(spawned);
-		var bounds = Helper.GetCollisionShapeBounds(_roamingAreaShape);
-		GD.Print("Bound from ready", bounds.Position, bounds.Size);
-		spawned.Position = new Vector2(bounds.Position.X, bounds.Position.Y);
-
-		var spawned2 = Unit.Instantiate<AnimalFarmUnit>();
-		// var spawnPosition2 = GenerateUnitRandomRoamingLocation();
-		this.AddChild(spawned2);
-		spawned.Position = new Vector2(bounds.Size.X, bounds.Size.Y);
 	}
 
 	private void SpawnChickens()
@@ -44,17 +34,24 @@ public partial class FarmUnits : Node2D
 			var spawned = Unit.Instantiate<AnimalFarmUnit>();
 			var spawnPosition = GenerateUnitRandomRoamingLocation();
 			this.AddChild(spawned);
+			spawned.Setup(Ground);
 			spawned.Position = spawnPosition;
 
 			_spawnedUnits.Add(spawned);
+
+
+			spawned.MovementTimerTimout += () =>
+			{
+				spawned.HandleMove(GenerateUnitRandomRoamingLocation());
+			};
 		}
 	}
 	private Vector2 GenerateUnitRandomRoamingLocation()
 	{
 		var bounds = Helper.GetCollisionShapeBounds(_roamingAreaShape);
-		float x = (float)GD.RandRange(bounds.Position.X, bounds.Position.X + bounds.Size.X);
-		float y = (float)GD.RandRange(bounds.Position.Y, bounds.Position.Y + bounds.Size.Y);
-		GD.Print("Bound location from random", x, y);
+		float x = (float)GD.RandRange(0, bounds.Size.X);
+		float y = (float)GD.RandRange(0, bounds.Size.Y);
 		return new Vector2(x, y);
 	}
+
 }

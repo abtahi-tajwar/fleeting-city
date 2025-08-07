@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class GameManager : Node
+public partial class GameManager : Node2D
 {
     public static Player Player { get; private set; }
 

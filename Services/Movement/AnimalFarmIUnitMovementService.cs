@@ -1,26 +1,25 @@
 using FleetingCity.BAL.Enum;
 using Godot;
 using System;
+using System.Diagnostics;
 using System.Linq;
 
-public class CharacterMovementService
+public class AnimalFarmUnitMovementService
 {
 	private AStarGrid2D _grid;
 	private TileMapLayer _ground;
 	private CharacterBody2D _context;
 	private Godot.Collections.Array<Vector2I> _idPath;
-	public CharacterMovementService(CharacterBody2D context)
+
+	public AnimalFarmUnitMovementService(CharacterBody2D context, TileMapLayer ground)
 	{
+		if (ground == null) throw new Exception("Ground tilemap layer cannot be null");
 		if (context == null) throw new ArgumentNullException(nameof(context), "Context cannot be null.");
 
 		_context = context;
-		_ground = context.GetTree()
-			.GetNodesInGroup("walkable")
-			.Cast<Node>()
-			.OfType<TileMapLayer>()
-			.FirstOrDefault();
+		_ground = ground;
 
-		if (_ground == null) throw new InvalidOperationException("No TileMapLayer found in 'walkable' group.");
+		if (_ground == null) throw new InvalidOperationException("Animal farm Ground tilemap layer is null");
 
 		_context = context;
 		_grid = new AStarGrid2D();
@@ -84,6 +83,8 @@ public class CharacterMovementService
 	public void StartMovementTo(Vector2 Position)
 	{
 		var globalPosition = _context.ToGlobal(Position);
+		// GD.Print($"Global Position: ({globalPosition.X}, {globalPosition.Y}); LocalPosition: ({Position.X}, {Position.Y})");
+		// Vector2I targetPos = _ground.LocalToMap(globalPosition);
 		Vector2I targetPos = _ground.LocalToMap(Position);
 		Vector2I playerPos = _ground.LocalToMap(_context.Position);
 
@@ -100,21 +101,21 @@ public class CharacterMovementService
 			return MOVEMENT_DIRECTION_ENUM.NONE;
 		}
 		if (_idPath.Count == 0)
-			{
-				_idPath = null; // Clear the path when done
-				return MOVEMENT_DIRECTION_ENUM.NONE;
-			}
+		{
+			_idPath = null; // Clear the path when done
+			return MOVEMENT_DIRECTION_ENUM.NONE;
+		}
 
-			Vector2I nextPosition = _idPath[0];
-			Vector2 targetPosition = _ground.MapToLocal(nextPosition);
-			_context.GlobalPosition = _context.GlobalPosition.MoveToward(targetPosition, 100f * (float)delta);
-			if (_context.GlobalPosition.DistanceTo(targetPosition) < 1f)
-			{
-				_idPath.RemoveAt(0);
-				if (_idPath.Count == 0)
-					_idPath = null;
-			}
-			return Helper.GetMovementDirection(_context.GlobalPosition, targetPosition);
+		Vector2I nextPosition = _idPath[0];
+		Vector2 targetPosition = _ground.MapToLocal(nextPosition);
+		_context.Position = _context.Position.MoveToward(targetPosition, 100f * (float)delta);
+		if (_context.Position.DistanceTo(targetPosition) < 1f)
+		{
+			_idPath.RemoveAt(0);
+			if (_idPath.Count == 0)
+				_idPath = null;
+		}
+		return Helper.GetMovementDirection(_context.Position, targetPosition);
 	}
 
 }

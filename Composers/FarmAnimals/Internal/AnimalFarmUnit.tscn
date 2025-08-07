@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmu3ljoyrto61"]
+[gd_scene load_steps=15 format=3 uid="uid://bmu3ljoyrto61"]
 
 [ext_resource type="Script" uid="uid://c0sogffrwfunw" path="res://Composers/FarmAnimals/Internal/AnimalFarmUnit.cs" id="1_j7mr4"]
 [ext_resource type="Texture2D" uid="uid://nhjljjylmau" path="res://assets/game/npc/Chicken.png" id="2_7idp1"]
@@ -91,16 +91,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Unit" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7mr4"]
+size = Vector2(10, 3.5)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+y_sort_enabled = true
 script = ExtResource("1_j7mr4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_snxfv")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
 offset = Vector2(0, -5)
 
 [node name="MovementTimer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1.25)
+shape = SubResource("RectangleShape2D_j7mr4")

@@ -5,6 +5,9 @@
 
 [node name="BaseScene" instance=ExtResource("1_tvckn")]
 
+[node name="Player" parent="." index="1"]
+position = Vector2(27, -45)
+
 [node name="Settlers" parent="." index="5" node_paths=PackedStringArray("SpawnPoints")]
 z_index = 1
 SpawnPoints = NodePath("SettlerSpawns")

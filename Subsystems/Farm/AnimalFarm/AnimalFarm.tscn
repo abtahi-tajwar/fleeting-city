@@ -575,9 +575,10 @@ tile_set = SubResource("TileSet_ffvaa")
 tile_map_data = PackedByteArray("AAD9//3/AAABAAAAAAD///3/AAABAAAAAAABAP3/AAABAAAAAAADAP3/AAABAAAAAAD7//3/AAABAAAAAAAEAP3/AAAFAAAAAAAEAP7/AAAFAAEAAAAEAP//AAAFAAIAAAAEAAEAAAAFAAIAAAAEAAMAAAAFAAIAAAADAAQAAAABAAAAAAABAAQAAAABAAAAAAD//wQAAAABAAAAAAD9/wQAAAABAAAAAAD7/wQAAAABAAAAAAD6/wMAAAAFAAIAAAD6/wEAAAAFAAIAAAD6////AAAFAAIAAAD6//7/AAAFAAIAAAA=")
 tile_set = SubResource("TileSet_w376c")
 
-[node name="Units" parent="Object" instance=ExtResource("5_u4i51")]
-position = Vector2(-80, -27)
+[node name="Units" parent="Object" node_paths=PackedStringArray("Ground") instance=ExtResource("5_u4i51")]
+position = Vector2(-79, -23)
 scale = Vector2(1, 0.973744)
+Ground = NodePath("../Surrounding/Ground")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Object"]
 

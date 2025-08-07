@@ -11,9 +11,9 @@ script = ExtResource("1_36q7p")
 Unit = ExtResource("2_36q7p")
 
 [node name="RoamingArea" type="Area2D" parent="."]
+position = Vector2(73, 47)
 
 [node name="Shape" type="CollisionShape2D" parent="RoamingArea"]
-position = Vector2(73, 48)
 shape = SubResource("RectangleShape2D_u4i51")
 
 [node name="Unit" parent="." instance=ExtResource("2_36q7p")]
