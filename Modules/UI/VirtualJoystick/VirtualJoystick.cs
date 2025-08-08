@@ -23,7 +23,6 @@ public partial class VirtualJoystick : Control
 		initialInnerPos = Inner.Position;
 		initialInnerPosGlobal = Inner.GlobalPosition;
 		outerPos = Outer.GlobalPosition;
-		GD.Print($"Inner position intial {initialInnerPos}, {initialInnerPosGlobal}");
 	}
 
 	public override void _Process(double delta)
@@ -38,14 +37,12 @@ public partial class VirtualJoystick : Control
 			if (t.Pressed)
 			{
 				_pressed = true;
-				GD.Print("Knob pressed");
 				_start = GetGlobalMousePosition();
 			}
 			else
 			{
 				_pressed = false;
 				// reset knob here
-				GD.Print("Knob released");
 				Inner.Position = initialInnerPos;
 				ReleaseAllMoveActions();
 			}
@@ -61,7 +58,6 @@ public partial class VirtualJoystick : Control
 
 			Inner.GlobalPosition = initialInnerPosGlobal + offset;
 			InvokeDirectionInput();
-			GD.Print($"Knob should be moving {mousePos}");
 			// clamp & move knob; compute direction, etc.
 		}
 	}

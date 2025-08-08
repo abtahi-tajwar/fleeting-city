@@ -60,13 +60,14 @@ public partial class InputManager : Node2D
 			}
 			else
 			{
-				OnMouseDown();
+				GD.Print("Touch is working on settler");
+				OnMouseUp();
 			}
 		}
 
 
 		// Detect motion
-		if (@event is InputEventMouseMotion motion && IsMousePressed)
+		if ((@event is InputEventMouseMotion || @event is InputEventScreenDrag) && IsMousePressed)
 		{
 			if (IsMousePressed)
 			{
