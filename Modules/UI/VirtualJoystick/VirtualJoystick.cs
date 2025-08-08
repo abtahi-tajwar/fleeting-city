@@ -32,10 +32,12 @@ public partial class VirtualJoystick : Control
 	}
 	public override void _GuiInput(InputEvent @event)
 	{
-		if (@event is InputEventScreenTouch t)
+		if (@event is InputEventScreenTouch touch)
 		{
-			if (t.Pressed)
+			
+			if (touch.Pressed)
 			{
+				GD.Print($"Touch position: {touch.Position}, Mouse Position: {GetGlobalMousePosition()}");
 				_pressed = true;
 				_start = GetGlobalMousePosition();
 			}
@@ -50,13 +52,16 @@ public partial class VirtualJoystick : Control
 		else if (_pressed && @event is InputEventScreenDrag d)
 		{
 			var mousePos = GetGlobalMousePosition();
-			var offset = mousePos - initialInnerPosGlobal;
+			var uiLayerSize = GetViewportRect().Size;
+			var touchPos = new Vector2(d.Position.X, uiLayerSize.Y - d.Position.Y);
+			var offset = touchPos - initialInnerPosGlobal;
 
 			// Clamp length
 			if (offset.Length() > MaxClampRadius)
 				offset = offset.Normalized() * MaxClampRadius;
 
-			Inner.GlobalPosition = initialInnerPosGlobal + offset;
+			// Inner.GlobalPosition = initialInnerPosGlobal + offset;
+			Inner.GlobalPosition = new Vector2(initialInnerPosGlobal.X + offset.X, initialInnerPosGlobal.Y - offset.Y);
 			InvokeDirectionInput();
 			// clamp & move knob; compute direction, etc.
 		}

@@ -20,3 +20,6 @@ mono/
 
 # Heavy files
 vendor/
+
+#distributions
+dist/
