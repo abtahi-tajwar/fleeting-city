@@ -11,6 +11,8 @@ public partial class InputManager : Node2D
 	private bool DraggingJustFinished = false;
 	public Vector2 MouseDragDelta = Vector2.Zero;
 
+	public static Vector2 GlobalMousePosition = Vector2.Zero;
+
 	// privates
 	private Vector2 _lastMousePosition;
 	public override void _Ready()
@@ -34,6 +36,7 @@ public partial class InputManager : Node2D
 	{
 		CapturePlayerMovementInput(delta);
 		CaptureMovementCommand();
+		CalculateGlobalMousePosition();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -142,6 +145,21 @@ public partial class InputManager : Node2D
 			_lastDirection = newDir;
 			EventBus.Instance.EmitPlayerMove(newDir);
 		}
+	}
+
+	private void CalculateGlobalMousePosition()
+	{
+		// if (_camera == null) { GD.PrintErr("No Camera found"); return; }
+		var globalPos = GetGlobalMousePosition();
+		// var cameraSize = _camera.GetViewportRect().Size;
+		// var cameraPos = _camera.Position;
+		// var halfX = cameraSize.X / 2;
+		// var halfY = cameraSize.Y / 2;
+		// var zoom = _camera.Zoom;
+
+		// var finalGlobalPos = new Vector2(globalPos.X - halfX + (cameraPos.X * zoom.X), globalPos.Y - halfY + (cameraPos.Y * zoom.Y));
+		// // InputManager.GlobalMousePosition = finalGlobalPos;
+		InputManager.GlobalMousePosition = globalPos;
 	}
 
 }

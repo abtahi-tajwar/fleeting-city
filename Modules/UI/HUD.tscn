@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvnw0jfd4pyif"]
+[gd_scene load_steps=6 format=3 uid="uid://cvnw0jfd4pyif"]
 
+[ext_resource type="PackedScene" uid="uid://c0a7gkbx7qhts" path="res://Debug/MousePosition/MousePosition.tscn" id="1_6w5ua"]
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="3_s7k6r"]
@@ -15,6 +16,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="MousePosition" parent="Container" instance=ExtResource("1_6w5ua")]
+layout_mode = 1
 
 [node name="ActionButtonsContainer" type="HBoxContainer" parent="Container"]
 custom_minimum_size = Vector2(0, 100)

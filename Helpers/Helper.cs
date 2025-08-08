@@ -86,4 +86,87 @@ public class Helper
         return new Rect2();
     }
 
+    public static Rect2 GetBounds(Node node)
+    {
+        switch (node)
+        {
+            case CollisionShape2D collisionShape:
+                if (collisionShape.Shape is RectangleShape2D rect)
+                {
+                    Vector2 size = rect.Size * collisionShape.Scale;
+                    // Local top-left in shape space
+                    // Local top-left in shape space
+                    Vector2 localTopLeft = -size / 2;
+
+                    // Transform to global coordinates
+                    Vector2 globalTopLeft = collisionShape.GlobalTransform * localTopLeft;
+
+                    return new Rect2(globalTopLeft, size);
+
+                }
+                else if (collisionShape.Shape is CircleShape2D circle)
+                {
+                    float radius = circle.Radius * collisionShape.Scale.X;
+                    Vector2 localTopLeft = new Vector2(-radius, -radius);
+                    Vector2 globalTopLeft = collisionShape.GlobalTransform * localTopLeft;
+
+                    return new Rect2(globalTopLeft, new Vector2(radius * 2, radius * 2));
+                }
+                break;
+
+            case Sprite2D sprite:
+                if (sprite.Texture != null)
+                {
+                    Vector2 size = sprite.Texture.GetSize() * sprite.Scale;
+                    Vector2 position = sprite.GlobalPosition - (size / 2);
+                    return new Rect2(position, size);
+                }
+                break;
+
+            case TextureRect textureRect:
+                Vector2 texPosition = textureRect.GlobalPosition;
+                Vector2 texSize = textureRect.Size * textureRect.Scale;
+                return new Rect2(texPosition, texSize);
+
+            case CollisionPolygon2D poly:
+                if (poly.Polygon != null && poly.Polygon.Length > 0)
+                {
+                    Rect2 localBounds = CalculatePolygonBounds(poly.Polygon);
+                    return new Rect2(poly.GlobalPosition + localBounds.Position, localBounds.Size * poly.Scale);
+                }
+                break;
+
+            case Area2D area:
+                Rect2 combined = new Rect2();
+                foreach (Node child in area.GetChildren())
+                {
+                    Rect2 childBounds = GetBounds(child);
+                    if (childBounds.HasArea())
+                        combined = combined.HasArea() ? combined.Merge(childBounds) : childBounds;
+                }
+                return combined;
+        }
+
+        return new Rect2();
+    }
+
+    private static Rect2 CalculatePolygonBounds(Vector2[] points)
+    {
+        if (points == null || points.Length == 0)
+            return new Rect2();
+
+        Vector2 min = points[0];
+        Vector2 max = points[0];
+
+        foreach (var p in points)
+        {
+            min.X = Mathf.Min(min.X, p.X);
+            min.Y = Mathf.Min(min.Y, p.Y);
+            max.X = Mathf.Max(max.X, p.X);
+            max.Y = Mathf.Max(max.Y, p.Y);
+        }
+
+        return new Rect2(min, max - min);
+    }
+
 }

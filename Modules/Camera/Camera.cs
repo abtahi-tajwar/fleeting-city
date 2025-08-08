@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Camera : Node2D
+public partial class Camera : Camera2D
 {
 	// Exports
 	[Export]
@@ -9,6 +9,10 @@ public partial class Camera : Node2D
 	// Privates
 	private Node2D _target = null;
 	private bool _followTarget = true;
+    public override void _EnterTree()
+    {
+        MakeCurrent();
+    }
 	public override void _Ready()
 	{
 		CallDeferred(nameof(SetDefaultTargetToPlayer));

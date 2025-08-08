@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djkfeodwshfbh"]
+
+[ext_resource type="Script" uid="uid://b4q2sjyf1m7di" path="res://Debug/Outliner/Outliner.cs" id="1_1snbo"]
+
+[node name="Outliner" type="Node2D"]
+script = ExtResource("1_1snbo")
