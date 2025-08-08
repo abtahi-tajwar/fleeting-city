@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://d3kdrsp3ft3o6"]
 
 [ext_resource type="Script" uid="uid://b7fmeyogm6hng" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.cs" id="1_dstxq"]
-[ext_resource type="Texture2D" uid="uid://cmyodl1hrh0kx" path="res://vendor/Tiny Swords (Update 010)/UI/Buttons/Button_Blue_9Slides.png" id="2_hukjd"]
+[ext_resource type="Texture2D" uid="uid://cmyodl1hrh0kx" path="res://assets/game/UI/Buttons/Button_Blue_9Slides.png" id="2_hukjd"]
 [ext_resource type="Texture2D" uid="uid://stltll7ydd5p" path="res://assets/game/UI/player_walk_toggle.png" id="2_js3fr"]
-[ext_resource type="Texture2D" uid="uid://c7abfkqcb2713" path="res://vendor/Tiny Swords (Update 010)/UI/Buttons/Button_Blue_9Slides_Pressed.png" id="3_831e6"]
-[ext_resource type="Texture2D" uid="uid://b8jxgo4hrhxc3" path="res://vendor/Tiny Swords (Update 010)/UI/Buttons/Button_Hover_9Slides.png" id="3_hukjd"]
+[ext_resource type="Texture2D" uid="uid://c7abfkqcb2713" path="res://assets/game/UI/Buttons/Button_Blue_9Slides_Pressed.png" id="3_831e6"]
+[ext_resource type="Texture2D" uid="uid://b8jxgo4hrhxc3" path="res://assets/game/UI/Buttons/Button_Hover_9Slides.png" id="3_hukjd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dlvd5"]
 
@@ -19,6 +19,12 @@ texture = ExtResource("2_hukjd")
 
 [node name="MoveToggleButton" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 200)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_right = 200.0
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_dlvd5")
 script = ExtResource("1_dstxq")
 ActionType = 1

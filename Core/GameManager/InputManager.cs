@@ -92,7 +92,6 @@ public partial class InputManager : Node2D
 		if (!IsDragging)
 		{
 			EventBus.Instance.EmitSettlerSelectOrMove(GetGlobalMousePosition());
-			GD.Print("Move settler please");
 		}
 		IsDragging = false;
 	}

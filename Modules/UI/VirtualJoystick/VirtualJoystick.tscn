@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpa0i2j65dmlv"]
+
+[ext_resource type="Texture2D" uid="uid://dsb855j2p4ble" path="res://assets/game/UI/outer_stick_wooden.png" id="1_36s78"]
+[ext_resource type="Script" uid="uid://co2slcvxpf10x" path="res://Modules/UI/VirtualJoystick/VirtualJoystick.cs" id="1_mbb6i"]
+[ext_resource type="Texture2D" uid="uid://c7ougstqbef8" path="res://assets/game/UI/inner_stick_wooden.png" id="2_4mrra"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mbb6i"]
+
+[node name="container" type="Panel" node_paths=PackedStringArray("Inner", "Outer")]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_right = 200.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mbb6i")
+script = ExtResource("1_mbb6i")
+Inner = NodePath("outer/inner")
+Outer = NodePath("outer")
+
+[node name="outer" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -99.5
+offset_right = 100.5
+offset_bottom = 99.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(102.5, 99.5)
+texture = ExtResource("1_36s78")
+expand_mode = 2
+
+[node name="inner" type="TextureRect" parent="outer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -49.5
+offset_right = 49.5
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(49.5, 48.5)
+texture = ExtResource("2_4mrra")
+expand_mode = 2
+stretch_mode = 5

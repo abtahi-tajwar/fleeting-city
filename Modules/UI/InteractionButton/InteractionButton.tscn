@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dl570yu5fjx30"]
 
 [ext_resource type="Script" uid="uid://ud3ejb4csy45" path="res://Modules/UI/InteractionButton/InteractionButton.cs" id="1_8i3hs"]
-[ext_resource type="Texture2D" uid="uid://c7abfkqcb2713" path="res://vendor/Tiny Swords (Update 010)/UI/Buttons/Button_Blue_9Slides_Pressed.png" id="1_75dsx"]
-[ext_resource type="Texture2D" uid="uid://cmyodl1hrh0kx" path="res://vendor/Tiny Swords (Update 010)/UI/Buttons/Button_Blue_9Slides.png" id="1_at2rd"]
-[ext_resource type="Texture2D" uid="uid://b8jxgo4hrhxc3" path="res://vendor/Tiny Swords (Update 010)/UI/Buttons/Button_Hover_9Slides.png" id="1_lmotf"]
+[ext_resource type="Texture2D" uid="uid://c7abfkqcb2713" path="res://assets/game/UI/Buttons/Button_Blue_9Slides_Pressed.png" id="1_75dsx"]
+[ext_resource type="Texture2D" uid="uid://cmyodl1hrh0kx" path="res://assets/game/UI/Buttons/Button_Blue_9Slides.png" id="1_at2rd"]
+[ext_resource type="Texture2D" uid="uid://b8jxgo4hrhxc3" path="res://assets/game/UI/Buttons/Button_Hover_9Slides.png" id="1_lmotf"]
 [ext_resource type="Texture2D" uid="uid://y5f33lkbyrxk" path="res://Modules/UI/InteractionButton/Icons/INTERACT.png" id="3_6gqpt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6gqpt"]
@@ -17,17 +17,8 @@ texture = ExtResource("1_75dsx")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j1t27"]
 texture = ExtResource("1_at2rd")
 
-[node name="InteractionButton" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_8i3hs")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
+[node name="MarginContainer" type="MarginContainer"]
+custom_minimum_size = Vector2(200, 200)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 10
@@ -35,13 +26,24 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
+[node name="InteractionButton" type="Control" parent="."]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_8i3hs")
+
+[node name="Panel" type="Panel" parent="InteractionButton"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 200.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_6gqpt")
 
-[node name="Button" type="Button" parent="MarginContainer/Panel"]
+[node name="Button" type="Button" parent="InteractionButton/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,7 +54,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_8i3hs")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_at2rd")
 theme_override_styles/normal = SubResource("StyleBoxTexture_j1t27")
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/Panel"]
+[node name="Icon" type="TextureRect" parent="InteractionButton/Panel"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 offset_left = 54.0
@@ -67,7 +69,7 @@ texture = ExtResource("3_6gqpt")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="MarginContainer/Panel"]
+[node name="Label" type="Label" parent="InteractionButton/Panel"]
 layout_mode = 0
 offset_left = 45.0
 offset_top = 127.0
