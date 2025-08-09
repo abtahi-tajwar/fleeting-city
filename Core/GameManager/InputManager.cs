@@ -36,38 +36,40 @@ public partial class InputManager : Node2D
 	{
 		CapturePlayerMovementInput(delta);
 		CaptureMovementCommand();
-		CalculateGlobalMousePosition();
+		if (!GameManager.IsPlatformMobile) CalculateGlobalMousePosition();
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event is InputEventMouseButton mouseEvent)
+		if (@event is InputEventMouseButton mouseEvent && !GameManager.IsPlatformMobile)
 		{
 			if (mouseEvent.Pressed)
 			{
-				OnMouseDown();
+				OnMouseDown(GetViewport().GetMousePosition());
 			}
 			else
 			{
-				OnMouseUp();
+				GD.Print($"Selected with mouse {GetGlobalMousePosition()}");
+				OnMouseUp(GetGlobalMousePosition());
 			}
 		}
-		else if (@event is InputEventScreenTouch touchEvent)
+		else if (@event is InputEventScreenTouch touchEvent && GameManager.IsPlatformMobile)
 		{
+			var touchPos = CalculateGlobalTouchPosition(touchEvent.Position);
 			if (touchEvent.Pressed)
 			{
-				OnMouseDown();
+				OnMouseDown(touchEvent.Position);
 			}
 			else
 			{
-				GD.Print("Touch is working on settler");
-				OnMouseUp();
+				GD.Print($"Selected with touch {touchEvent.Position}");
+				OnMouseUp(touchPos);
 			}
 		}
 
 
 		// Detect motion
-		if ((@event is InputEventMouseMotion || @event is InputEventScreenDrag) && IsMousePressed)
+		if (@event is InputEventMouseMotion && IsMousePressed && !GameManager.IsPlatformMobile)
 		{
 			if (IsMousePressed)
 			{
@@ -79,20 +81,31 @@ public partial class InputManager : Node2D
 			}
 			// Don't reset dragging here
 		}
+		else if (@event is InputEventScreenDrag touch && IsMousePressed && GameManager.IsPlatformMobile)
+		{
+			if (IsMousePressed)
+			{
+				IsDragging = true;
+				// Capture mouse movement delta
+				var currentMousePosition = touch.Position;
+				MouseDragDelta = currentMousePosition - _lastMousePosition;
+				_lastMousePosition = currentMousePosition;
+			}
+		}
 
 	}
 
-	private void OnMouseDown()
+	private void OnMouseDown(Vector2 mousePosition)
 	{
 		IsMousePressed = true;
-		_lastMousePosition = GetViewport().GetMousePosition();
+		_lastMousePosition = mousePosition;
 	}
-	private void OnMouseUp()
+	private void OnMouseUp(Vector2 mousePosition)
 	{
 		IsMousePressed = false;
 		if (!IsDragging)
 		{
-			EventBus.Instance.EmitSettlerSelectOrMove(GetGlobalMousePosition());
+			EventBus.Instance.EmitSettlerSelectOrMove(mousePosition);
 		}
 		IsDragging = false;
 	}
@@ -160,6 +173,12 @@ public partial class InputManager : Node2D
 		// var finalGlobalPos = new Vector2(globalPos.X - halfX + (cameraPos.X * zoom.X), globalPos.Y - halfY + (cameraPos.Y * zoom.Y));
 		// // InputManager.GlobalMousePosition = finalGlobalPos;
 		InputManager.GlobalMousePosition = globalPos;
+	}
+
+	private Vector2 CalculateGlobalTouchPosition(Vector2 touchPos)
+	{
+
+		return GetCanvasTransform().AffineInverse() * touchPos;
 	}
 
 }

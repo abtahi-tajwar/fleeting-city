@@ -4,6 +4,22 @@ using System;
 public partial class GameManager : Node2D
 {
     public static Player Player { get; private set; }
+    public static bool IsPlatformMobile { get; set; }
+
+    [Export]
+    public bool DebugForMobile { get; set; }
+
+    public override void _Ready()
+    {
+        if (OS.HasFeature("editor"))
+        {
+            IsPlatformMobile = DebugForMobile;
+        }
+        else
+        {
+            IsPlatformMobile = OS.HasFeature("mobile");
+        }
+    }
 
     public static void SetPlayer(Player player)
     {

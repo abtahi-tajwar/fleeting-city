@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhl1mpmjatwdb"]
+
+[ext_resource type="Script" uid="uid://df1vhlhx74p51" path="res://Debug/ProcessDebug/ProcessDebug.cs" id="1_3yahw"]
+
+[node name="ProcessDebug" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_3yahw")

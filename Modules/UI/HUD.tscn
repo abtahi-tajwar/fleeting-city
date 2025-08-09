@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvnw0jfd4pyif"]
+[gd_scene load_steps=7 format=3 uid="uid://cvnw0jfd4pyif"]
 
 [ext_resource type="PackedScene" uid="uid://c0a7gkbx7qhts" path="res://Debug/MousePosition/MousePosition.tscn" id="1_6w5ua"]
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
+[ext_resource type="PackedScene" uid="uid://bhl1mpmjatwdb" path="res://Debug/ProcessDebug/ProcessDebug.tscn" id="2_b21t2"]
 [ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://dpa0i2j65dmlv" path="res://Modules/UI/VirtualJoystick/VirtualJoystick.tscn" id="3_b21t2"]
 [ext_resource type="PackedScene" uid="uid://dl570yu5fjx30" path="res://Modules/UI/InteractionButton/InteractionButton.tscn" id="4_s7k6r"]
@@ -19,6 +20,22 @@ mouse_filter = 2
 
 [node name="MousePosition" parent="Container" instance=ExtResource("1_6w5ua")]
 layout_mode = 1
+
+[node name="ProcessDebug" parent="Container" instance=ExtResource("2_b21t2")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -105.0
+offset_right = -35.0
+offset_bottom = -82.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container"]
 layout_mode = 1

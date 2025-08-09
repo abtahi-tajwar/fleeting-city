@@ -27,17 +27,23 @@ public partial class VirtualJoystick : Control
 
 	public override void _Process(double delta)
 	{
-		if (!UnitSelectionManager.IsPlayerSelected) Visible = false;
-		else Visible = true;
+		if (GameManager.IsPlatformMobile)
+		{
+			if (!UnitSelectionManager.IsPlayerSelected) Visible = false;
+			else Visible = true;
+		}
+		else
+		{
+			Visible = false;
+		}
 	}
 	public override void _GuiInput(InputEvent @event)
 	{
 		if (@event is InputEventScreenTouch touch)
 		{
-			
+
 			if (touch.Pressed)
 			{
-				GD.Print($"Touch position: {touch.Position}, Mouse Position: {GetGlobalMousePosition()}");
 				_pressed = true;
 				_start = GetGlobalMousePosition();
 			}

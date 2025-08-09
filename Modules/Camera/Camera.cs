@@ -1,20 +1,27 @@
 using Godot;
 using System;
+using System.Drawing;
 
 public partial class Camera : Camera2D
 {
 	// Exports
 	[Export]
 	public float CameraSpeed = 50f;
+
+	public static Vector2 MovementDistanceFromInitialPosition;
+	public static Vector2 CurrentZoom;
+	
 	// Privates
 	private Node2D _target = null;
 	private bool _followTarget = true;
+	private Vector2 _initialPosition;
     public override void _EnterTree()
-    {
-        MakeCurrent();
-    }
+	{
+		MakeCurrent();
+	}
 	public override void _Ready()
 	{
+		_initialPosition = GlobalPosition;
 		CallDeferred(nameof(SetDefaultTargetToPlayer));
 		CallDeferred(nameof(ConnectToEventBus));
 
@@ -22,6 +29,9 @@ public partial class Camera : Camera2D
 
 	public override void _Process(double delta)
 	{
+		MovementDistanceFromInitialPosition = _initialPosition - GlobalPosition;
+		ProcessDebug.Print($"{MovementDistanceFromInitialPosition}");
+		CurrentZoom = Zoom;
 		if (_followTarget)
 		{
 			// Smoothly follow the target
