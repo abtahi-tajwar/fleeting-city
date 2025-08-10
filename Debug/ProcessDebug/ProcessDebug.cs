@@ -9,7 +9,7 @@ public partial class ProcessDebug : Label
 	public override void _Ready()
 	{
 		Instance = this;
-		GD.PushWarning("Process debug class attached. Please remove it before release build");
+		if (!OS.HasFeature("editor")) QueueFree();
 	}
 
 	public static void Print(string text)

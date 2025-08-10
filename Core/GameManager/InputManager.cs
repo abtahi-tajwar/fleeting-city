@@ -105,7 +105,7 @@ public partial class InputManager : Node2D
 		IsMousePressed = false;
 		if (!IsDragging)
 		{
-			EventBus.Instance.EmitSettlerSelectOrMove(mousePosition);
+			EventBus.Instance.EmitUnitSelectOrMove(mousePosition);
 		}
 		IsDragging = false;
 	}

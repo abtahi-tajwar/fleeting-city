@@ -49,7 +49,8 @@ public partial class Settler : CharacterBody2D
 	{
 		if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
 		{
-			if (UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
+			if (UnitSelectionManager.SelectedSettler != null
+			&& UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
 			{
 				_movementService.StartMovementOnClick(touchPos);
 			}
@@ -69,7 +70,7 @@ public partial class Settler : CharacterBody2D
 		}
 
 		EventBus.Instance.Connect(
-			EventBus.SignalName.SettlerSelectOrMove,
+			EventBus.SignalName.UnitSelectOrMove,
 			new Callable(this, nameof(OnSettlerSelectOrMove))
 		);
 	}

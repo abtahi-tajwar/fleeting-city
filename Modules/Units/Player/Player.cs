@@ -38,18 +38,18 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (
-			@event is InputEventMouseButton mouseButtonEvent
-			&& mouseButtonEvent.IsPressed()
-			&& ActionManager.CurrentAction == ACTION_ENUM.POINT
-		)
-		{
-			_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
-		}
+	// public override void _UnhandledInput(InputEvent @event)
+	// {
+	// 	if (
+	// 		@event is InputEventMouseButton mouseButtonEvent
+	// 		&& mouseButtonEvent.IsPressed()
+	// 		&& ActionManager.CurrentAction == ACTION_ENUM.POINT
+	// 	)
+	// 	{
+	// 		_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
+	// 	}
 
-	}
+	// }
 
 	public void UpdateCurrentDirection(string directionStr)
 	{
@@ -96,6 +96,14 @@ public partial class Player : CharacterBody2D
 		Position = Position.Clamp(boundRect.Position, boundRect.End);
 	}
 
+	private void OnSelect(Vector2 touchPos)
+	{
+		if (ActionManager.CurrentAction == ACTION_ENUM.POINT)
+		{
+			_unitSelectionManager.SelectPointedUnit(touchPos);
+		}
+	}
+
 	private void ConnectToEventBus()
 	{
 		if (EventBus.Instance == null)
@@ -107,6 +115,11 @@ public partial class Player : CharacterBody2D
 		EventBus.Instance.Connect(
 			"PlayerMove",
 			new Callable(this, nameof(UpdateCurrentDirection))
+		);
+
+		EventBus.Instance.Connect(
+			EventBus.SignalName.UnitSelectOrMove,
+			new Callable(this, nameof(OnSelect))
 		);
 		GD.Print("Connected to EventBus for PlayerMove events.");
 	}

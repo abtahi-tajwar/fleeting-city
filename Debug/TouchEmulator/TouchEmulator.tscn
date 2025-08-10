@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbs3spsx8dbn"]
+
+[ext_resource type="Script" uid="uid://wdb88840sa56" path="res://Debug/TouchEmulator/TouchEmulator.cs" id="1_4k4sc"]
+
+[node name="TouchEmulator" type="Node2D"]
+script = ExtResource("1_4k4sc")
