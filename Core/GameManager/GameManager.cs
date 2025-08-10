@@ -9,7 +9,7 @@ public partial class GameManager : Node2D
     [Export]
     public bool DebugForMobile { get; set; }
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         if (OS.HasFeature("editor"))
         {

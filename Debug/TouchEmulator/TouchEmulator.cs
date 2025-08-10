@@ -3,8 +3,6 @@ using System;
 
 public partial class TouchEmulator : Node2D
 {
-	[Export]
-	public float TouchFingerRadius = 15.0f;
 	public override void _Ready()
 	{
 		if (GameManager.IsPlatformMobile) Input.MouseMode = Input.MouseModeEnum.Hidden;
@@ -17,7 +15,7 @@ public partial class TouchEmulator : Node2D
 	{
 		if (GameManager.IsPlatformMobile)
 		{
-			DrawCircle(GetGlobalMousePosition(), TouchFingerRadius, new Color(1f, 1f, 1f, 0.3f), true);
+			DrawCircle(GetGlobalMousePosition(), InputManager.Instance.TouchFingerRadius, new Color(1f, 1f, 1f, 0.3f), true);
 		}
 	}
 }

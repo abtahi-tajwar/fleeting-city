@@ -11,13 +11,15 @@ public partial class UnitSelectionManager : Node
 	public UnitSelectionManager(Node2D unit)
 	{
 		if (unit == null) throw new ArgumentNullException(nameof(unit), "Unit cannot be null.");
-		
+
 		_unit = unit;
 	}
 
 	public void SelectPointedUnit(Vector2 mousePos)
 	{
-		var isMouseOver = Helper.IsMouseOverCollider(_unit, mousePos);
+		var isMouseOver = GameManager.IsPlatformMobile
+			? Helper.IsTouchOverCollider(_unit, mousePos, InputManager.Instance.TouchFingerRadius) 
+			: Helper.IsMouseOverCollider(_unit, mousePos);
 		if (!isMouseOver)
 		{
 			return;

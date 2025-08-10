@@ -58,6 +58,42 @@ public class Helper
         return false;
 
     }
+    public static bool IsTouchOverCollider(Node2D node, Vector2 mousePosition, float FINGER_RADIUS_PX = 18f)
+    {
+        var space = node.GetWorld2D().DirectSpaceState;
+
+        // Keep a roughly constant screen-space radius even if the camera is zoomed.
+        float radius = FINGER_RADIUS_PX;
+        var cam = node.GetViewport()?.GetCamera2D();
+        if (cam != null)
+        {
+            // If non-uniform zoom, average the axes.
+            float zoom = (cam.Zoom.X + cam.Zoom.Y) * 0.5f;
+            if (zoom != 0f) radius *= 1f / zoom;
+        }
+
+        // Use a small circle shape at the pointer to test overlap with the node.
+        var circle = new CircleShape2D { Radius = radius };
+
+        var shapeParams = new PhysicsShapeQueryParameters2D
+        {
+            Shape = circle,
+            Transform = new Transform2D(0f, mousePosition), // position in world coords
+            CollideWithAreas = true,
+            CollideWithBodies = true
+            // You can also set CollisionMask here if you want to limit layers.
+        };
+
+        var results = space.IntersectShape(shapeParams); // Godot.Collections.Array<Dictionary>
+        foreach (var result in results)
+        {
+            if (result.TryGetValue("collider", out var obj) && obj.As<Node2D>() == node)
+                return true;
+        }
+
+        return false;
+    }
+
 
     public static Rect2 GetCollisionShapeBounds(CollisionShape2D shapeNode)
     {
