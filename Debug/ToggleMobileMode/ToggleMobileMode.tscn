@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6i2l35801ccn"]
+
+[ext_resource type="Script" uid="uid://dacla2ik66e5c" path="res://Debug/ToggleMobileMode/ToggleMobileMode.cs" id="1_864ss"]
+
+[node name="ToggleMobileMode" type="Label"]
+theme_override_font_sizes/font_size = 30
+text = "Switch to Mobile (Cmd + P)"
+script = ExtResource("1_864ss")

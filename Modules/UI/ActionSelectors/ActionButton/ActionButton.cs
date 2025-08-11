@@ -1,3 +1,4 @@
+using System.Security;
 using FleetingCity.BAL.Enum;
 using Godot;
 
@@ -8,17 +9,19 @@ public partial class ActionButton : Control
     [Export]
     public ACTION_BUTTON_SCOPE Scope;
     [Export]
-    public Button DesktopButton;
+    public bool IsMobileOnly = true;
+    // [Export]
+    // public Button DesktopButton;
     [Export]
     public TouchScreenButton MobileButton;
 
     public override void _Ready()
     {
 
-        DesktopButton.Pressed += () =>
-        {
-            EventBus.Instance.EmitActionChange(ActionType, DesktopButton.ButtonPressed);
-        };
+        // DesktopButton.Pressed += () =>
+        // {
+        //     EventBus.Instance.EmitActionChange(ActionType, DesktopButton.ButtonPressed);
+        // };
         MobileButton.Pressed += () =>
         {
             EventBus.Instance.EmitActionChange(ActionType, true);
@@ -32,19 +35,9 @@ public partial class ActionButton : Control
 
     public override void _Process(double delta)
     {
-        if (!GameManager.IsPlatformMobile)
-        {
-            MobileButton.Visible = false;
-            DesktopButton.Visible = false;
-        }
-        else
-        {
-            MobileButton.Visible = true;
-            DesktopButton.Visible = false;
-        }
         if (Scope == ACTION_BUTTON_SCOPE.BOTH)
         {
-            this.Visible = true;
+            SetVisible(true);
             return;
         }
         else
@@ -53,7 +46,7 @@ public partial class ActionButton : Control
             {
                 if (Scope != ACTION_BUTTON_SCOPE.HERO)
                 {
-                    this.Visible = false;
+                    SetVisible(false);
                     return;
                 }
             }
@@ -63,12 +56,39 @@ public partial class ActionButton : Control
                 {
                     if (Scope == ACTION_BUTTON_SCOPE.SETTLER)
                     {
-                        this.Visible = true;
+                        SetVisible(true);
                         return;
                     }
                 }
             }
         }
 
+    }
+
+    public void SetVisible(bool isVisible)
+    {
+        if (!IsMobileOnly)
+        {
+            Visible = isVisible;
+            return;
+        }
+
+        if (isVisible)
+        {
+            if (!GameManager.IsPlatformMobile)
+            {
+                Visible = false;
+                // DesktopButton.Visible = false;
+            }
+            else
+            {
+                Visible = true;
+                // DesktopButton.Visible = false;
+            }
+        }
+        else
+        {
+            Visible = false;
+        }
     }
 }

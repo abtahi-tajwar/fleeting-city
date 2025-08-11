@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvnw0jfd4pyif"]
+[gd_scene load_steps=10 format=3 uid="uid://cvnw0jfd4pyif"]
 
 [ext_resource type="PackedScene" uid="uid://c0a7gkbx7qhts" path="res://Debug/MousePosition/MousePosition.tscn" id="1_6w5ua"]
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://dpa0i2j65dmlv" path="res://Modules/UI/VirtualJoystick/VirtualJoystick.tscn" id="3_b21t2"]
 [ext_resource type="PackedScene" uid="uid://dl570yu5fjx30" path="res://Modules/UI/InteractionButton/InteractionButton.tscn" id="4_s7k6r"]
+[ext_resource type="PackedScene" uid="uid://c6i2l35801ccn" path="res://Debug/ToggleMobileMode/ToggleMobileMode.tscn" id="7_drm30"]
+[ext_resource type="PackedScene" uid="uid://dbs3spsx8dbn" path="res://Debug/TouchEmulator/TouchEmulator.tscn" id="8_rjit6"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_yfhxn")
@@ -19,25 +21,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="MousePosition" parent="Container" instance=ExtResource("1_6w5ua")]
-layout_mode = 1
-
-[node name="ProcessDebug" parent="Container" instance=ExtResource("2_b21t2")]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -105.0
-offset_right = -35.0
-offset_bottom = -82.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Container"]
 layout_mode = 1
@@ -72,3 +55,29 @@ layout_mode = 2
 [node name="InteractionButton" parent="Container/HBoxContainer/ActionButtonsContainer" instance=ExtResource("4_s7k6r")]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -385.0
+offset_top = -92.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ProcessDebug" parent="Container/VBoxContainer" instance=ExtResource("2_b21t2")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
+
+[node name="ToggleMobileMode" parent="Container/VBoxContainer" instance=ExtResource("7_drm30")]
+layout_mode = 2
+
+[node name="MousePosition" parent="Container/VBoxContainer" instance=ExtResource("1_6w5ua")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="TouchEmulator" parent="." instance=ExtResource("8_rjit6")]

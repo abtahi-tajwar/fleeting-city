@@ -30,7 +30,6 @@ public partial class Camera : Camera2D
 	public override void _Process(double delta)
 	{
 		MovementDistanceFromInitialPosition = _initialPosition - GlobalPosition;
-		ProcessDebug.Print($"{MovementDistanceFromInitialPosition}");
 		CurrentZoom = Zoom;
 		if (_followTarget)
 		{

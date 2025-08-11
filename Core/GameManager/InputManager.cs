@@ -6,7 +6,7 @@ public partial class InputManager : Node2D
 {
 	// Singleton instance
 	[Export]
-	public float TouchFingerRadius = 18.0f;
+	public float TouchFingerRadius = 28.0f;
 	public static InputManager Instance { get; private set; }
 	public bool IsDragging { get; set; } = false;
 	private bool IsMousePressed = false;
