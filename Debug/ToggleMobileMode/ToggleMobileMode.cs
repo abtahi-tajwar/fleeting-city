@@ -4,6 +4,7 @@ public partial class ToggleMobileMode : Label
 {
 	public override void _Ready()
 	{
+		if (!OS.HasFeature("editor")) Visible = false;
 		UpdateText();
 	}
 
