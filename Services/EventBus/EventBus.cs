@@ -12,7 +12,7 @@ public partial class EventBus : Node
     [Signal]
     public delegate void PlayerMoveEventHandler(string actionType);
     [Signal]
-    public delegate void UnitSelectOrMoveEventHandler(Vector2 touchPos);
+    public delegate void UnitMoveEventHandler(Vector2 touchPos);
 
     // From Interactables
     [Signal]
@@ -35,9 +35,9 @@ public partial class EventBus : Node
         EmitSignal(SignalName.PlayerMove, actionType.ToString());
     }
 
-    public void EmitUnitSelectOrMove(Vector2 touchPos)
+    public void EmitUnitMove(Vector2 touchPos)
     {
-        EmitSignal(SignalName.UnitSelectOrMove, touchPos);
+        EmitSignal(SignalName.UnitMove, touchPos);
     }
 
     public void EmitInteractionZoneEntered(INTERACTION interaction)

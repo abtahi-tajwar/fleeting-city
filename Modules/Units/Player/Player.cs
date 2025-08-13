@@ -7,6 +7,8 @@ public partial class Player : CharacterBody2D
 	private UnitSelectionManager _unitSelectionManager;
 	[Export]
 	public float MovementSpeed; // Speed of the player movement
+	[Export]
+	public SelectionArea SelectionArea;
 
 	// privates
 	private MOVEMENT_DIRECTION_ENUM _currentDirection = MOVEMENT_DIRECTION_ENUM.NONE;
@@ -19,6 +21,8 @@ public partial class Player : CharacterBody2D
 		GameManager.SetPlayer(this); // Register the player with GameManager
 
 		CallDeferred(nameof(ConnectToEventBus));
+
+		SelectionArea.OnSelect += OnSelect;
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -38,19 +42,10 @@ public partial class Player : CharacterBody2D
 		}
 	}
 
-	// public override void _UnhandledInput(InputEvent @event)
-	// {
-	// 	if (
-	// 		@event is InputEventMouseButton mouseButtonEvent
-	// 		&& mouseButtonEvent.IsPressed()
-	// 		&& ActionManager.CurrentAction == ACTION_ENUM.POINT
-	// 	)
-	// 	{
-	// 		_unitSelectionManager.SelectPointedUnit(GetGlobalMousePosition());
-	// 	}
-
-	// }
-
+	private void OnSelect()
+	{
+		_unitSelectionManager.SelectUnit();
+	}
 	public void UpdateCurrentDirection(string directionStr)
 	{
 		_currentDirection = Enum.Parse<MOVEMENT_DIRECTION_ENUM>(directionStr, true);
@@ -96,14 +91,6 @@ public partial class Player : CharacterBody2D
 		Position = Position.Clamp(boundRect.Position, boundRect.End);
 	}
 
-	private void OnSelect(Vector2 touchPos)
-	{
-		if (ActionManager.CurrentAction == ACTION_ENUM.POINT)
-		{
-			_unitSelectionManager.SelectPointedUnit(touchPos);
-		}
-	}
-
 	private void ConnectToEventBus()
 	{
 		if (EventBus.Instance == null)
@@ -117,10 +104,10 @@ public partial class Player : CharacterBody2D
 			new Callable(this, nameof(UpdateCurrentDirection))
 		);
 
-		EventBus.Instance.Connect(
-			EventBus.SignalName.UnitSelectOrMove,
-			new Callable(this, nameof(OnSelect))
-		);
-		GD.Print("Connected to EventBus for PlayerMove events.");
+		// EventBus.Instance.Connect(
+		// 	EventBus.SignalName.UnitSelectOrMove,
+		// 	new Callable(this, nameof(OnSelect))
+		// );
+		// GD.Print("Connected to EventBus for PlayerMove events.");
 	}
 }

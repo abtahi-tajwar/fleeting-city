@@ -60,6 +60,7 @@ public class Helper
     }
     public static bool IsTouchOverCollider(Node2D node, Vector2 mousePosition, float FINGER_RADIUS_PX = 18f)
     {
+        var selection = node.GetNodeOrNull<Area2D>("SelectionArea");
         var space = node.GetWorld2D().DirectSpaceState;
 
         // Keep a roughly constant screen-space radius even if the camera is zoomed.
@@ -85,11 +86,13 @@ public class Helper
         };
 
         var results = space.IntersectShape(shapeParams); // Godot.Collections.Array<Dictionary>
-        foreach (var result in results)
+        foreach (Godot.Collections.Dictionary hit in results)
         {
-            if (result.TryGetValue("collider", out var obj) && obj.As<Node2D>() == node)
+            var area = hit["collider"].As<Area2D>();
+            if (area != null && area == selection)
                 return true;
         }
+
 
         return false;
     }

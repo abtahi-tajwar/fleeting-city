@@ -15,15 +15,9 @@ public partial class UnitSelectionManager : Node
 		_unit = unit;
 	}
 
-	public void SelectPointedUnit(Vector2 mousePos)
+
+	public void SelectUnit()
 	{
-		var isMouseOver = GameManager.IsPlatformMobile
-			? Helper.IsTouchOverCollider(_unit, mousePos, InputManager.Instance.TouchFingerRadius) 
-			: Helper.IsMouseOverCollider(_unit, mousePos);
-		if (!isMouseOver)
-		{
-			return;
-		}
 		if (_unit is Player)
 		{
 			IsPlayerSelected = true;

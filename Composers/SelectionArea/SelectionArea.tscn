@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxaoctvhmti50"]
+
+[ext_resource type="Script" uid="uid://bhhjw8r6v5gh4" path="res://Composers/SelectionArea/SelectionArea.cs" id="1_kyrhk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk3r0"]
+size = Vector2(20, 28)
+
+[node name="SelectionArea" type="Area2D" node_paths=PackedStringArray("Collision")]
+script = ExtResource("1_kyrhk")
+Collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vk3r0")

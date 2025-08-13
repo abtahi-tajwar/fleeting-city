@@ -6,7 +6,7 @@ public partial class InputManager : Node2D
 {
 	// Singleton instance
 	[Export]
-	public float TouchFingerRadius = 28.0f;
+	public float TouchFingerRadius = 40.0f;
 	public static InputManager Instance { get; private set; }
 	public bool IsDragging { get; set; } = false;
 	private bool IsMousePressed = false;
@@ -51,7 +51,6 @@ public partial class InputManager : Node2D
 			}
 			else
 			{
-				GD.Print($"Selected with mouse {GetGlobalMousePosition()}");
 				OnMouseUp(GetGlobalMousePosition());
 			}
 		}
@@ -64,7 +63,6 @@ public partial class InputManager : Node2D
 			}
 			else
 			{
-				GD.Print($"Selected with touch {touchEvent.Position}");
 				OnMouseUp(touchPos);
 			}
 		}
@@ -107,7 +105,7 @@ public partial class InputManager : Node2D
 		IsMousePressed = false;
 		if (!IsDragging)
 		{
-			EventBus.Instance.EmitUnitSelectOrMove(mousePosition);
+		EventBus.Instance.EmitUnitMove(mousePosition);
 		}
 		IsDragging = false;
 	}

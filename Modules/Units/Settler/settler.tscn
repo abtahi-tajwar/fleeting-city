@@ -1,9 +1,10 @@
-[gd_scene load_steps=44 format=3 uid="uid://dy6308whqr3cl"]
+[gd_scene load_steps=45 format=3 uid="uid://dy6308whqr3cl"]
 
-[ext_resource type="Shader" uid="uid://8xhcxptn0236" path="res://Shaders/GlowingOutline2D.gdshader" id="1_7dj6d"]
+[ext_resource type="Shader" uid="uid://8xhcxptn0236" path="res://shaders/GlowingOutline2D.gdshader" id="1_7dj6d"]
 [ext_resource type="Script" uid="uid://cmhohcnhsqfjr" path="res://Modules/Units/Settler/Settler.cs" id="1_j1b6g"]
 [ext_resource type="Texture2D" uid="uid://c1wd2j3dv354u" path="res://assets/game/Settlers/settler_spritesheet.png" id="2_7dj6d"]
-[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://Shaders/TestShader.gdshader" id="3_u8hul"]
+[ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://shaders/TestShader.gdshader" id="3_u8hul"]
+[ext_resource type="PackedScene" uid="uid://cxaoctvhmti50" path="res://Composers/SelectionArea/SelectionArea.tscn" id="5_v40vm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u8hul"]
 shader = ExtResource("1_7dj6d")
@@ -11,7 +12,7 @@ shader_parameter/outline_size = 3.0
 shader_parameter/outline_color = Vector4(1, 1, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6a0g"]
-size = Vector2(20, 33)
+size = Vector2(14, 7)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v40vm"]
 shader = ExtResource("3_u8hul")
@@ -312,19 +313,24 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Settler" type="CharacterBody2D"]
+[node name="Settler" type="CharacterBody2D" node_paths=PackedStringArray("SelectionArea")]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_u8hul")
-collision_layer = 2
 input_pickable = true
 script = ExtResource("1_j1b6g")
+SelectionArea = NodePath("SelectionArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.5)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_o6a0g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_v40vm")
-position = Vector2(0, -2.5)
+position = Vector2(0, -10)
 scale = Vector2(1, 0.921875)
 sprite_frames = SubResource("SpriteFrames_wc155")
-animation = &"walk_down_right"
+animation = &"idle"
+autoplay = "idle"
+
+[node name="SelectionArea" parent="." instance=ExtResource("5_v40vm")]
+position = Vector2(0, -12)

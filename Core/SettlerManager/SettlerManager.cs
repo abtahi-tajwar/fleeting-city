@@ -50,6 +50,8 @@ public partial class SettlerManager : Node2D
 			var uniqueMaterial = (ShaderMaterial)original.Duplicate(true); // Deep copy
 			sprite.Material = uniqueMaterial;
 		}
+		settler.ZIndex = 1;
+		settler.YSortEnabled = true;
 
 	}
 }

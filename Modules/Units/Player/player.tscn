@@ -1,8 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://bsrv5uef8ua7e"]
+[gd_scene load_steps=41 format=3 uid="uid://bsrv5uef8ua7e"]
 
 [ext_resource type="Script" uid="uid://crk333j8aaiks" path="res://Modules/Units/Player/Player.cs" id="1_trhtq"]
 [ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://shaders/TestShader.gdshader" id="1_vk3r0"]
 [ext_resource type="Texture2D" uid="uid://coxvaww2qi78x" path="res://assets/game/player/demo_player.png" id="2_1n4l5"]
+[ext_resource type="PackedScene" uid="uid://cxaoctvhmti50" path="res://Composers/SelectionArea/SelectionArea.tscn" id="4_n1vyh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vk3r0"]
 shader = ExtResource("1_vk3r0")
@@ -290,21 +291,25 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqiun"]
-size = Vector2(12, 11)
+size = Vector2(12, 8)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("SelectionArea")]
 script = ExtResource("1_trhtq")
 MovementSpeed = 200.0
+SelectionArea = NodePath("SelectionArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_vk3r0")
-position = Vector2(0, -4)
+position = Vector2(0, -7)
 scale = Vector2(1, 0.875)
 sprite_frames = SubResource("SpriteFrames_wydw0")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.5)
+y_sort_enabled = true
 shape = SubResource("RectangleShape2D_kqiun")
 metadata/_edit_group_ = true
+
+[node name="SelectionArea" parent="." instance=ExtResource("4_n1vyh")]
+position = Vector2(0, -9)

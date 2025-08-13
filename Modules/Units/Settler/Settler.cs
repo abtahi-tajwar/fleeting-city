@@ -5,6 +5,9 @@ using System;
 
 public partial class Settler : CharacterBody2D
 {
+	[Export]
+	public SelectionArea SelectionArea;
+
 	// Services
 	private CharacterMovementService _movementService;
 	private CharacterAnimationService _animationService;
@@ -23,6 +26,8 @@ public partial class Settler : CharacterBody2D
 		_unitSelectionManager = new UnitSelectionManager(this);
 
 		CallDeferred(nameof(ConnectToEventBus));
+
+		SelectionArea.OnSelect += HandleSelect;
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -45,7 +50,7 @@ public partial class Settler : CharacterBody2D
 		}
 	}
 
-	private void OnSettlerSelectOrMove(Vector2 touchPos)
+	private void HandleSettlerMove(Vector2 touchPos)
 	{
 		if (ActionManager.CurrentAction == ACTION_ENUM.MOVE)
 		{
@@ -55,10 +60,11 @@ public partial class Settler : CharacterBody2D
 				_movementService.StartMovementOnClick(touchPos);
 			}
 		}
-		else
-		{
-			_unitSelectionManager.SelectPointedUnit(touchPos);
-		}
+	}
+
+	private void HandleSelect()
+	{
+		_unitSelectionManager.SelectUnit();
 	}
 
 	private void ConnectToEventBus()
@@ -70,8 +76,8 @@ public partial class Settler : CharacterBody2D
 		}
 
 		EventBus.Instance.Connect(
-			EventBus.SignalName.UnitSelectOrMove,
-			new Callable(this, nameof(OnSettlerSelectOrMove))
+			EventBus.SignalName.UnitMove,
+			new Callable(this, nameof(HandleSettlerMove))
 		);
 	}
 }

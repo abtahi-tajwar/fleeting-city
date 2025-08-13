@@ -581,8 +581,10 @@ scale = Vector2(1, 0.973744)
 Ground = NodePath("../Surrounding/Ground")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Object"]
+y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Object/StaticBody2D"]
+y_sort_enabled = true
 position = Vector2(-6.5, 19.5)
 shape = SubResource("RectangleShape2D_bxtqc")
 
