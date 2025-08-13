@@ -2,9 +2,21 @@
 
 [ext_resource type="Script" uid="uid://wdb88840sa56" path="res://Debug/TouchEmulator/TouchEmulator.cs" id="1_4k4sc"]
 
-[node name="TouchEmulator" type="Control"]
+[node name="TouchEmulator" type="Control" node_paths=PackedStringArray("HintText")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_4k4sc")
+HintText = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "Alt+N (Add new input)
+Alt+X (Delete current input)
+Alt+Z (Toggle pressed)
+Alt+M+[n] (Switch to input)
+"
