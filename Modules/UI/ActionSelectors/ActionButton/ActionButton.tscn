@@ -38,7 +38,8 @@ MobileButton = NodePath("MobileButton")
 
 [node name="MobileButton" type="TouchScreenButton" parent="."]
 position = Vector2(6, 3)
-texture_normal = ExtResource("3_hukjd")
+texture_normal = ExtResource("2_hukjd")
+texture_pressed = ExtResource("3_hukjd")
 shape = SubResource("RectangleShape2D_831e6")
 action = "move_command"
 

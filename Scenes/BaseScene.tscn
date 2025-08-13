@@ -572,6 +572,5 @@ tile_map_data = PackedByteArray("AADH/9//AAACAAIAAADH/+D/AAACAAMAAADH/+H/AAACAAQ
 tile_set = SubResource("TileSet_56e3h")
 
 [node name="GameManager" parent="." instance=ExtResource("7_56e3h")]
-DebugForMobile = true
 
 [editable path="WorldBound"]

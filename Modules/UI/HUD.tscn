@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvnw0jfd4pyif"]
+[gd_scene load_steps=9 format=3 uid="uid://cvnw0jfd4pyif"]
 
 [ext_resource type="PackedScene" uid="uid://c0a7gkbx7qhts" path="res://Debug/MousePosition/MousePosition.tscn" id="1_6w5ua"]
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_s7k6r"]
-[ext_resource type="Script" uid="uid://be5qpxbq6shqq" path="res://Core/UIManager.cs" id="1_yfhxn"]
 [ext_resource type="PackedScene" uid="uid://bhl1mpmjatwdb" path="res://Debug/ProcessDebug/ProcessDebug.tscn" id="2_b21t2"]
 [ext_resource type="PackedScene" uid="uid://d3kdrsp3ft3o6" path="res://Modules/UI/ActionSelectors/ActionButton/ActionButton.tscn" id="2_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://dpa0i2j65dmlv" path="res://Modules/UI/VirtualJoystick/VirtualJoystick.tscn" id="3_b21t2"]
@@ -11,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dbs3spsx8dbn" path="res://Debug/TouchEmulator/TouchEmulator.tscn" id="8_rjit6"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("1_yfhxn")
 
 [node name="Container" type="Control" parent="."]
 layout_mode = 3

@@ -5,6 +5,8 @@ public partial class TouchEmulator : Control
 {
 	[Export]
 	public float TouchInputOpacity = 0.5f;
+	[Export]
+	public Label HintText;
 	private List<TouchInput> _inputs = new List<TouchInput>();
 	private int _currentInputIndex;
 	private bool _altMMode = false;
@@ -18,17 +20,30 @@ public partial class TouchEmulator : Control
 		{
 			layer.Layer = 2000; // max layer order
 		}
-		_inputs.Add(new TouchInput(Vector2.Zero));
+		_inputs.Add(new TouchInput(this, Vector2.Zero));
 		_currentInputIndex = 0;
 		if (!OS.HasFeature("editor")) QueueFree();
 
 	}
 	public override void _Process(double delta)
 	{
-		if (GameManager.IsPlatformMobile) Input.MouseMode = Input.MouseModeEnum.Hidden;
-		else Input.MouseMode = Input.MouseModeEnum.Visible;
-		_inputs[_currentInputIndex].Position = GetGlobalMousePosition();
+		if (GameManager.IsPlatformMobile)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Hidden;
+			HintText.Visible = true;
+		}
+		else
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+			HintText.Visible = false;
+		}
+		// _inputs[_currentInputIndex].Position = GetGlobalMousePosition();
 		QueueRedraw(); // repaint now that we moved
+
+		for (int i = 0; i < _inputs.Count; i++)
+		{
+			_inputs[i].EmitEvents(i);
+		}
 
 	}
 	public override void _Draw()
@@ -38,18 +53,19 @@ public partial class TouchEmulator : Control
 		{
 			for (int i = 0; i < _inputs.Count; i++)
 			{
-				// Pick a font resource (DynamicFont, BitmapFont, Theme font, etc.)
-				var font = GetThemeFont("font", "Label"); // uses default UI font
-
-				string text = $"{i + 1}";
-
-				// Color + optional width limit + alignment
-				DrawString(font, _inputs[i].Position, text, HorizontalAlignment.Center, -1, 16, new Color(0, 0, 0));
-				DrawCircle(_inputs[i].Position, InputManager.Instance.TouchFingerRadius, new Color(1f, 1f, 1f, TouchInputOpacity), true);
-				if (i == _currentInputIndex) DrawCircle(_inputs[i].Position, InputManager.Instance.TouchFingerRadius + 10, new Color(1f, 1f, 1f, TouchInputOpacity), false, 5);
+				_inputs[i].Draw(i, _currentInputIndex);
 			}
 		}
 
+	}
+
+	public override void _UnhandledInput(InputEvent e)
+	{
+		if (e is InputEventMouseMotion mm)
+		{
+			GD.Print("Motion detecting");
+			_inputs[_currentInputIndex].Position = GetGlobalMousePosition();
+		}
 	}
 
 	public override void _Input(InputEvent e)
@@ -64,7 +80,7 @@ public partial class TouchEmulator : Control
 				{
 					if (keyEvent.Keycode == Key.N)
 					{
-						_inputs.Add(new TouchInput(GetGlobalMousePosition()));
+						_inputs.Add(new TouchInput(this, GetGlobalMousePosition()));
 						_currentInputIndex = _inputs.Count - 1;
 					}
 
@@ -78,6 +94,22 @@ public partial class TouchEmulator : Control
 					{
 						int idx = (int)keyEvent.Keycode - (int)Key.Key1;
 						SelectInput(idx);
+					}
+
+					if (keyEvent.Keycode == Key.Z)
+					{
+						_inputs[_currentInputIndex].Pressed = !_inputs[_currentInputIndex].Pressed;
+					}
+
+					if (keyEvent.Keycode == Key.X)
+					{
+						if (_inputs.Count <= 1)
+						{
+							GD.Print("Can't remove this input, deletion is only possible when there is more than 1 input");
+							return;
+						}
+						_inputs.RemoveAt(_currentInputIndex);
+						_currentInputIndex -= 1;
 					}
 				}
 			}
@@ -110,9 +142,63 @@ public class TouchInput
 	public Vector2 Position { get; set; } = Vector2.Zero;
 	public bool Pressed { get; set; } = false;
 
-	public TouchInput(Vector2 position)
+	// Privates
+	private TouchEmulator _context;
+	// track previous state to avoid spamming
+	private bool _lastPressed = false;
+	private Vector2 _lastPos = Vector2.Zero;
+
+
+	public TouchInput(TouchEmulator context, Vector2 position)
 	{
 		Position = position;
+		_context = context;
 	}
 
+	public void Draw(int index, int _currentSelectedIndex)
+	{
+		// Pick a font resource (DynamicFont, BitmapFont, Theme font, etc.)
+		var font = _context.GetThemeFont("font", "Label"); // uses default UI font
+
+		string text = $"{index + 1}";
+
+		Color inputColor = this.Pressed ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, _context.TouchInputOpacity);
+		// Color + optional width limit + alignment
+		_context.DrawCircle(this.Position, InputManager.Instance.TouchFingerRadius, inputColor, true);
+		if (index == _currentSelectedIndex) _context.DrawCircle(Position, InputManager.Instance.TouchFingerRadius + 10, inputColor, false, 5);
+		_context.DrawString(font, Position, text, HorizontalAlignment.Center, -1, 16, new Color(0, 0, 0));
+	}
+
+	public void EmitEvents(int index)
+	{
+		// 1) DOWN / UP: only when state flips
+		if (Pressed != _lastPressed)
+		{
+			var touch = new InputEventScreenTouch
+			{
+				Position = Position,
+				Index = index,
+				Pressed = Pressed
+			};
+			_context.GetViewport().PushInput(touch);
+			_lastPressed = Pressed;
+			_lastPos = Position;
+			return;
+		}
+
+		// 2) DRAG: when pressed and position changed
+		if (Pressed && Position != _lastPos)
+		{
+			var drag = new InputEventScreenDrag
+			{
+				Position = Position,
+				Index = index,
+				Relative = Position - _lastPos,
+				Pressure = 1.0f
+			};
+			_context.GetViewport().PushInput(drag);
+			_lastPos = Position;
+		}
+		// 3) Otherwise: do nothing this frame
+	}
 }
