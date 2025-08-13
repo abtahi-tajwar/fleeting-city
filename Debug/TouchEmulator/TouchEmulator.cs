@@ -59,17 +59,12 @@ public partial class TouchEmulator : Control
 
 	}
 
-	public override void _UnhandledInput(InputEvent e)
+	public override void _Input(InputEvent e)
 	{
 		if (e is InputEventMouseMotion mm)
 		{
-			GD.Print("Motion detecting");
 			_inputs[_currentInputIndex].Position = GetGlobalMousePosition();
 		}
-	}
-
-	public override void _Input(InputEvent e)
-	{
 
 		if (e is InputEventKey keyEvent && !keyEvent.Echo)
 		{

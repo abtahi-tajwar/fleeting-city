@@ -86,5 +86,3 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="TouchEmulator" parent="." instance=ExtResource("8_rjit6")]
-offset_right = 0.0
-offset_bottom = 500.0

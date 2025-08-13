@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FleetingCity.BAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2f5b69c5844f5aefaf396bef88d5e278d1c7e8a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+077825f3f35f0f593350e931d5f38a992abcb870")]
 [assembly: System.Reflection.AssemblyProductAttribute("FleetingCity.BAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FleetingCity.BAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
