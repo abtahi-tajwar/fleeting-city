@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhh132bi1sxkd"]
+
+[ext_resource type="Script" uid="uid://borgw6xosg3wd" path="res://Core/InputManager/InputManager.cs" id="1_8gx73"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gx73"]
+size = Vector2(1000, 800)
+
+[node name="InputManager" type="Node2D" node_paths=PackedStringArray("InputCatchArea")]
+script = ExtResource("1_8gx73")
+InputCatchArea = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8gx73")

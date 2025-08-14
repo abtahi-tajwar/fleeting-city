@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://b5u14wmn35ijq"]
+[gd_scene load_steps=13 format=4 uid="uid://b5u14wmn35ijq"]
 
 [ext_resource type="PackedScene" uid="uid://bmy5u5b2vikxa" path="res://Services/EventBus/EventBus.tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://bhr44w7i2cwxo" path="res://Modules/World/WorldBound.tscn" id="3_58y5n"]
 [ext_resource type="Script" uid="uid://bgbwmstb7ix3w" path="res://Modules/Camera/Camera.cs" id="4_yga4i"]
 [ext_resource type="PackedScene" uid="uid://cvnw0jfd4pyif" path="res://Modules/UI/HUD.tscn" id="5_4ksr6"]
+[ext_resource type="PackedScene" uid="uid://bhh132bi1sxkd" path="res://Core/InputManager/InputManager.tscn" id="5_orcbb"]
 [ext_resource type="Script" uid="uid://be5qpxbq6shqq" path="res://Core/UIManager.cs" id="6_sbiut"]
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="6_uc7fm"]
 [ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="7_56e3h"]
@@ -555,12 +556,6 @@ metadata/_edit_group_ = true
 [node name="BoundaryShape" parent="WorldBound" index="0"]
 position = Vector2(-2, -1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(3, 1)
-scale = Vector2(0.44, 1)
-zoom = Vector2(3.5, 3.5)
-script = ExtResource("4_yga4i")
-
 [node name="HUD" parent="." instance=ExtResource("5_4ksr6")]
 script = ExtResource("6_sbiut")
 
@@ -577,5 +572,13 @@ tile_map_data = PackedByteArray("AADH/9//AAACAAIAAADH/+D/AAACAAMAAADH/+H/AAACAAQ
 tile_set = SubResource("TileSet_56e3h")
 
 [node name="GameManager" parent="." instance=ExtResource("7_56e3h")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 3
+scale = Vector2(0.44, 1)
+zoom = Vector2(3.5, 3.5)
+script = ExtResource("4_yga4i")
+
+[node name="InputManager" parent="Camera2D" instance=ExtResource("5_orcbb")]
 
 [editable path="WorldBound"]

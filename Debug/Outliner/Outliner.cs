@@ -11,7 +11,7 @@ public partial class Outliner : Node2D
 
 	public override void _Ready()
 	{
-		GD.PushWarning("Please remove Outliner Node before actual build. This is a debug Node");
+		if (!OS.HasFeature("editor")) QueueFree();
 		_parent = GetParent<Node2D>();
 		_parentShape = Helper.GetBounds(_parent);
 		GD.Print($"Parent position: ({_parentShape.Position.X}, {_parentShape.Position.Y})");
@@ -51,7 +51,7 @@ public partial class Outliner : Node2D
 		}
 		else
 		{
-			GD.Print("Shape type not supported in Outliner");
+			GD.PushWarning("Shape type not supported in Outliner");
 		}
 	}
 

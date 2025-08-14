@@ -22,13 +22,11 @@ public partial class UnitSelectionManager : Node
 		{
 			IsPlayerSelected = true;
 			SelectedSettler = null;
-			GD.Print("Player unit selected.");
 		}
 		else if (_unit is Settler settler)
 		{
 			IsPlayerSelected = false;
 			SelectedSettler = settler;
-			GD.Print($"Settler unit selected with UniqueId: {settler.Model.Id}");
 		}
 		else
 		{
