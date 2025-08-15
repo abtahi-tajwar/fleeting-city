@@ -14,8 +14,12 @@ public partial class ActionButton : Control
     // public Button DesktopButton;
     [Export]
     public TouchScreenButton MobileButton;
+    [Export]
+    public Control MobileButtonContainer;
 
     private bool _isPressed = false;
+
+    private int _finger = -1;
 
     public override void _Ready()
     {
@@ -34,6 +38,45 @@ public partial class ActionButton : Control
             EventBus.Instance.EmitActionHold(ActionType, false);
         };
         // MobileButton.Released += OnMobileReleased;
+
+        // Prevent double subscription if _Ready runs again
+        // MobileButtonContainer.GuiInput -= OnMobileContainerGuiInput;
+        MobileButtonContainer.GuiInput += OnMobileContainerGuiInput;
+
+    }
+
+    private void OnMobileContainerGuiInput(InputEvent e)
+    {
+        if (e is InputEventScreenTouch t)
+        {
+            if (t.Pressed)
+            {
+                _finger = t.Index;
+                // If you also want to hide this finger from gameplay:
+                if (InputManager.Instance != null)
+                    InputManager.Instance.ActionButtonFinger = _finger;
+
+                // Fire your action if you don’t rely on TouchScreenButton.Pressed
+                // EventBus.Instance.EmitActionHold(ActionType, true);
+            }
+            else if (t.Index == _finger)
+            {
+                // EventBus.Instance.EmitActionHold(ActionType, false);
+                if (InputManager.Instance != null &&
+                    InputManager.Instance.ActionButtonFinger == _finger)
+                    InputManager.Instance.ActionButtonFinger = -1;
+
+                _finger = -1;
+            }
+
+            // Block further propagation (so _UnhandledInput won't see it)
+            MobileButtonContainer.AcceptEvent();
+        }
+        else if (e is InputEventScreenDrag d && d.Index == _finger)
+        {
+            // Keep blocking while that finger moves on the button
+            MobileButtonContainer.AcceptEvent();
+        }
     }
 
 

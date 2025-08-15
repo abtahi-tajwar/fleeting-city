@@ -11,15 +11,24 @@ public partial class InputManager : Node2D
 	public Area2D InputCatchArea;
 	public static InputManager Instance { get; private set; }
 	public bool IsDragging { get; set; } = false;
-	private bool IsMousePressed = false;
-	private bool DraggingJustFinished = false;
+	public bool IsPinching { get; set; } = false;
 	public Vector2 MouseDragDelta = Vector2.Zero;
 
 	public Dictionary<int, Vector2> RegisteredFingers = new(); // index -> WORLD pos
+	public Dictionary<int, Vector2> RegisteredFingersLocal = new(); // index -> Local pos
 	public int ActionButtonFinger { get; set; } = -1;
+	public int TotalRegisteredFingers = 0;
 
-	// Debug
-	private static int printCount = 0;
+
+	//privates
+	private bool IsMousePressed = false;
+	private bool DraggingJustFinished = false;
+	private Dictionary<int, Vector2> _pinchZoomFingerPositions = new Dictionary<int, Vector2>()
+	{
+		{ 0, Vector2.Zero },
+		{ 1, Vector2.Zero }
+	};
+	private float _pinchZoomInitialDelta = 0f;
 
 
 
@@ -94,7 +103,23 @@ public partial class InputManager : Node2D
 			CaptureMovementCommand();
 			CalculateGlobalMousePosition();
 		}
+		// UpdatePinchFingerPositions();
 	}
+	private void UpdatePinchFingerPositions()
+	{
+		if (!IsPinching || RegisteredFingersLocal.Count < 2) return;
+
+		var keys = RegisteredFingersLocal.Keys.GetEnumerator();
+		keys.MoveNext(); var k1 = keys.Current;
+		keys.MoveNext(); var k2 = keys.Current;
+
+		// GD.Print($"Initial Positions: {RegisteredFingersLocal[k1]}, {RegisteredFingersLocal[k2]}, Newest position: {_pinchZoomFingerPositions[0]}, {_pinchZoomFingerPositions[1]}");
+		var initialDistance = RegisteredFingersLocal[k1].DistanceTo(RegisteredFingersLocal[k2]);
+		var newDistance = _pinchZoomFingerPositions[0].DistanceTo(_pinchZoomFingerPositions[1]);
+
+		EventBus.Instance.EmitPinchZoom(newDistance - initialDistance);
+	}
+
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton mouseEvent && !GameManager.IsPlatformMobile)
@@ -111,11 +136,13 @@ public partial class InputManager : Node2D
 		else if (@event is InputEventScreenTouch touchEvent && GameManager.IsPlatformMobile)
 		{
 			var touchPos = CalculateGlobalPointerPosition(touchEvent.Position);
-			GD.Print($"{printCount++} Finger index: {touchEvent.Index}");
 			if (touchEvent.Pressed)
 			{
 				// register THIS finger
 				RegisteredFingers[touchEvent.Index] = touchPos;
+				RegisteredFingersLocal[touchEvent.Index] = touchEvent.Position;
+				_pinchZoomFingerPositions[touchEvent.Index] = touchEvent.Position;
+				TotalRegisteredFingers += 1;
 
 				OnMouseDown(touchEvent.Position);
 			}
@@ -124,9 +151,11 @@ public partial class InputManager : Node2D
 				// OnMouseUp(touchPos);
 				// update final pos, then release THIS finger
 				RegisteredFingers[touchEvent.Index] = touchPos;
-				ProcessDebug.Print($"Touch position: ${RegisteredFingers[touchEvent.Index]}");
+				RegisteredFingersLocal[touchEvent.Index] = touchEvent.Position;
 				OnMouseUp(RegisteredFingers[touchEvent.Index]);
 				RegisteredFingers.Remove(touchEvent.Index);
+				RegisteredFingersLocal.Remove(touchEvent.Index);
+				TotalRegisteredFingers -= 1;
 			}
 		}
 
@@ -148,11 +177,21 @@ public partial class InputManager : Node2D
 		{
 			if (IsMousePressed)
 			{
-				IsDragging = true;
-				// Capture mouse movement delta
-				var currentMousePosition = touch.Position;
-				MouseDragDelta = currentMousePosition - _lastMousePosition;
-				_lastMousePosition = currentMousePosition;
+				if (TotalRegisteredFingers == 1)
+				{
+					IsDragging = true;
+					// Capture mouse movement delta
+					var currentMousePosition = touch.Position;
+					MouseDragDelta = currentMousePosition - _lastMousePosition;
+					_lastMousePosition = currentMousePosition;
+				}
+				else if (TotalRegisteredFingers == 2)
+				{
+					IsPinching = true;
+					if (touch.Index == 0) _pinchZoomFingerPositions[0] = touch.Position;
+					else if (touch.Index == 1) _pinchZoomFingerPositions[1] = touch.Position;
+					UpdatePinchFingerPositions();
+				}
 			}
 		}
 
@@ -171,6 +210,7 @@ public partial class InputManager : Node2D
 			EventBus.Instance.EmitUnitMove(mousePosition);
 		}
 		IsDragging = false;
+		if (TotalRegisteredFingers < 2) IsPinching = false;
 	}
 
 	private void CaptureMovementCommand()

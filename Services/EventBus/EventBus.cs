@@ -15,6 +15,8 @@ public partial class EventBus : Node
     public delegate void PlayerMoveEventHandler(string actionType);
     [Signal]
     public delegate void UnitMoveEventHandler(Vector2 touchPos);
+    [Signal]
+    public delegate void PinchZoomEventHandler(float pinchZoomDelta);
 
     // From Interactables
     [Signal]
@@ -60,4 +62,8 @@ public partial class EventBus : Node
         EmitSignal(SignalName.InteractionZoneExited, interaction.ToString());
     }
 
+    public void EmitPinchZoom(float pinchZoomDelta)
+    {
+        EmitSignal(SignalName.PinchZoom, pinchZoomDelta); 
+    }
 }

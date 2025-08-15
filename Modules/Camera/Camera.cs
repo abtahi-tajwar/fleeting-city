@@ -7,15 +7,17 @@ public partial class Camera : Camera2D
 	// Exports
 	[Export]
 	public float CameraSpeed = 50f;
+	[Export]
+	public float ZoomSensitivity = 0.0005f;
 
 	public static Vector2 MovementDistanceFromInitialPosition;
 	public static Vector2 CurrentZoom;
-	
+
 	// Privates
 	private Node2D _target = null;
 	private bool _followTarget = true;
 	private Vector2 _initialPosition;
-    public override void _EnterTree()
+	public override void _EnterTree()
 	{
 		MakeCurrent();
 	}
@@ -84,6 +86,19 @@ public partial class Camera : Camera2D
 	{
 		_followTarget = true;
 	}
+	public void OnPinchZoom(float pinchZoomDelta)
+	{
+		GD.Print($"Pinch zoom delta: {pinchZoomDelta}");
+		// pinchZoomDelta > 0 → zoom out, < 0 → zoom in
+		// float zoomChange = pinchZoomDelta * ZoomSensitivity; // small number, e.g., 0.001f
+		float zoomChange =  300 * (pinchZoomDelta / 70) * ZoomSensitivity; // small number, e.g., 0.001f
+
+		Zoom += new Vector2(zoomChange, zoomChange);
+
+		// Clamp final zoom between reasonable limits
+		Zoom = Zoom.Clamp(new Vector2(1.5f, 1.5f), new Vector2(5f, 5f));
+
+	}
 	private void ConnectToEventBus()
 	{
 		if (EventBus.Instance == null)
@@ -95,6 +110,10 @@ public partial class Camera : Camera2D
 		EventBus.Instance.Connect(
 			"PlayerMove",
 			new Callable(this, nameof(RefocusToPlayer))
+		);
+		EventBus.Instance.Connect(
+			"PinchZoom",
+			new Callable(this, nameof(OnPinchZoom))
 		);
 		GD.Print("Connected to EventBus for PlayerMove events from camera.");
 	}
