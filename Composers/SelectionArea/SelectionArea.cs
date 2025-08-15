@@ -18,8 +18,6 @@ public partial class SelectionArea : Area2D
 		InputPickable = true;
 		InputEvent += OnInputEvent;
 	}
-
-
 	private void OnInputEvent(Node viewport, InputEvent e, long shapeIdx)
 	{
 		if (e is InputEventScreenTouch t)
@@ -49,9 +47,9 @@ public partial class SelectionArea : Area2D
 		}
 		else if (@event is InputEventScreenTouch finger)
 		{
-						// RectangleShape2D is centered; compute local top-left
+			// RectangleShape2D is centered; compute local top-left
 			var worldP = Helper.CalculateGlobalPointerPosition(this, finger.Position);
-			var hit = PhysicsHelper.CircleOverlapsCollisionRect(worldP, InputManager.Instance.TouchFingerRadius, Collision);
+			var hit = PhysicsHelper.CircleOverlapsCollisionRect(worldP, InputManager.Instance.TouchFingerRadius / Camera.CurrentZoom.X, Collision);
 
 			if (hit)
 			{
