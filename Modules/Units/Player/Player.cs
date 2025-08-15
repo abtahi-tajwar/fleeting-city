@@ -44,7 +44,10 @@ public partial class Player : CharacterBody2D
 
 	private void OnSelect()
 	{
-		_unitSelectionManager.SelectUnit();
+		if (ActionManager.CurrentAction == ACTION_ENUM.POINT)
+		{
+			_unitSelectionManager.SelectUnit();
+		}
 	}
 	public void UpdateCurrentDirection(string directionStr)
 	{

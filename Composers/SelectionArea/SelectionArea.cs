@@ -53,7 +53,7 @@ public partial class SelectionArea : Area2D
 
 			if (hit)
 			{
-				if (finger.Pressed) EmitSignal(SignalName.OnSelect);
+				if (!finger.Pressed) EmitSignal(SignalName.OnSelect);
 			}
 		}
 	}

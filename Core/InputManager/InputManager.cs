@@ -15,6 +15,10 @@ public partial class InputManager : Node2D
 	private bool DraggingJustFinished = false;
 	public Vector2 MouseDragDelta = Vector2.Zero;
 
+	public Dictionary<int, Vector2> RegisteredFingers = new(); // index -> WORLD pos
+	public int ActionButtonFinger { get; set; } = -1;
+
+
 
 	public static Vector2 GlobalMousePosition = Vector2.Zero;
 
@@ -85,80 +89,7 @@ public partial class InputManager : Node2D
 		CaptureMovementCommand();
 		if (!GameManager.IsPlatformMobile) CalculateGlobalMousePosition();
 	}
-	// private void OnInputAreaEvent(Node viewport, InputEvent @event, long shapeIdx)
-	// {
-	// 	// // Mouse
-	// 	// if (e is InputEventMouseButton mb)
-	// 	// {
-	// 	// 	GD.Print("Mouse interacted in input catcher");
-	// 	// }
-
-	// 	// // Touch
-	// 	// if (e is InputEventScreenTouch t)
-	// 	// {
-	// 	// 	GD.Print("touched at input catcher");
-	// 	// }
-
-	// 	// // Drag (finger held and moving)
-	// 	// if (e is InputEventScreenDrag d)
-	// 	// {
-	// 	// 	GD.Print("Dragging in input catched");
-	// 	// }
-
-	// 	if (@event is InputEventMouseButton mouseEvent && !GameManager.IsPlatformMobile)
-	// 	{
-	// 		var mousePos = CalculateGlobalPointerPosition(mouseEvent.Position);
-	// 		if (mouseEvent.Pressed)
-	// 		{
-	// 			// OnMouseDown(GetViewport().GetMousePosition());
-	// 			OnMouseDown(mouseEvent.Position);
-	// 		}
-	// 		else
-	// 		{
-	// 			OnMouseUp(mousePos);
-	// 		}
-	// 	}
-	// 	else if (@event is InputEventScreenTouch touchEvent && GameManager.IsPlatformMobile)
-	// 	{
-	// 		var touchPos = CalculateGlobalPointerPosition(touchEvent.Position);
-	// 		if (touchEvent.Pressed)
-	// 		{
-	// 			OnMouseDown(touchEvent.Position);
-	// 		}
-	// 		else
-	// 		{
-	// 			OnMouseUp(touchPos);
-	// 		}
-	// 	}
-
-
-	// 	// Detect motion
-	// 	if (@event is InputEventMouseMotion mm && IsMousePressed && !GameManager.IsPlatformMobile)
-	// 	{
-	// 		if (IsMousePressed)
-	// 		{
-	// 			IsDragging = true;
-	// 			// Capture mouse movement delta
-	// 			// var currentMousePosition = GetViewport().GetMousePosition();
-	// 			var currentMousePosition = mm.Position;
-	// 			MouseDragDelta = currentMousePosition - _lastMousePosition;
-	// 			_lastMousePosition = currentMousePosition;
-	// 		}
-	// 		// Don't reset dragging here
-	// 	}
-	// 	else if (@event is InputEventScreenDrag touch && IsMousePressed && GameManager.IsPlatformMobile)
-	// 	{
-	// 		if (IsMousePressed)
-	// 		{
-	// 			IsDragging = true;
-	// 			// Capture mouse movement delta
-	// 			var currentMousePosition = touch.Position;
-	// 			MouseDragDelta = currentMousePosition - _lastMousePosition;
-	// 			_lastMousePosition = currentMousePosition;
-	// 		}
-	// 	}
-	// }
-	public override void _UnhandledInput(InputEvent @event)
+	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton mouseEvent && !GameManager.IsPlatformMobile)
 		{
@@ -176,11 +107,21 @@ public partial class InputManager : Node2D
 			var touchPos = CalculateGlobalPointerPosition(touchEvent.Position);
 			if (touchEvent.Pressed)
 			{
+				// register THIS finger
+				RegisteredFingers[touchEvent.Index] = touchPos;
+
 				OnMouseDown(touchEvent.Position);
 			}
 			else
 			{
-				OnMouseUp(touchPos);
+				// OnMouseUp(touchPos);
+				// update final pos, then release THIS finger
+				RegisteredFingers[touchEvent.Index] = touchPos;
+
+				if (touchEvent.Index != ActionButtonFinger)
+					OnMouseUp(RegisteredFingers[touchEvent.Index]); // pass WORLD
+
+				RegisteredFingers.Remove(touchEvent.Index);
 			}
 		}
 
@@ -297,5 +238,6 @@ public partial class InputManager : Node2D
 
 		return GetCanvasTransform().AffineInverse() * touchPos;
 	}
+
 
 }

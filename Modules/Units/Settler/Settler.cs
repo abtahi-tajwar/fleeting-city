@@ -64,7 +64,10 @@ public partial class Settler : CharacterBody2D
 
 	private void HandleSelect()
 	{
-		_unitSelectionManager.SelectUnit();
+		if (ActionManager.CurrentAction == ACTION_ENUM.POINT)
+		{
+			_unitSelectionManager.SelectUnit();
+		}
 	}
 
 	private void ConnectToEventBus()

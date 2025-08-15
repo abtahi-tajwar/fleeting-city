@@ -316,6 +316,7 @@ animations = [{
 [node name="Settler" type="CharacterBody2D" node_paths=PackedStringArray("SelectionArea")]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_u8hul")
+collision_layer = 2
 input_pickable = true
 script = ExtResource("1_j1b6g")
 SelectionArea = NodePath("SelectionArea")

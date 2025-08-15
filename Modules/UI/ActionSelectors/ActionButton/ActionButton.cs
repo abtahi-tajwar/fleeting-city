@@ -17,17 +17,18 @@ public partial class ActionButton : Control
 
     public override void _Ready()
     {
-
         // DesktopButton.Pressed += () =>
         // {
         //     EventBus.Instance.EmitActionChange(ActionType, DesktopButton.ButtonPressed);
         // };
         MobileButton.Pressed += () =>
         {
+            InputManager.Instance.ActionButtonFinger = 0;
             EventBus.Instance.EmitActionChange(ActionType, true);
         };
         MobileButton.Released += () =>
         {
+            InputManager.Instance.ActionButtonFinger = -1;
             EventBus.Instance.EmitActionChange(ActionType, false);
         };
 
