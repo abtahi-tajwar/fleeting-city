@@ -124,6 +124,7 @@ public partial class InputManager : Node2D
 				// OnMouseUp(touchPos);
 				// update final pos, then release THIS finger
 				RegisteredFingers[touchEvent.Index] = touchPos;
+				ProcessDebug.Print($"Touch position: ${RegisteredFingers[touchEvent.Index]}");
 				OnMouseUp(RegisteredFingers[touchEvent.Index]);
 				RegisteredFingers.Remove(touchEvent.Index);
 			}

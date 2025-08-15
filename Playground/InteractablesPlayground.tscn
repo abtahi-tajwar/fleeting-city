@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5b7lv7hnyl4d"]
+[gd_scene load_steps=5 format=3 uid="uid://c5b7lv7hnyl4d"]
 
 [ext_resource type="PackedScene" uid="uid://b5u14wmn35ijq" path="res://Scenes/BaseScene.tscn" id="1_tvckn"]
 [ext_resource type="PackedScene" uid="uid://b0dnn0vgtyml0" path="res://Modules/Farm/ChickenCoup/ChickenCoup.tscn" id="2_jyrq1"]
 [ext_resource type="PackedScene" uid="uid://dy6308whqr3cl" path="res://Modules/Units/Settler/settler.tscn" id="3_f161n"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_f161n"]
 
 [node name="BaseScene" instance=ExtResource("1_tvckn")]
 
@@ -32,5 +34,10 @@ position = Vector2(-231, -208)
 
 [node name="Settler" parent="." index="8" instance=ExtResource("3_f161n")]
 position = Vector2(-102, -108)
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="9"]
+position = Vector2(-98.125, -61.125)
+scale = Vector2(8.25, 8.25)
+texture = SubResource("CanvasTexture_f161n")
 
 [editable path="WorldBound"]

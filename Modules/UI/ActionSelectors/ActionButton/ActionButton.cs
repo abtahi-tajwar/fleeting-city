@@ -23,17 +23,17 @@ public partial class ActionButton : Control
         // {
         //     EventBus.Instance.EmitActionChange(ActionType, DesktopButton.ButtonPressed);
         // };
-        // MobileButton.Pressed += () =>
-        // {
-        //     InputManager.Instance.ActionButtonFinger = 0;
-        //     EventBus.Instance.EmitActionHold(ActionType, true);
-        // };
-        // MobileButton.Released += () =>
-        // {
-        //     InputManager.Instance.ActionButtonFinger = -1;
-        //     EventBus.Instance.EmitActionHold(ActionType, false);
-        // };
-        MobileButton.Released += OnMobileReleased;
+        MobileButton.Pressed += () =>
+        {
+            InputManager.Instance.ActionButtonFinger = 0;
+            EventBus.Instance.EmitActionHold(ActionType, true);
+        };
+        MobileButton.Released += () =>
+        {
+            InputManager.Instance.ActionButtonFinger = -1;
+            EventBus.Instance.EmitActionHold(ActionType, false);
+        };
+        // MobileButton.Released += OnMobileReleased;
     }
 
 

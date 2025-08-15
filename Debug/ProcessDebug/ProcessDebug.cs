@@ -9,7 +9,7 @@ public partial class ProcessDebug : Label
 	public override void _Ready()
 	{
 		Instance = this;
-		if (!OS.HasFeature("editor")) QueueFree();
+		// if (!OS.HasFeature("editor")) QueueFree();
 	}
 
 	public static void Print(string text)

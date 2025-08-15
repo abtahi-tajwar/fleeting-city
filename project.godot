@@ -20,7 +20,6 @@ boot_splash/minimum_display_time=10
 
 Bootstrapper="*res://Core/Bootstrapper.cs"
 EventBus="*res://Services/EventBus/EventBus.cs"
-InputTracer="*res://Debug/InputTracer/InputTracer.cs"
 
 [display]
 

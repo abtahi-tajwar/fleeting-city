@@ -57,7 +57,7 @@ public partial class Settler : CharacterBody2D
 			if (UnitSelectionManager.SelectedSettler != null
 			&& UnitSelectionManager.SelectedSettler.Model.Id == Model.Id)
 			{
-				_movementService.StartMovementOnClick(touchPos);
+				_movementService.StartMovementTo(touchPos);
 			}
 		}
 	}
