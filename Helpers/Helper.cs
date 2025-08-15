@@ -208,4 +208,10 @@ public class Helper
         return new Rect2(min, max - min);
     }
 
+    public static Vector2 CalculateGlobalPointerPosition(Node2D context, Vector2 touchPos)
+    {
+
+        return context.GetCanvasTransform().AffineInverse() * touchPos;
+    }
+
 }

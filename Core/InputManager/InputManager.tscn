@@ -10,6 +10,7 @@ script = ExtResource("1_8gx73")
 InputCatchArea = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="Shape" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_8gx73")

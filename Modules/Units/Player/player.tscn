@@ -312,4 +312,4 @@ shape = SubResource("RectangleShape2D_kqiun")
 metadata/_edit_group_ = true
 
 [node name="SelectionArea" parent="." instance=ExtResource("4_n1vyh")]
-position = Vector2(0, -9)
+position = Vector2(0, -10)

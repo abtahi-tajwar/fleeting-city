@@ -333,4 +333,4 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="SelectionArea" parent="." instance=ExtResource("5_v40vm")]
-position = Vector2(0, -12)
+position = Vector2(0, -13)
