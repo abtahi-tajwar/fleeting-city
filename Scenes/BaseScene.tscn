@@ -1,6 +1,5 @@
-[gd_scene load_steps=13 format=4 uid="uid://b5u14wmn35ijq"]
+[gd_scene load_steps=12 format=4 uid="uid://b5u14wmn35ijq"]
 
-[ext_resource type="PackedScene" uid="uid://bmy5u5b2vikxa" path="res://Services/EventBus/EventBus.tscn" id="1_brycl"]
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://bhr44w7i2cwxo" path="res://Modules/World/WorldBound.tscn" id="3_58y5n"]
 [ext_resource type="Script" uid="uid://bgbwmstb7ix3w" path="res://Modules/Camera/Camera.cs" id="4_yga4i"]
@@ -540,8 +539,6 @@ sources/0 = SubResource("TileSetAtlasSource_eumj5")
 
 [node name="BaseScene" type="Node2D"]
 y_sort_enabled = true
-
-[node name="EventBus" parent="." instance=ExtResource("1_brycl")]
 
 [node name="Player" parent="." instance=ExtResource("2_ufl4h")]
 z_index = 1

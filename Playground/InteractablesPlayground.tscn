@@ -6,10 +6,10 @@
 
 [node name="BaseScene" instance=ExtResource("1_tvckn")]
 
-[node name="Player" parent="." index="1"]
+[node name="Player" parent="." index="0"]
 position = Vector2(0, 0)
 
-[node name="Settlers" parent="." index="4" node_paths=PackedStringArray("SpawnPoints")]
+[node name="Settlers" parent="." index="3" node_paths=PackedStringArray("SpawnPoints")]
 SpawnPoints = NodePath("SettlerSpawns")
 
 [node name="SettlerSpawns" type="Node2D" parent="Settlers" index="0"]
@@ -21,7 +21,7 @@ position = Vector2(60, 60)
 [node name="Loc2" type="Node2D" parent="Settlers/SettlerSpawns" index="1"]
 position = Vector2(60, 0)
 
-[node name="Environment" parent="." index="5"]
+[node name="Environment" parent="." index="4"]
 position = Vector2(-5, 13)
 metadata/_edit_group_ = true
 
@@ -30,7 +30,7 @@ z_index = 1
 y_sort_enabled = true
 position = Vector2(-231, -208)
 
-[node name="Settler" parent="." index="9" instance=ExtResource("3_f161n")]
+[node name="Settler" parent="." index="8" instance=ExtResource("3_f161n")]
 position = Vector2(-102, -108)
 
 [editable path="WorldBound"]

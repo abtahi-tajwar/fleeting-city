@@ -8,7 +8,9 @@ public partial class EventBus : Node
     public static EventBus Instance { get; private set; }
     // Singals
     [Signal]
-    public delegate void ActionChangeEventHandler(string actionType, bool value);
+    public delegate void ActionHoldEventHandler(string actionType, bool value);
+    [Signal]
+    public delegate void ActionToggleEventHandler(string actionType);
     [Signal]
     public delegate void PlayerMoveEventHandler(string actionType);
     [Signal]
@@ -21,13 +23,22 @@ public partial class EventBus : Node
     public delegate void InteractionZoneExitedEventHandler(INTERACTION interaction);
 
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
     }
-    public void EmitActionChange(ACTION_ENUM actionType, bool value)
+    public override void _ExitTree()
     {
-        EmitSignal(SignalName.ActionChange, actionType.ToString(), value);
+        if (Instance == this) Instance = null;
+    }
+
+    public void EmitActionHold(ACTION_ENUM actionType, bool value)
+    {
+        EmitSignal(SignalName.ActionHold, actionType.ToString(), value);
+    }
+    public void EmitActionToggle(ACTION_ENUM actionType)
+    {
+        EmitSignal(SignalName.ActionToggle, actionType.ToString());
     }
 
     public void EmitPlayerMove(MOVEMENT_DIRECTION_ENUM actionType)
@@ -48,5 +59,5 @@ public partial class EventBus : Node
     {
         EmitSignal(SignalName.InteractionZoneExited, interaction.ToString());
     }
-    
+
 }

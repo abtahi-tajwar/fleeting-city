@@ -15,27 +15,46 @@ public partial class ActionButton : Control
     [Export]
     public TouchScreenButton MobileButton;
 
+    private bool _isPressed = false;
+
     public override void _Ready()
     {
         // DesktopButton.Pressed += () =>
         // {
         //     EventBus.Instance.EmitActionChange(ActionType, DesktopButton.ButtonPressed);
         // };
-        MobileButton.Pressed += () =>
-        {
-            InputManager.Instance.ActionButtonFinger = 0;
-            EventBus.Instance.EmitActionChange(ActionType, true);
-        };
-        MobileButton.Released += () =>
-        {
-            InputManager.Instance.ActionButtonFinger = -1;
-            EventBus.Instance.EmitActionChange(ActionType, false);
-        };
+        // MobileButton.Pressed += () =>
+        // {
+        //     InputManager.Instance.ActionButtonFinger = 0;
+        //     EventBus.Instance.EmitActionHold(ActionType, true);
+        // };
+        // MobileButton.Released += () =>
+        // {
+        //     InputManager.Instance.ActionButtonFinger = -1;
+        //     EventBus.Instance.EmitActionHold(ActionType, false);
+        // };
+        MobileButton.Released += OnMobileReleased;
+    }
 
+
+    private void OnMobileReleased()
+    {
+        _isPressed = !_isPressed;
+        GD.Print("Mobile button released");
+        InputManager.Instance.ActionButtonFinger = 0;
+        EventBus.Instance.EmitActionToggle(ActionType);
     }
 
     public override void _Process(double delta)
     {
+        if (_isPressed)
+        {
+            MobileButton.Modulate = new Color(1, 1, 1, 0.5f);
+        }
+        else
+        {
+            MobileButton.Modulate = new Color(1, 1, 1, 1f);
+        }
         if (Scope == ACTION_BUTTON_SCOPE.BOTH)
         {
             SetVisible(true);

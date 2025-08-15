@@ -18,6 +18,9 @@ public partial class InputManager : Node2D
 	public Dictionary<int, Vector2> RegisteredFingers = new(); // index -> WORLD pos
 	public int ActionButtonFinger { get; set; } = -1;
 
+	// Debug
+	private static int printCount = 0;
+
 
 
 	public static Vector2 GlobalMousePosition = Vector2.Zero;
@@ -86,10 +89,13 @@ public partial class InputManager : Node2D
 	public override void _Process(double delta)
 	{
 		CapturePlayerMovementInput(delta);
-		CaptureMovementCommand();
-		if (!GameManager.IsPlatformMobile) CalculateGlobalMousePosition();
+		if (!GameManager.IsPlatformMobile)
+		{
+			CaptureMovementCommand();
+			CalculateGlobalMousePosition();
+		}
 	}
-	public override void _Input(InputEvent @event)
+	public override void _UnhandledInput(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton mouseEvent && !GameManager.IsPlatformMobile)
 		{
@@ -105,6 +111,7 @@ public partial class InputManager : Node2D
 		else if (@event is InputEventScreenTouch touchEvent && GameManager.IsPlatformMobile)
 		{
 			var touchPos = CalculateGlobalPointerPosition(touchEvent.Position);
+			GD.Print($"{printCount++} Finger index: {touchEvent.Index}");
 			if (touchEvent.Pressed)
 			{
 				// register THIS finger
@@ -117,10 +124,7 @@ public partial class InputManager : Node2D
 				// OnMouseUp(touchPos);
 				// update final pos, then release THIS finger
 				RegisteredFingers[touchEvent.Index] = touchPos;
-
-				if (touchEvent.Index != ActionButtonFinger)
-					OnMouseUp(RegisteredFingers[touchEvent.Index]); // pass WORLD
-
+				OnMouseUp(RegisteredFingers[touchEvent.Index]);
 				RegisteredFingers.Remove(touchEvent.Index);
 			}
 		}

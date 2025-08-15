@@ -4,29 +4,42 @@ using Godot;
 
 public partial class ActionManager : Node
 {
-	public static ACTION_ENUM CurrentAction { get; set; } = ACTION_ENUM.POINT;
+	public static ACTION_ENUM CurrentAction { get; set; }
 
+	private bool _wired;
+	public override void _EnterTree() {
+		GD.Print("Action manager enter tree also twice?");
+	}
 	public override void _Ready()
 	{
+		CurrentAction = ACTION_ENUM.POINT;
+		GD.Print($"Parent: {GetParent()?.Name}, Path: {GetPath()}, ID: {GetInstanceId()}");
 		CallDeferred(nameof(ConnectToEventBus));
 	}
+
 	private void ConnectToEventBus()
 	{
-		if (EventBus.Instance == null)
+		if (_wired || EventBus.Instance == null) return;
+
+		var holdCb = new Callable(this, nameof(OnActionHold));
+		var toggleCb = new Callable(this, nameof(OnActionToggle));
+
+		if (!EventBus.Instance.IsConnected("ActionHold", holdCb))
 		{
-			GD.PrintErr("EventBus instance is still null even after deferring.");
-			return;
+			EventBus.Instance.Connect("ActionHold", holdCb);
 		}
 
-		GD.Print("Connecting to EventBus...");
-		var result = EventBus.Instance.Connect(
-			"ActionChange",
-			new Callable(this, nameof(OnActionChanged))
-		);
-		GD.Print("Connect result: " +    result); // 0 is OK
+		if (!EventBus.Instance.IsConnected("ActionToggle", toggleCb))
+		{
+			GD.Print("Should I connect? ", false);
+			EventBus.Instance.Connect("ActionToggle", toggleCb);
+		}
+
+		_wired = true;
 	}
 
-	private void OnActionChanged(string actionType, bool value)
+
+	private void OnActionHold(string actionType, bool value)
 	{
 		ACTION_ENUM action = (ACTION_ENUM)Enum.Parse(typeof(ACTION_ENUM), actionType, true);
 		if (action == ACTION_ENUM.MOVE && value)
@@ -39,5 +52,15 @@ public partial class ActionManager : Node
 			CurrentAction = ACTION_ENUM.POINT;
 		}
 		GD.Print($"Action changed: {actionType}, Value: {ActionManager.CurrentAction}");
+	}
+	private void OnActionToggle(string actionType)
+	{
+		ACTION_ENUM action = (ACTION_ENUM)Enum.Parse(typeof(ACTION_ENUM), actionType, true);
+		if (action == ACTION_ENUM.MOVE || action == ACTION_ENUM.POINT)
+		{
+			GD.Print($"Before Action toggled: {CurrentAction}");
+			CurrentAction = (CurrentAction == ACTION_ENUM.MOVE) ? ACTION_ENUM.POINT : ACTION_ENUM.MOVE;
+			GD.Print($"After Action toggled: {CurrentAction}");
+		}
 	}
 }
