@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://buwckro4um4up"]
+
+[ext_resource type="PackedScene" uid="uid://b5u14wmn35ijq" path="res://Scenes/BaseScene.tscn" id="1_t3bo8"]
+[ext_resource type="Texture2D" uid="uid://cxwslfv5jpwpy" path="res://assets/game/light/light.png" id="2_jxi8c"]
+[ext_resource type="Texture2D" uid="uid://fq0twh2dbee4" path="res://assets/game/environment/realistic_grass.png" id="2_p0wrn"]
+[ext_resource type="Texture2D" uid="uid://ckd5mlnff2o7f" path="res://assets/game/environment/realistic_mud.png" id="3_u01th"]
+[ext_resource type="PackedScene" uid="uid://dvhp2qr7mba1q" path="res://Subsystems/Farm/AnimalFarm/AnimalFarm.tscn" id="4_xuil4"]
+
+[node name="BaseScene" instance=ExtResource("1_t3bo8")]
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" index="3"]
+position = Vector2(4, -4)
+color = Color(0.921569, 0.458824, 0.0901961, 1)
+texture = ExtResource("2_jxi8c")
+
+[node name="Settlers" parent="." index="3" node_paths=PackedStringArray("SpawnPoints")]
+SpawnPoints = NodePath("SettlerSpawns")
+
+[node name="SettlerSpawns" type="Node2D" parent="Settlers" index="0"]
+z_index = 1
+
+[node name="Loc1" type="Node2D" parent="Settlers/SettlerSpawns" index="0"]
+position = Vector2(60, 60)
+
+[node name="Loc2" type="Node2D" parent="Settlers/SettlerSpawns" index="1"]
+position = Vector2(60, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Environment" index="0"]
+position = Vector2(3.3333, -3.50001)
+scale = Vector2(0.392926, 0.392926)
+texture = ExtResource("2_p0wrn")
+
+[node name="Ground" parent="Environment" index="1"]
+modulate = Color(1, 1, 1, 0.223529)
+
+[node name="Realistic Muds" type="Sprite2D" parent="Environment" index="2"]
+scale = Vector2(0.39438, 0.39438)
+texture = ExtResource("3_u01th")
+
+[node name="AnimalFarm" parent="." index="7" instance=ExtResource("4_xuil4")]
+position = Vector2(-144, -155)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="8"]
+blend_mode = 1
+max_distance = 6645.0
+
+[editable path="WorldBound"]

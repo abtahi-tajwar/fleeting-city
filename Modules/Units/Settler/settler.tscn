@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dy6308whqr3cl"]
+[gd_scene load_steps=37 format=3 uid="uid://dy6308whqr3cl"]
 
 [ext_resource type="Shader" uid="uid://8xhcxptn0236" path="res://shaders/GlowingOutline2D.gdshader" id="1_7dj6d"]
 [ext_resource type="Script" uid="uid://cmhohcnhsqfjr" path="res://Modules/Units/Settler/Settler.cs" id="1_j1b6g"]
@@ -55,22 +55,6 @@ region = Rect2(256, 256, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ls4th"]
 atlas = ExtResource("2_7dj6d")
 region = Rect2(320, 256, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b25pr"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(384, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ql7b7"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(448, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wgbaq"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(384, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vwb2y"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(448, 384, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v40vm"]
 atlas = ExtResource("2_7dj6d")
@@ -144,22 +128,6 @@ region = Rect2(256, 320, 64, 64)
 atlas = ExtResource("2_7dj6d")
 region = Rect2(320, 320, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_byw4f"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(384, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0cbll"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(448, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_57gyl"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(384, 384, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7esxp"]
-atlas = ExtResource("2_7dj6d")
-region = Rect2(448, 384, 64, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_wc155"]
 animations = [{
 "frames": [{
@@ -197,28 +165,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b25pr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ql7b7")
-}],
-"loop": true,
-"name": &"walk_down_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wgbaq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vwb2y")
-}],
-"loop": true,
-"name": &"walk_down_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -289,28 +235,6 @@ animations = [{
 "loop": true,
 "name": &"walk_up",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_byw4f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0cbll")
-}],
-"loop": true,
-"name": &"walk_up_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_57gyl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7esxp")
-}],
-"loop": true,
-"name": &"walk_up_right",
-"speed": 5.0
 }]
 
 [node name="Settler" type="CharacterBody2D" node_paths=PackedStringArray("SelectionArea")]
@@ -330,7 +254,7 @@ material = SubResource("ShaderMaterial_v40vm")
 position = Vector2(0, -10)
 scale = Vector2(1, 0.921875)
 sprite_frames = SubResource("SpriteFrames_wc155")
-animation = &"idle"
+animation = &"walk_up"
 autoplay = "idle"
 
 [node name="SelectionArea" parent="." instance=ExtResource("5_v40vm")]

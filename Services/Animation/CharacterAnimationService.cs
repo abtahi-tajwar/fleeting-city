@@ -38,16 +38,16 @@ public class CharacterAnimationService
                 PlayAnimationWithFallback("walk_right");
                 break;
             case MOVEMENT_DIRECTION_ENUM.UP_RIGHT:
-                PlayAnimationWithFallback("walk_up_right");
+                PlayAnimationWithFallback("walk_up_right", "walk_right");
                 break;
             case MOVEMENT_DIRECTION_ENUM.UP_LEFT:
-                PlayAnimationWithFallback("walk_up_left");
+                PlayAnimationWithFallback("walk_up_left", "walk_left");
                 break;
             case MOVEMENT_DIRECTION_ENUM.DOWN_LEFT:
-                PlayAnimationWithFallback("walk_down_left");
+                PlayAnimationWithFallback("walk_down", "walk_left");
                 break;
             case MOVEMENT_DIRECTION_ENUM.DOWN_RIGHT:
-                PlayAnimationWithFallback("walk_down_right");
+                PlayAnimationWithFallback("walk_down_right", "walk_right");
                 break;
             default:
                 _animatedSprite.Stop();

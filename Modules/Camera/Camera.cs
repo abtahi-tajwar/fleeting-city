@@ -8,7 +8,7 @@ public partial class Camera : Camera2D
 	[Export]
 	public float CameraSpeed = 50f;
 	[Export]
-	public float ZoomSensitivity = 0.0005f;
+	public float ZoomSensitivity = 50;
 
 	public static Vector2 MovementDistanceFromInitialPosition;
 	public static Vector2 CurrentZoom;
@@ -17,6 +17,7 @@ public partial class Camera : Camera2D
 	private Node2D _target = null;
 	private bool _followTarget = true;
 	private Vector2 _initialPosition;
+	public float _zoomSensitivityCoefficient = 0.0005f;
 	public override void _EnterTree()
 	{
 		MakeCurrent();
@@ -88,10 +89,11 @@ public partial class Camera : Camera2D
 	}
 	public void OnPinchZoom(float pinchZoomDelta)
 	{
-		GD.Print($"Pinch zoom delta: {pinchZoomDelta}");
+		float normalized = Mathf.Sign(pinchZoomDelta); 
+		GD.Print($"Pinch zoom delta: {pinchZoomDelta}, {normalized}");
 		// pinchZoomDelta > 0 → zoom out, < 0 → zoom in
 		// float zoomChange = pinchZoomDelta * ZoomSensitivity; // small number, e.g., 0.001f
-		float zoomChange =  300 * (pinchZoomDelta / 70) * ZoomSensitivity; // small number, e.g., 0.001f
+		float zoomChange =  2500 * (normalized / ZoomSensitivity) * _zoomSensitivityCoefficient; // small number, e.g., 0.001f
 
 		Zoom += new Vector2(zoomChange, zoomChange);
 
