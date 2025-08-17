@@ -17,6 +17,8 @@ public partial class EventBus : Node
     public delegate void UnitMoveEventHandler(Vector2 touchPos);
     [Signal]
     public delegate void PinchZoomEventHandler(float pinchZoomDelta);
+    [Signal]
+    public delegate void ScrollZoomEventHandler(int direction);
 
     // From Interactables
     [Signal]
@@ -64,6 +66,10 @@ public partial class EventBus : Node
 
     public void EmitPinchZoom(float pinchZoomDelta)
     {
-        EmitSignal(SignalName.PinchZoom, pinchZoomDelta); 
+        EmitSignal(SignalName.PinchZoom, pinchZoomDelta);
+    }
+    public void EmitScrollZoom(int direction)
+    {
+        EmitSignal(SignalName.ScrollZoom, direction);
     }
 }

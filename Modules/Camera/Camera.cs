@@ -101,6 +101,19 @@ public partial class Camera : Camera2D
 		Zoom = Zoom.Clamp(new Vector2(1.5f, 1.5f), new Vector2(5f, 5f));
 
 	}
+	public void OnScrollZoom(int direction)
+	{
+		// pinchZoomDelta > 0 → zoom out, < 0 → zoom in
+		// float zoomChange = pinchZoomDelta * ZoomSensitivity; // small number, e.g., 0.001f
+		GD.Print("Scroll zooming", direction);
+		float zoomChange =  2500 * (direction / ZoomSensitivity) * _zoomSensitivityCoefficient; // small number, e.g., 0.001f
+
+		Zoom += new Vector2(zoomChange, zoomChange);
+
+		// Clamp final zoom between reasonable limits
+		Zoom = Zoom.Clamp(new Vector2(1.5f, 1.5f), new Vector2(5f, 5f));
+
+	}
 	private void ConnectToEventBus()
 	{
 		if (EventBus.Instance == null)
@@ -116,6 +129,10 @@ public partial class Camera : Camera2D
 		EventBus.Instance.Connect(
 			"PinchZoom",
 			new Callable(this, nameof(OnPinchZoom))
+		);
+		EventBus.Instance.Connect(
+			"ScrollZoom",
+			new Callable(this, nameof(OnScrollZoom))
 		);
 		GD.Print("Connected to EventBus for PlayerMove events from camera.");
 	}

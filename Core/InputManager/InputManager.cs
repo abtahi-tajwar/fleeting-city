@@ -122,11 +122,38 @@ public partial class InputManager : Node2D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
+		// Treat Ctrl (Win/Linux) or Command (macOS) as the zoom modifier.
+        bool ctrlLike = Input.IsKeyPressed(Key.Ctrl) || Input.IsKeyPressed(Key.Meta);
+
+		// Trackpad two-finger scroll on macOS
+		if (@event is InputEventPanGesture pan && ctrlLike)
+		{
+			// On most trackpads: negative Y = scroll up, positive Y = scroll down
+			int dir = pan.Delta.Y < 0 ? -1 : +1; // +1 zoom in, -1 zoom out
+			GD.Print("Touchpad scroll");
+			EventBus.Instance.EmitScrollZoom(dir);
+		}
+
 		if (@event is InputEventMouseButton mouseEvent && !GameManager.IsPlatformMobile)
 		{
 			if (mouseEvent.Pressed)
 			{
 				OnMouseDown(GetViewport().GetMousePosition());
+
+				if (mouseEvent.CtrlPressed)
+				{
+					GD.Print("Ctrl pressed");
+					if (mouseEvent.ButtonIndex == MouseButton.WheelUp)
+					{
+						GD.Print("Wheel up");
+						EventBus.Instance.EmitScrollZoom(1);
+					}
+					else if (mouseEvent.ButtonIndex == MouseButton.WheelDown)
+					{
+						EventBus.Instance.EmitScrollZoom(-1);
+					}
+				}
+
 			}
 			else
 			{
