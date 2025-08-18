@@ -34,5 +34,15 @@
       "CARBS": 0,
       "VITAMIN": 30
     }
+  },
+  {
+    "Name": "Cherry Fruit",
+    "Id": "fruit_cherry",
+    "Type": "FOOD",
+    "NutritionalComposition": {
+      "PROTEIN": 2,
+      "CARBS": 90,
+      "VITAMIN": 8
+    }
   }
 ]

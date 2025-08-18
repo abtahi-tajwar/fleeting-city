@@ -9,12 +9,12 @@ public class AnimalFarmModel
     // Properties
     /**
     → CurrentState
-→ ProducedResource : AnimalFarmResource
-→ Unit: AnimalFarmUnit
-→ ResourcePerUnit : Dictionary<Resource, float>
-→ MinimumUnitThreshold: int
-→ LastFed: DateTime
-**/
+    → ProducedResource : AnimalFarmResource
+    → Unit: AnimalFarmUnit
+    → ResourcePerUnit : Dictionary<Resource, float>
+    → MinimumUnitThreshold: int
+    → LastFed: DateTime
+    **/
     public int CurrentUnits { get; set; }
     public int MaximumUnits { get; set; }
     public ANIMAL_FARM_STATES CurrentState { get; set; }

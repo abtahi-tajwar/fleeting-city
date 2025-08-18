@@ -3,10 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dxi1wu2rnyk4g" path="res://assets/game/environment/tree/common.png" id="1_p4gf1"]
 [ext_resource type="PackedScene" uid="uid://p2yey6ny634o" path="res://Composers/Interactable/Interactable.tscn" id="1_vmncd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p4gf1"]
-atlas = ExtResource("1_p4gf1")
-region = Rect2(48, 0, 48, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_stck6"]
 atlas = ExtResource("1_p4gf1")
 region = Rect2(0, 128, 48, 64)
@@ -63,16 +59,12 @@ region = Rect2(160, 384, 80, 64)
 atlas = ExtResource("1_p4gf1")
 region = Rect2(0, 0, 48, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4gf1"]
+atlas = ExtResource("1_p4gf1")
+region = Rect2(48, 0, 48, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_stck6"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p4gf1")
-}],
-"loop": true,
-"name": &"chopped",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_stck6")
@@ -90,7 +82,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_lbdis")
 }],
 "loop": true,
-"name": &"chopping_left",
+"name": &"chopped_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -110,7 +102,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_nafeg")
 }],
 "loop": true,
-"name": &"chopping_right",
+"name": &"chopped_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -134,6 +126,14 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4gf1")
+}],
+"loop": true,
+"name": &"stump",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgp2i"]
@@ -148,14 +148,12 @@ InteractionType = 3
 HintLabel = NodePath("../Label")
 
 [node name="CollisionShape2D" parent="Interactable/InteractBoundary" index="0"]
-position = Vector2(-1, -0.5)
+position = Vector2(-1, 0)
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_stck6")
-animation = &"chopping_right"
+animation = &"idle"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.297118
 offset = Vector2(0, -25)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

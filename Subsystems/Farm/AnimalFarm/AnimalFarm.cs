@@ -11,8 +11,8 @@ public partial class AnimalFarm : Node
 	{
 		if (Interactable != null)
 		{
-			Interactable.InteractionStart += OnInteractionStart;
-			Interactable.InteractionStart += OnInteractionEnd;
+			Interactable.InteractionZoneEntered += OnInteractionStart;
+			Interactable.InteractionZoneExited += OnInteractionEnd;
 		}
 		else
 		{

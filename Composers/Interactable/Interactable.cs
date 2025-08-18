@@ -15,9 +15,9 @@ public partial class Interactable : Node
 
 	// Signals
 	[Signal]
-	public delegate void InteractionStartEventHandler(CharacterBody2D character);
+	public delegate void InteractionZoneEnteredEventHandler(CharacterBody2D character);
 	[Signal]
-	public delegate void InteractionEndEventHandler(CharacterBody2D character);
+	public delegate void InteractionZoneExitedEventHandler(CharacterBody2D character);
 
 	// Privates
 	private string _interactionKeyName;
@@ -30,8 +30,10 @@ public partial class Interactable : Node
 		{
 			GD.Print($"id: {item.Key}, label: {item.Value.Label}");
 		}
-		if (HintLabel != null || GameManager.IsPlatformMobile) HintLabel.Visible = false;
+		if (HintLabel != null
+			|| (GameManager.IsPlatformMobile && HintLabel != null)) HintLabel.Visible = false;
 		_area = GetNode<Area2D>("InteractBoundary");
+
 		if (_area == null)
 		{
 			GD.PrintErr("Area2D node not found in Interactable.");
@@ -62,7 +64,7 @@ public partial class Interactable : Node
 				var hintData = InteractableHintData.Instance.Data[InteractionType.ToString()];
 				HintLabel.Text = (hintData != null) ? GetHintLabel(hintData.Label) : GetHintLabel("Interact");
 			}
-			EmitSignal(SignalName.InteractionStart, character);
+			EmitSignal(SignalName.InteractionZoneEntered, character);
 			EventBus.Instance.EmitInteractionZoneEntered(InteractionType);
 		}
 	}
@@ -70,8 +72,8 @@ public partial class Interactable : Node
 	{
 		if (body is CharacterBody2D character)
 		{
-			if (HintLabel != null && !GameManager.IsPlatformMobile) HintLabel.Visible = false;
-			EmitSignal(SignalName.InteractionEnd, body);
+			if (HintLabel != null) HintLabel.Visible = false;
+			EmitSignal(SignalName.InteractionZoneExited, body);
 			EventBus.Instance.EmitInteractionZoneExited(InteractionType);
 		}
 	}

@@ -1,0 +1,123 @@
+[
+  {
+    "Id": "tree_oak_001",
+    "Type": "OAK",
+    "CurrentState": "MATURE",
+    "IsBeingChopped": false,
+    "ProducedResource": [
+      {
+        "Resource": { "Id": "wood_oak", "Name": "Oak Wood", "Type": "Natural" },
+        "Quantity": 10,
+        "MaxCapacity": 100,
+        "IsChoppingRequired": true,
+        "ProductionPerState": {
+          "MATURE": 10,
+          "STUMP": 2
+        }
+      }
+    ],
+    "HarvestableStates": ["MATURE"]
+  },
+  {
+    "Id": "tree_pine_001",
+    "Type": "PINE",
+    "CurrentState": "MATURE",
+    "IsBeingChopped": false,
+    "ProducedResource": [
+      {
+        "Resource": { "Id": "wood_pine", "Name": "Pine Wood", "Type": "Natural" },
+        "Quantity": 8,
+        "MaxCapacity": 100,
+        "IsChoppingRequired": true,
+        "ProductionPerState": {
+          "MATURE": 8,
+          "STUMP": 1
+        }
+      },
+      {
+        "Resource": { "Id": "sap_pine", "Name": "Pine Sap", "Type": "Natural" },
+        "Quantity": 2,
+        "MaxCapacity": 50,
+        "IsChoppingRequired": false,
+        "ProductionPerState": {
+          "MATURE": 2
+        }
+      }
+    ],
+    "HarvestableStates": ["MATURE"]
+  },
+  {
+    "Id": "tree_birch_001",
+    "Type": "BIRCH",
+    "CurrentState": "YOUNG",
+    "IsBeingChopped": false,
+    "ProducedResource": [
+      {
+        "Resource": { "Id": "wood_birch", "Name": "Birch Wood", "Type": "Natural" },
+        "Quantity": 4,
+        "MaxCapacity": 80,
+        "IsChoppingRequired": true,
+        "ProductionPerState": {
+          "MATURE": 7
+        }
+      }
+    ],
+    "HarvestableStates": ["MATURE"]
+  },
+  {
+    "Id": "tree_maple_001",
+    "Type": "MAPLE",
+    "CurrentState": "MATURE",
+    "IsBeingChopped": false,
+    "ProducedResource": [
+      {
+        "Resource": { "Id": "wood_maple", "Name": "Maple Wood", "Type": "Natural" },
+        "Quantity": 6,
+        "MaxCapacity": 90,
+        "IsChoppingRequired": true,
+        "ProductionPerState": {
+          "MATURE": 6,
+          "STUMP": 1
+        }
+      },
+      {
+        "Resource": { "Id": "sap_maple", "Name": "Maple Sap", "Type": "Natural" },
+        "Quantity": 3,
+        "MaxCapacity": 40,
+        "IsChoppingRequired": false,
+        "ProductionPerState": {
+          "MATURE": 3
+        }
+      }
+    ],
+    "HarvestableStates": ["MATURE"]
+  },
+  {
+    "Id": "tree_cherry_001",
+    "Type": "CHERRY",
+    "CurrentState": "MATURE",
+    "IsBeingChopped": false,
+    "ProducedResource": [
+      {
+        "Resource": { "Id": "wood_cherry", "Name": "Cherry Wood", "Type": "Natural" },
+        "Quantity": 5,
+        "MaxCapacity": 70,
+        "IsChoppingRequired": true,
+        "ProductionPerState": {
+          "MATURE": 5
+        }
+      },
+      {
+        "Resource": { "Id": "fruit_cherry", "Name": "Cherry Fruit", "Type": "Food" },
+        "Quantity": 10,
+        "MaxCapacity": 50,
+        "IsChoppingRequired": false,
+        "ProductionPerState": {
+          "YOUNG": 5,
+          "MATURE": 10
+        }
+      }
+    ],
+    "HarvestableStates": ["YOUNG", "MATURE"]
+  }
+]

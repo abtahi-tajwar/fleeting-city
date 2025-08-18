@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cb1b5tsvv6abm" path="res://Composers/Interactable/Interactable.cs" id="1_32g6i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfdbx"]
-size = Vector2(34, 15)
+size = Vector2(34, 19)
 
 [node name="Interactable" type="Node2D"]
 script = ExtResource("1_32g6i")

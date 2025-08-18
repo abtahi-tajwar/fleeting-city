@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json;
+using FleetingCity.BAL.Model;
 
 namespace FleetingCity.BAL.Helper;
 

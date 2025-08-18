@@ -1,0 +1,9 @@
+[
+  { "Name": "Oak Wood",   "Id": "wood_oak",   "Type": "NATURAL" },
+  { "Name": "Pine Wood",  "Id": "wood_pine",  "Type": "NATURAL" },
+  { "Name": "Birch Wood", "Id": "wood_birch", "Type": "NATURAL" },
+  { "Name": "Maple Wood", "Id": "wood_maple", "Type": "NATURAL" },
+  { "Name": "Cherry Wood","Id": "wood_cherry","Type": "NATURAL" },
+  { "Name": "Pine Sap",   "Id": "sap_pine",   "Type": "NATURAL" },
+  { "Name": "Maple Sap",  "Id": "sap_maple",  "Type": "NATURAL" }
+]
