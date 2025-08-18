@@ -34,6 +34,8 @@ public partial class UnitSelectionManager : Node
 			SelectedSettler = null;
 			GD.Print("Unit selection failed. Not a valid unit type.");
 		}
+
+		EventBus.Instance.EmitSelectedUnitChanged();
 	}
 
 	public static void SetOutline(Node2D node, bool enabled)

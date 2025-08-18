@@ -83,7 +83,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_lbdis")
 }],
 "loop": true,
-"name": &"chopped_left",
+"name": &"chopping_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -103,7 +103,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_nafeg")
 }],
 "loop": true,
-"name": &"chopped_right",
+"name": &"chopping_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -140,22 +140,29 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgp2i"]
 size = Vector2(17.5, 14)
 
-[node name="Tree" type="Node2D"]
+[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_stck6")
 TreeType = "oak_tree"
+InteractableNode = NodePath("Interactable")
+TreeSprite = NodePath("MainSprite")
+ChopTimer = NodePath("Timer")
 
 [node name="Interactable" parent="." node_paths=PackedStringArray("HintLabel") instance=ExtResource("1_vmncd")]
 InteractionType = 3
 HintLabel = NodePath("../Label")
+
+[node name="InteractBoundary" parent="Interactable" index="0"]
+collision_layer = 1
+collision_mask = 3
 
 [node name="CollisionShape2D" parent="Interactable/InteractBoundary" index="0"]
 position = Vector2(-1, 0)
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_stck6")
-animation = &"idle"
+animation = &"chopping_right"
 autoplay = "idle"
 offset = Vector2(0, -25)
 
@@ -172,6 +179,11 @@ offset_top = -61.0
 offset_right = 91.0
 offset_bottom = -38.0
 scale = Vector2(0.440001, 0.440001)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Press E to Chop"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
 
 [editable path="Interactable"]

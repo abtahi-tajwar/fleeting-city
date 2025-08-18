@@ -16,12 +16,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="InteractionButton" type="Control" parent="."]
+[node name="InteractionButton" type="Control" parent="." node_paths=PackedStringArray("TouchScreenButton")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_8i3hs")
+TouchScreenButton = NodePath("Panel/TouchScreenButton")
 
 [node name="Panel" type="Panel" parent="InteractionButton"]
 custom_minimum_size = Vector2(200, 200)

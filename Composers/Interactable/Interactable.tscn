@@ -9,6 +9,7 @@ size = Vector2(34, 19)
 script = ExtResource("1_32g6i")
 
 [node name="InteractBoundary" type="Area2D" parent="."]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractBoundary"]
 shape = SubResource("RectangleShape2D_nfdbx")

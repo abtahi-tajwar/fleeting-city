@@ -25,6 +25,12 @@ public partial class EventBus : Node
     public delegate void InteractionZoneEnteredEventHandler(INTERACTION interaction);
     [Signal]
     public delegate void InteractionZoneExitedEventHandler(INTERACTION interaction);
+    [Signal]
+    public delegate void InteractionPressedEventHandler();
+    [Signal]
+    public delegate void InteractionCommandEventHandler(INTERACTION interaction);
+    [Signal]
+    public delegate void SelectedUnitChangedEventHandler();
 
 
     public override void _EnterTree()
@@ -71,5 +77,18 @@ public partial class EventBus : Node
     public void EmitScrollZoom(int direction)
     {
         EmitSignal(SignalName.ScrollZoom, direction);
+    }
+
+    public void EmitSelectedUnitChanged()
+    {
+        EmitSignal(SignalName.SelectedUnitChanged);
+    }
+    public void EmitInteractionCommand(INTERACTION interactionType)
+    {
+        EmitSignal(SignalName.InteractionCommand, interactionType.ToString());
+    }
+    public void EmitInteractionPressed()
+    {
+        EmitSignal(SignalName.InteractionPressed);
     }
 }

@@ -102,6 +102,7 @@ public partial class InputManager : Node2D
 		{
 			CaptureMovementCommand();
 			CalculateGlobalMousePosition();
+			CaptureInteractionPress();
 		}
 		// UpdatePinchFingerPositions();
 	}
@@ -239,6 +240,14 @@ public partial class InputManager : Node2D
 		if (TotalRegisteredFingers < 2) IsPinching = false;
 	}
 
+	private void CaptureInteractionPress()
+	{
+		if (Input.IsActionJustPressed("interact"))
+		{
+			EventBus.Instance.EmitInteractionPressed();
+		}
+	}
+
 	private void CaptureMovementCommand()
 	{
 		if (Input.IsActionPressed("move_command"))
@@ -254,6 +263,7 @@ public partial class InputManager : Node2D
 			return; // No action change
 		}
 	}
+
 	private void CapturePlayerMovementInput(double delta)
 	{
 		Vector2 vec = Input.GetVector("move_left", "move_right", "move_up", "move_down");
