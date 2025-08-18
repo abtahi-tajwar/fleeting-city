@@ -26,7 +26,7 @@ namespace FleetingCity.BAL.Data
                 }
                 catch (Exception ex)
                 {
-                    RootProvider.Logger?.Log($"❌ Failed to load {type.Name}: {ex.Message}");
+                    RootProvider.Logger?.Log($"❌ Failed to load {type.Name}: {ex}");
                 }
             }
         }

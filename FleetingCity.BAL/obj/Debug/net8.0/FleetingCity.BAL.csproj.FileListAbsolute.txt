@@ -15,3 +15,4 @@
 /Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/Data/InteractionHint.json
 /Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/Data/NaturalResource.json
 /Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/Data/Tree.json
+/Users/abtahitajwar/Documents/my-apps/fleeting-city/FleetingCity.BAL/bin/Debug/net8.0/Data/MaterialResource.json

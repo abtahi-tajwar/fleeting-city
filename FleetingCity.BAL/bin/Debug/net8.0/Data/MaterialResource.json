@@ -1,0 +1,54 @@
+[
+  {
+    "Name": "Oak Plank",
+    "Id": "plank_oak",
+    "Type": "MATERIAL",
+    "Composition": {
+      "wood_oak": 1.0
+    }
+  },
+  {
+    "Name": "Pine Resin Glue",
+    "Id": "glue_pine_resin",
+    "Type": "MATERIAL",
+    "Composition": {
+      "sap_pine": 0.8,
+      "wood_pine": 0.2
+    }
+  },
+  {
+    "Name": "Maple Varnish",
+    "Id": "varnish_maple",
+    "Type": "MATERIAL",
+    "Composition": {
+      "sap_maple": 0.85,
+      "wood_maple": 0.15
+    }
+  },
+  {
+    "Name": "Cherry Red Dye",
+    "Id": "dye_red_cherry",
+    "Type": "MATERIAL",
+    "Composition": {
+      "fruit_cherry": 1.0
+    }
+  },
+  {
+    "Name": "Birch Plywood",
+    "Id": "plywood_birch",
+    "Type": "MATERIAL",
+    "Composition": {
+      "wood_birch": 0.9,
+      "sap_pine": 0.1
+    }
+  },
+  {
+    "Name": "Hardwood Beam (Oak/Maple)",
+    "Id": "beam_hardwood_mixed",
+    "Type": "MATERIAL",
+    "Composition": {
+      "wood_oak": 0.5,
+      "wood_maple": 0.5
+    }
+  }
+]

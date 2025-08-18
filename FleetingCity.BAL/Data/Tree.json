@@ -1,6 +1,6 @@
 [
   {
-    "Id": "tree_oak_001",
+    "Id": "oak_tree",
     "Type": "OAK",
     "CurrentState": "MATURE",
     "IsBeingChopped": false,
@@ -19,7 +19,7 @@
     "HarvestableStates": ["MATURE"]
   },
   {
-    "Id": "tree_pine_001",
+    "Id": "pine_tree",
     "Type": "PINE",
     "CurrentState": "MATURE",
     "IsBeingChopped": false,
@@ -47,13 +47,13 @@
     "HarvestableStates": ["MATURE"]
   },
   {
-    "Id": "tree_birch_001",
+    "Id": "birch_tree",
     "Type": "BIRCH",
     "CurrentState": "YOUNG",
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": { "Id": "wood_birch", "Name": "Birch Wood", "Type": "Natural" },
+        "Resource": { "Id": "wood_birch", "Name": "Birch Wood", "Type": "NATURAL" },
         "Quantity": 4,
         "MaxCapacity": 80,
         "IsChoppingRequired": true,
@@ -65,13 +65,13 @@
     "HarvestableStates": ["MATURE"]
   },
   {
-    "Id": "tree_maple_001",
+    "Id": "maple_tree",
     "Type": "MAPLE",
     "CurrentState": "MATURE",
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": { "Id": "wood_maple", "Name": "Maple Wood", "Type": "Natural" },
+        "Resource": "wood_maple",
         "Quantity": 6,
         "MaxCapacity": 90,
         "IsChoppingRequired": true,
@@ -81,7 +81,7 @@
         }
       },
       {
-        "Resource": { "Id": "sap_maple", "Name": "Maple Sap", "Type": "Natural" },
+        "Resource": "sap_maple",
         "Quantity": 3,
         "MaxCapacity": 40,
         "IsChoppingRequired": false,
@@ -93,13 +93,13 @@
     "HarvestableStates": ["MATURE"]
   },
   {
-    "Id": "tree_cherry_001",
+    "Id": "cherry_tree",
     "Type": "CHERRY",
     "CurrentState": "MATURE",
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": { "Id": "wood_cherry", "Name": "Cherry Wood", "Type": "Natural" },
+        "Resource": "wood_cherry",
         "Quantity": 5,
         "MaxCapacity": 70,
         "IsChoppingRequired": true,
@@ -108,7 +108,7 @@
         }
       },
       {
-        "Resource": { "Id": "fruit_cherry", "Name": "Cherry Fruit", "Type": "Food" },
+        "Resource": "fruit_cherry",
         "Quantity": 10,
         "MaxCapacity": 50,
         "IsChoppingRequired": false,

@@ -14,13 +14,13 @@ public class ChickenCoupModel : AnimalFarmModel
 		base.ProducedResource = new()
 		{
 			new() {
-				Resource = FoodResourceData.Instance.Data.GetValueOrDefault("egg"),
+				ResourceId = "egg",
 				Quantity = 0,
 				ProductionRatePerMinute = 1,
 				MaxCapacity = 30
 			},
 			new() {
-				Resource = FoodResourceData.Instance.Data.GetValueOrDefault("chicken_meat"),
+				ResourceId = "chicken_meat",
 				Quantity = 0,
 				ProductionRatePerMinute = 5,
 				MaxCapacity = 20

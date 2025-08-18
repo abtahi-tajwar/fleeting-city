@@ -8,5 +8,6 @@ public class MaterialResourceModel : IResourceModel
     public string Name { get; set; }
     public string Id { get; set; } // Assuming Id is needed for IGameDataModel
     public RESOURCE_TYPE Type { get; set; }
-    public Dictionary<IResourceModel, float> Composition { get; set; }
+    // Composition : <resourceId, proportion>
+    public Dictionary<string, float> Composition { get; set; }
 }   

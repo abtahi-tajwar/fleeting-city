@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using FleetingCity.BAL.Provider;
 using FleetingCity.BAL.Utils;
 
@@ -26,9 +27,11 @@ public abstract class BaseGameData<T, TModel> : IGameDataMarker
 		string json = Helper.Helper.GetGameDataJSON(ResourceFileName);
 		var options = new JsonSerializerOptions
 		{
+			AllowTrailingCommas = true,
+			ReadCommentHandling = JsonCommentHandling.Skip,
 			PropertyNameCaseInsensitive = true
 		};
-
+		options.Converters.Add(new JsonStringEnumConverter(allowIntegerValues: false));
 		List<TModel> foodResourceList = JsonSerializer.Deserialize<List<TModel>>(json, options);
 		DataList = foodResourceList;
 		Data = new Dictionary<string, TModel>();

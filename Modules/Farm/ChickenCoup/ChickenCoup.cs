@@ -10,7 +10,7 @@ public partial class ChickenCoup : AnimalFarm
         _model = new ChickenCoupModel();
         foreach (var item in _model.ProducedResource)
         {
-            GD.Print($"Produced item", item.Resource.Name);
+            GD.Print($"Produced item", item.GetResource().Name);
         }
     }
 }
