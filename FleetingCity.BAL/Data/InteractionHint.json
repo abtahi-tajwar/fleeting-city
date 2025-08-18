@@ -1,0 +1,7 @@
+[
+  { "id": "SEED", "label": "Seed" },
+  { "id": "HARVEST", "label": "Harvest" },
+  { "id": "TALK", "label": "Talk" },
+  { "id": "CHOP_TREE", "label": "Chop Tree" },
+  { "id": "REMOVE_TRUNK", "label": "Remove Trunk" }
+]

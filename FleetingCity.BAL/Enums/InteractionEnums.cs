@@ -6,5 +6,6 @@ public enum INTERACTION
     SEED,
     HARVEST,
     TALK,
-
+    CHOP_TREE,
+    REMOVE_TRUNK
 }

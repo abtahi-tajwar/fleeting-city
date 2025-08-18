@@ -130,7 +130,6 @@ public partial class InputManager : Node2D
 		{
 			// On most trackpads: negative Y = scroll up, positive Y = scroll down
 			int dir = pan.Delta.Y < 0 ? -1 : +1; // +1 zoom in, -1 zoom out
-			GD.Print("Touchpad scroll");
 			EventBus.Instance.EmitScrollZoom(dir);
 		}
 

@@ -11,6 +11,7 @@ script = ExtResource("1_4k4sc")
 HintText = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

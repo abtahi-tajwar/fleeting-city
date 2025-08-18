@@ -4,10 +4,18 @@ using System;
 
 public partial class InteractionButton : Control
 {
+    // privates
+    private bool insideInteractionZone = false;
     public override void _Ready()
     {
         this.Visible = false;
         CallDeferred(nameof(ConnectToEventBus));
+        Visible = false;
+    }
+    public override void _Process(double delta)
+    {
+        if (GameManager.IsPlatformMobile && insideInteractionZone) Visible = true;
+        else Visible = false;
     }
 
     private void ConnectToEventBus()
@@ -19,12 +27,12 @@ public partial class InteractionButton : Control
     private void OnInteractionZoneEntered(string interaction)
     {
         var interactionType = (INTERACTION)Enum.Parse(typeof(INTERACTION), interaction, true);
-        this.Visible = true;
+        insideInteractionZone = true;
     }
     private void OnInteractionZoneExited(string interaction)
     {
         var interactionType = (INTERACTION)Enum.Parse(typeof(INTERACTION), interaction, true);
-        this.Visible = false;
+        insideInteractionZone = false;
         // Handle interaction logic here
     }
 }

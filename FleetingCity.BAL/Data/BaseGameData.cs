@@ -23,7 +23,7 @@ public abstract class BaseGameData<T, TModel> : IGameDataMarker
 	}
 
 	protected void LoadDataFromJSON() {
-		string json = Helper.Helper.GetGameDataJSON("FoodResource");
+		string json = Helper.Helper.GetGameDataJSON(ResourceFileName);
 		var options = new JsonSerializerOptions
 		{
 			PropertyNameCaseInsensitive = true

@@ -224,7 +224,7 @@ SelectionArea = NodePath("SelectionArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_vk3r0")
-position = Vector2(0, -7)
+position = Vector2(0, -11)
 scale = Vector2(1, 0.875)
 sprite_frames = SubResource("SpriteFrames_wydw0")
 animation = &"idle"
@@ -232,8 +232,9 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
+position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_kqiun")
 metadata/_edit_group_ = true
 
 [node name="SelectionArea" parent="." instance=ExtResource("4_n1vyh")]
-position = Vector2(0, -10)
+position = Vector2(0, -14)

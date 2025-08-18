@@ -105,7 +105,6 @@ public partial class Camera : Camera2D
 	{
 		// pinchZoomDelta > 0 → zoom out, < 0 → zoom in
 		// float zoomChange = pinchZoomDelta * ZoomSensitivity; // small number, e.g., 0.001f
-		GD.Print("Scroll zooming", direction);
 		float zoomChange =  2500 * (direction / ZoomSensitivity) * _zoomSensitivityCoefficient; // small number, e.g., 0.001f
 
 		Zoom += new Vector2(zoomChange, zoomChange);
