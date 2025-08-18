@@ -20,6 +20,7 @@ public partial class Tree : Node2D
 		if (InteractableNode == null) GD.PushError($"At: {GetTree()}: Pleas assign InteractableNode");
 
 		InteractableNode.InteractionCommand += OnInteractionCommand;
+		InteractableNode.InteractionStopCommand += OnInteractionStopCommand;
 	}
 	
 	private void OnInteractionCommand(string interaction)
@@ -31,6 +32,18 @@ public partial class Tree : Node2D
 			// Add logic to handle tree chopping
 			// For example, remove the tree from the scene or play an animation
 			TreeSprite.Play("chopping_left");
+		}
+		else
+		{
+			GD.Print($"Unhandled interaction: {interaction} for tree type: {TreeType}");
+		}
+	}
+	private void OnInteractionStopCommand(string interaction)
+	{
+		INTERACTION interactionType = Enum.Parse<INTERACTION>(interaction, true);
+		if (interactionType == INTERACTION.CHOP_TREE)
+		{
+			TreeSprite.Play("idle");
 		}
 		else
 		{

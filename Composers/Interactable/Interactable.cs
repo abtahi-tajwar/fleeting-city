@@ -1,6 +1,7 @@
 using FleetingCity.BAL.Data;
 using FleetingCity.BAL.Enum;
 using Godot;
+using Microsoft.VisualBasic;
 using System;
 
 public partial class Interactable : Node
@@ -19,18 +20,22 @@ public partial class Interactable : Node
 	[Signal]
 	public delegate void InteractionZoneExitedEventHandler(CharacterBody2D character);
 	[Signal]
-	public delegate void InteractionCommandEventHandler(string interaction);
+	public delegate void InteractionCommandEventHandler(string interactionType);
+	[Signal]
+	public delegate void InteractionStopCommandEventHandler(string interactionType);
 
 	// publics
-	public CharacterBody2D InteractingCharacter { get; private set; }
+	public Player InteractingCharacter { get; private set; }
 
 	// Privates
 	private string _interactionKeyName;
+	private string _interactionCancelKeyName;
 
 
 	public override void _Ready()
 	{
 		_interactionKeyName = GetActionKeyName("interact");
+		_interactionCancelKeyName = GetActionKeyName("stop_interact");
 		foreach (var item in InteractableHintData.Instance.Data)
 		{
 			GD.Print($"id: {item.Key}, label: {item.Value.Label}");
@@ -63,6 +68,7 @@ public partial class Interactable : Node
 	private void ConnectToEventBus()
 	{
 		EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
+		EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
 	}
 
 	private void OnInteractionPressed()
@@ -72,10 +78,17 @@ public partial class Interactable : Node
 			EventBus.Instance.EmitInteractionCommand(InteractionType);
 			EmitSignal(SignalName.InteractionCommand, InteractionType.ToString());
 			GD.Print($"Interaction command emitted for {InteractionType}");
+			HintLabel.Text = $"Press {_interactionCancelKeyName} to stop {InteractionType}";
 		}
-		else
+	}
+
+	private void OnInteractionStop()
+	{
+		if (InteractingCharacter != null)
 		{
-			GD.PrintErr("No character is interacting.");
+			EventBus.Instance.EmitInteractionStopCommand(InteractionType.ToString());
+			EmitSignal(SignalName.InteractionStopCommand, InteractionType.ToString());
+			SetHint();
 		}
 	}
 
@@ -86,11 +99,8 @@ public partial class Interactable : Node
 
 	private void OnBodyEntered(Node body)
 	{
-		if (body is CharacterBody2D character)
+		if (body is Player character)
 		{
-			bool isSelected = CheckIfCharacterSelected(character);
-
-			if (!isSelected) return;
 			InteractingCharacter = character;
 			if (HintLabel != null && !GameManager.IsPlatformMobile)
 			{
@@ -99,8 +109,7 @@ public partial class Interactable : Node
 				{
 					GD.Print($"id: {item.Key}, label: {item.Value.Label}");
 				}
-				var hintData = InteractableHintData.Instance.Data[InteractionType.ToString()];
-				HintLabel.Text = (hintData != null) ? GetHintLabel(hintData.Label) : GetHintLabel("Interact");
+				SetHint();
 			}
 			EmitSignal(SignalName.InteractionZoneEntered, character);
 			EventBus.Instance.EmitInteractionZoneEntered(InteractionType);
@@ -108,9 +117,8 @@ public partial class Interactable : Node
 	}
 	private void OnBodyExited(Node body)
 	{
-		if (body is CharacterBody2D character)
+		if (body is Player character)
 		{
-			if (character != InteractingCharacter) return;
 			if (HintLabel != null) HintLabel.Visible = false;
 			EmitSignal(SignalName.InteractionZoneExited, body);
 			EventBus.Instance.EmitInteractionZoneExited(InteractionType);
@@ -131,7 +139,11 @@ public partial class Interactable : Node
 
 		return null; // no key bound
 	}
-
+	private void SetHint()
+	{
+		var hintData = InteractableHintData.Instance.Data[InteractionType.ToString()];
+		HintLabel.Text = (hintData != null) ? GetHintLabel(hintData.Label) : GetHintLabel("Interact");
+	}
 	private string GetHintLabel(string interactionType)
 	{
 		return $"Press {_interactionKeyName} to {interactionType}";

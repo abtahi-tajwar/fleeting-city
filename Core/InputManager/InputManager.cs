@@ -246,6 +246,10 @@ public partial class InputManager : Node2D
 		{
 			EventBus.Instance.EmitInteractionPressed();
 		}
+		if (Input.IsActionJustReleased("stop_interact"))
+		{
+			EventBus.Instance.EmitInteractionStop();
+		}
 	}
 
 	private void CaptureMovementCommand()

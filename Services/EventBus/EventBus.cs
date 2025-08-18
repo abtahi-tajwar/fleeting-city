@@ -28,7 +28,11 @@ public partial class EventBus : Node
     [Signal]
     public delegate void InteractionPressedEventHandler();
     [Signal]
+    public delegate void InteractionStopEventHandler();
+    [Signal]
     public delegate void InteractionCommandEventHandler(INTERACTION interaction);
+    [Signal]
+    public delegate void InteractionStopCommandEventHandler(string interactionType);
     [Signal]
     public delegate void SelectedUnitChangedEventHandler();
 
@@ -90,5 +94,15 @@ public partial class EventBus : Node
     public void EmitInteractionPressed()
     {
         EmitSignal(SignalName.InteractionPressed);
+    }
+
+    public void EmitInteractionStop()
+    {
+        EmitSignal(SignalName.InteractionStop);
+    }
+    
+    public void EmitInteractionStopCommand(string interactionType)
+    {
+        EmitSignal(SignalName.InteractionStopCommand, interactionType);
     }
 }

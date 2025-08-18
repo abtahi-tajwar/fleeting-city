@@ -3,14 +3,18 @@ using FleetingCity.BAL.Enum;
 using Godot;
 public partial class Player : CharacterBody2D
 {
-	private CharacterAnimationService _animationService;
-	private UnitSelectionManager _unitSelectionManager;
 	[Export]
 	public float MovementSpeed; // Speed of the player movement
 	[Export]
 	public SelectionArea SelectionArea;
 
+	// publics
+	public bool IsInteracting { get; set; } = false;
+	public INTERACTION? CurrentInteractionType { get; set; } = null;
+
 	// privates
+	private CharacterAnimationService _animationService;
+	private UnitSelectionManager _unitSelectionManager;
 	private MOVEMENT_DIRECTION_ENUM _currentDirection = MOVEMENT_DIRECTION_ENUM.NONE;
 
 	public override void _Ready()
@@ -26,8 +30,11 @@ public partial class Player : CharacterBody2D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		_animationService.PlayWalkAnimation(_currentDirection);
-		Move(delta);
+		if (!IsInteracting)
+		{
+			_animationService.PlayWalkAnimation(_currentDirection);
+			Move(delta);
+		}
 	}
 	public override void _Process(double delta)
 	{
@@ -94,6 +101,20 @@ public partial class Player : CharacterBody2D
 		Position = Position.Clamp(boundRect.Position, boundRect.End);
 	}
 
+	private void OnInteractionCommand(string interactionStr)
+	{
+		var interactionType = (INTERACTION)Enum.Parse(typeof(INTERACTION), interactionStr, true);
+		IsInteracting = true;
+		CurrentInteractionType = interactionType;
+	}
+	private void OnInteractionStopCommand(string interactionStr)
+	{
+		var interactionType = (INTERACTION)Enum.Parse(typeof(INTERACTION), interactionStr, true);
+		IsInteracting = false;
+		CurrentInteractionType = null;
+
+	}
+
 	private void ConnectToEventBus()
 	{
 		if (EventBus.Instance == null)
@@ -105,6 +126,15 @@ public partial class Player : CharacterBody2D
 		EventBus.Instance.Connect(
 			"PlayerMove",
 			new Callable(this, nameof(UpdateCurrentDirection))
+		);
+
+		EventBus.Instance.Connect(
+			EventBus.SignalName.InteractionCommand,
+			new Callable(this, nameof(OnInteractionCommand))
+		);
+		EventBus.Instance.Connect(
+			EventBus.SignalName.InteractionStopCommand,
+			new Callable(this, nameof(OnInteractionStopCommand))
 		);
 
 		// EventBus.Instance.Connect(
