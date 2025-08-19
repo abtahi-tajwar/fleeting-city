@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx0naigkjpfc0"]
+[gd_scene load_steps=4 format=3 uid="uid://cx0naigkjpfc0"]
 
 [ext_resource type="Script" uid="uid://tghynd6rkwdv" path="res://Core/ActionManager.cs" id="1_5k1yx"]
 [ext_resource type="Script" uid="uid://crcionj47rx2t" path="res://Core/GameManager/GameManager.cs" id="1_7hmn3"]
+[ext_resource type="Script" uid="uid://d1bwgkuf14744" path="res://Core/GameManager/GlobalTimer.cs" id="3_7hmn3"]
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_7hmn3")
 
 [node name="ActionManager" type="Node2D" parent="."]
 script = ExtResource("1_5k1yx")
+
+[node name="GlobalTimer" type="Timer" parent="."]
+autostart = true
+script = ExtResource("3_7hmn3")

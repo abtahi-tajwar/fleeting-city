@@ -19,9 +19,9 @@
     ],
     "HarvestableStates": ["MATURE"],
     "States": [
-      { "State": "SAPLING", "GrowingDurationInMinutes": 60 },
-      { "State": "YOUNG",   "GrowingDurationInMinutes": 120 },
-      { "State": "MATURE",  "GrowingDurationInMinutes": 180 },
+      { "State": "SAPLING", "GrowingDurationInMinutes": 0.2 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 0.2 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 0.2 },
       { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
     ]
   },

@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6r3adlg57l2j"]
+[gd_scene load_steps=24 format=3 uid="uid://b6r3adlg57l2j"]
 
 [ext_resource type="Texture2D" uid="uid://dxi1wu2rnyk4g" path="res://assets/game/environment/tree/common.png" id="1_p4gf1"]
 [ext_resource type="Script" uid="uid://b4v0ha3xgicc" path="res://Modules/Tree/Tree.cs" id="1_stck6"]
 [ext_resource type="PackedScene" uid="uid://p2yey6ny634o" path="res://Composers/Interactable/Interactable.tscn" id="1_vmncd"]
+[ext_resource type="Texture2D" uid="uid://cslkqpmy0kwsi" path="res://assets/game/environment/tree/test_grow.png" id="4_gwjg6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stck6"]
 atlas = ExtResource("1_p4gf1")
@@ -60,9 +61,17 @@ region = Rect2(160, 384, 80, 64)
 atlas = ExtResource("1_p4gf1")
 region = Rect2(0, 0, 48, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgp2i"]
+atlas = ExtResource("4_gwjg6")
+region = Rect2(288, 112, 32, 112)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4gf1"]
 atlas = ExtResource("1_p4gf1")
 region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vabe0"]
+atlas = ExtResource("4_gwjg6")
+region = Rect2(352, 112, 32, 112)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_stck6"]
 animations = [{
@@ -130,10 +139,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_vmncd")
+}],
+"loop": true,
+"name": &"mature",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgp2i")
+}],
+"loop": true,
+"name": &"sapling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_p4gf1")
 }],
 "loop": true,
 "name": &"stump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vabe0")
+}],
+"loop": true,
+"name": &"young",
 "speed": 5.0
 }]
 
@@ -162,7 +195,7 @@ position = Vector2(-1, 0)
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_stck6")
-animation = &"chopping_right"
+animation = &"mature"
 autoplay = "idle"
 offset = Vector2(0, -25)
 

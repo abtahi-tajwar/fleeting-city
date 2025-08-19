@@ -1,3 +1,4 @@
+using System.Data;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using FleetingCity.BAL.Data;
@@ -25,11 +26,17 @@ public class TreeModel
 	/// The current lifecycle state of the tree.
 	/// </summary>
 	public TreeStateModel CurrentState { get; set; }
+	public DateTime LastStateChangeTime { get; set; }
 
 	/// <summary>
 	/// True if the tree is currently in a chopping animation/action.
 	/// </summary>
 	public bool IsBeingChopped { get; set; }
+
+	/// <summary>
+	/// True if the tree is currently falling down.
+	/// <summary>
+	public bool IsFalling { get; set; } = false;
 
 
 	public readonly Dictionary<string, CurrentTreeResource> CurrentResources = new();
@@ -54,10 +61,11 @@ public class TreeModel
 		IsBeingChopped = false;
 
 		Data = TreeData.Instance.Data[treeName];
-		
+
 		CurrentState = Data.States.FirstOrDefault(s => s.State == initialState);
+		LastStateChangeTime = DateTime.UtcNow;
 		_currentStateIndex = Data.States.IndexOf(CurrentState);
-		
+
 		if (CurrentState == null)
 		{
 			throw new ArgumentException($"Initial state '{initialState}' not found in tree data.");
@@ -74,6 +82,8 @@ public class TreeModel
 
 	public void MoveToNextState()
 	{
+		var currentState = Data.States[_currentStateIndex];
+		if (currentState.State == TREE_STATE.STUMP) return;
 		if (_currentStateIndex < Data.States.Count - 1)
 		{
 			_currentStateIndex++;
@@ -87,12 +97,28 @@ public class TreeModel
 		}
 	}
 
-	private void UpdateCurrentResources()
+	public void UpdateCurrentStates()
+	{
+		if (CurrentState.State == TREE_STATE.STUMP)
+		{
+			IsFalling = false;
+			IsBeingChopped = false;
+			return;
+		}
+		if (DateTime.UtcNow - LastStateChangeTime >= TimeSpan.FromMinutes(CurrentState.GrowingDurationInMinutes))
+		{
+			MoveToNextState();
+			LastStateChangeTime = DateTime.UtcNow;
+		}
+	}
+
+	public void UpdateCurrentResources()
 	{
 		foreach (var resource in Data.ProducedResource)
 		{
 			var prodPerState = resource.ProductionPerState;
 			prodPerState.TryGetValue(CurrentState.State, out var productionRate);
+
 			if (!resource.IsChoppingRequired)
 			{
 				if (HasResourcePassedInterval(resource))
@@ -116,5 +142,51 @@ public class TreeModel
 			return true;
 		}
 		return false;
+	}
+
+	private void StartChopping()
+	{
+		if (IsBeingChopped || IsFalling) return;
+
+		IsBeingChopped = true;
+		IsFalling = false;
+	}
+	private void StartFalling()
+	{
+		if (IsFalling || IsBeingChopped) return;
+
+		IsFalling = true;
+		IsBeingChopped = false;
+	}
+	private void CancelChopping()
+	{
+		if (!IsBeingChopped) return;
+
+		IsBeingChopped = false;
+		IsFalling = false;
+	}
+	private Dictionary<string, CurrentTreeResource> CompleteChopping()
+	{
+		if (!IsBeingChopped) return null;
+
+		IsBeingChopped = false;
+		IsFalling = false;
+		var resources = CurrentResources;
+
+		foreach (var resource in Data.ProducedResource)
+		{
+			if (resource.IsChoppingRequired)
+			{
+				if (resources.TryGetValue(resource.ResourceId, out var currentResource))
+				{
+					currentResource.Amount = resource.ProductionPerState[CurrentState.State];
+					currentResource.LastUpdated = DateTime.UtcNow;
+				}
+			}
+		}
+
+		CurrentState = Data.States.FirstOrDefault(s => s.State == TREE_STATE.STUMP);
+
+		return resources;
 	}
 }

@@ -7,7 +7,7 @@ namespace FleetingCity.BAL.Model;
 public class TreeStateModel
 {
     public TREE_STATE State { get; set; }
-    public int GrowingDurationInMinutes { get; set; }
+    public float GrowingDurationInMinutes { get; set; }
 }
 
 public class TreeDataModel : IGameDataModel
