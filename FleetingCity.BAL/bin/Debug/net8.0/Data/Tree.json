@@ -6,17 +6,24 @@
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": { "Id": "wood_oak", "Name": "Oak Wood", "Type": "Natural" },
+        "ResourceId": "wood_oak",
         "Quantity": 10,
         "MaxCapacity": 100,
         "IsChoppingRequired": true,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 10,
           "STUMP": 2
         }
       }
     ],
-    "HarvestableStates": ["MATURE"]
+    "HarvestableStates": ["MATURE"],
+    "States": [
+      { "State": "SAPLING", "GrowingDurationInMinutes": 60 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 120 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 180 },
+      { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
+    ]
   },
   {
     "Id": "pine_tree",
@@ -25,26 +32,34 @@
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": { "Id": "wood_pine", "Name": "Pine Wood", "Type": "Natural" },
+        "ResourceId": "wood_pine",
         "Quantity": 8,
         "MaxCapacity": 100,
         "IsChoppingRequired": true,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 8,
           "STUMP": 1
         }
       },
       {
-        "Resource": { "Id": "sap_pine", "Name": "Pine Sap", "Type": "Natural" },
+        "ResourceId": "sap_pine",
         "Quantity": 2,
         "MaxCapacity": 50,
         "IsChoppingRequired": false,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 2
         }
       }
     ],
-    "HarvestableStates": ["MATURE"]
+    "HarvestableStates": ["MATURE"],
+    "States": [
+      { "State": "SAPLING", "GrowingDurationInMinutes": 50 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 100 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 150 },
+      { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
+    ]
   },
   {
     "Id": "birch_tree",
@@ -53,16 +68,23 @@
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": { "Id": "wood_birch", "Name": "Birch Wood", "Type": "NATURAL" },
+        "ResourceId": "wood_birch",
         "Quantity": 4,
         "MaxCapacity": 80,
         "IsChoppingRequired": true,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 7
         }
       }
     ],
-    "HarvestableStates": ["MATURE"]
+    "HarvestableStates": ["MATURE"],
+    "States": [
+      { "State": "SAPLING", "GrowingDurationInMinutes": 40 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 90 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 140 },
+      { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
+    ]
   },
   {
     "Id": "maple_tree",
@@ -71,53 +93,67 @@
     "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": "wood_maple",
+        "ResourceId": "wood_maple",
         "Quantity": 6,
         "MaxCapacity": 90,
         "IsChoppingRequired": true,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 6,
           "STUMP": 1
         }
       },
       {
-        "Resource": "sap_maple",
+        "ResourceId": "sap_maple",
         "Quantity": 3,
         "MaxCapacity": 40,
         "IsChoppingRequired": false,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 3
         }
       }
     ],
-    "HarvestableStates": ["MATURE"]
+    "HarvestableStates": ["MATURE"],
+    "States": [
+      { "State": "SAPLING", "GrowingDurationInMinutes": 70 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 130 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 200 },
+      { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
+    ]
   },
   {
     "Id": "cherry_tree",
     "Type": "CHERRY",
-    "CurrentState": "MATURE",
-    "IsBeingChopped": false,
     "ProducedResource": [
       {
-        "Resource": "wood_cherry",
+        "ResourceId": "wood_cherry",
         "Quantity": 5,
         "MaxCapacity": 70,
         "IsChoppingRequired": true,
+        "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 5
         }
       },
       {
-        "Resource": "fruit_cherry",
+        "ResourceId": "fruit_cherry",
         "Quantity": 10,
         "MaxCapacity": 50,
         "IsChoppingRequired": false,
+        "ProductionIntervalInMinutes": 2,
         "ProductionPerState": {
           "YOUNG": 5,
           "MATURE": 10
         }
       }
     ],
-    "HarvestableStates": ["YOUNG", "MATURE"]
+    "HarvestableStates": ["YOUNG", "MATURE"],
+    "States": [
+      { "State": "SAPLING", "GrowingDurationInMinutes": 30 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 60 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 120 },
+      { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
+    ]
   }
 ]

@@ -92,6 +92,15 @@ public partial class Interactable : Node
 		}
 	}
 
+	public void StopInteraction()
+	{
+		if (InteractingCharacter != null)
+		{
+			EventBus.Instance.EmitInteractionStopCommand(InteractionType.ToString());
+			SetHint();
+		}
+	}
+
 	public void UpdateInteraction(INTERACTION newInteraction)
 	{
 		InteractionType = newInteraction;

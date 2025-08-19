@@ -1,5 +1,6 @@
 using FleetingCity.BAL.Data;
 using FleetingCity.BAL.Enum;
+using FleetingCity.BAL.Model;
 using Godot;
 
 public partial class Tree : Node2D
@@ -13,6 +14,9 @@ public partial class Tree : Node2D
 	[Export]
 	public Godot.Timer ChopTimer;
 
+	// publics
+	public TreeModel Model;
+
 	public override void _Ready()
 	{
 		var treeTypeExists = TreeData.Instance.Data.ContainsKey(TreeType);
@@ -21,8 +25,10 @@ public partial class Tree : Node2D
 
 		InteractableNode.InteractionCommand += OnInteractionCommand;
 		InteractableNode.InteractionStopCommand += OnInteractionStopCommand;
+
+		Model = new TreeModel(TreeType);
 	}
-	
+
 	private void OnInteractionCommand(string interaction)
 	{
 		INTERACTION interactionType = Enum.Parse<INTERACTION>(interaction, true);
@@ -50,4 +56,6 @@ public partial class Tree : Node2D
 			GD.Print($"Unhandled interaction: {interaction} for tree type: {TreeType}");
 		}
 	}
+	
+
 }

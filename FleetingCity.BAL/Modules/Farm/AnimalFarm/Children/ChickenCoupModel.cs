@@ -15,13 +15,11 @@ public class ChickenCoupModel : AnimalFarmModel
 		{
 			new() {
 				ResourceId = "egg",
-				Quantity = 0,
 				ProductionRatePerMinute = 1,
 				MaxCapacity = 30
 			},
 			new() {
 				ResourceId = "chicken_meat",
-				Quantity = 0,
 				ProductionRatePerMinute = 5,
 				MaxCapacity = 20
 			},
