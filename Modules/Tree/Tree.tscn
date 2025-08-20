@@ -192,16 +192,26 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgp2i"]
 size = Vector2(17.5, 14)
 
-[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer", "FallTimer", "StumpTimer")]
+[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer", "FallTimer", "StumpTimer", "ProgressBar")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_stck6")
 TreeType = "oak_tree"
 InteractableNode = NodePath("Interactable")
 TreeSprite = NodePath("MainSprite")
-ChopTimer = NodePath("Node2D/ChopTimer")
-FallTimer = NodePath("Node2D/FallTimer")
-StumpTimer = NodePath("Node2D/StumpTimer")
+ChopTimer = NodePath("Timers/ChopTimer")
+FallTimer = NodePath("Timers/FallTimer")
+StumpTimer = NodePath("Timers/StumpTimer")
+ProgressBar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 1
+offset_left = -25.0
+offset_top = -49.0
+offset_right = 120.0
+offset_bottom = -22.0
+scale = Vector2(0.330931, 0.330931)
+step = 1.0
 
 [node name="Interactable" parent="." node_paths=PackedStringArray("HintLabel") instance=ExtResource("1_vmncd")]
 InteractionType = 3
@@ -216,7 +226,7 @@ position = Vector2(-1, 0)
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_stck6")
-animation = &"removed"
+animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -25)
 
@@ -238,16 +248,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Press E to Chop"
 horizontal_alignment = 1
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Timers" type="Node2D" parent="."]
 
-[node name="ChopTimer" type="Timer" parent="Node2D"]
+[node name="ChopTimer" type="Timer" parent="Timers"]
 wait_time = 3.0
 one_shot = true
 
-[node name="FallTimer" type="Timer" parent="Node2D"]
+[node name="FallTimer" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="StumpTimer" type="Timer" parent="Node2D"]
+[node name="StumpTimer" type="Timer" parent="Timers"]
 wait_time = 3.0
 one_shot = true
 

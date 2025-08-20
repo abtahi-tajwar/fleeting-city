@@ -18,6 +18,8 @@ public partial class Tree : Node2D
 	public Godot.Timer FallTimer;
 	[Export]
 	public Godot.Timer StumpTimer;
+	[Export]
+	public ProgressBar ProgressBar;
 
 	// publics
 	public TreeModel Model;
@@ -38,10 +40,27 @@ public partial class Tree : Node2D
 		ChopTimer.Timeout += OnChopTimerTimeout;
 		FallTimer.Timeout += FinishChopping;
 		StumpTimer.Timeout += FinishStumping;
+
+		ProgressBar.Visible = false;
+		ProgressBar.Value = 0;
 	}
 	public override void _Process(double delta)
 	{
-		if (!ChopTimer.IsStopped()) GD.Print($"Timer started: {ChopTimer.TimeLeft} seconds left");
+		if (!ChopTimer.IsStopped())
+		{
+			ProgressBar.Visible = true;
+			ProgressBar.Value = ChopTimer.TimeLeft / ChopTimer.WaitTime * 100;
+		}
+		else if (!StumpTimer.IsStopped())
+		{
+			ProgressBar.Visible = true;
+			ProgressBar.Value = StumpTimer.TimeLeft / StumpTimer.WaitTime * 100;
+		}
+		else
+		{
+			ProgressBar.Visible = false;
+			ProgressBar.Value = 0;
+		}
 	}
 
 	private void OnTimerTimeout()
@@ -123,7 +142,7 @@ public partial class Tree : Node2D
 		INTERACTION interactionType = Enum.Parse<INTERACTION>(interaction, true);
 		if (interactionType == INTERACTION.CHOP_TREE)
 		{
-			if (Model.IsFalling) 
+			if (Model.IsFalling)
 			{
 				GD.Print("Cannot stop chopping while tree is falling.");
 				return;
