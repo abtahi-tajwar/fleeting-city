@@ -12,6 +12,15 @@ public class CurrentTreeResource
 {
 	public float Amount { get; set; }
 	public DateTime LastUpdated { get; set; }
+	public TreeResourceModel Data { get; set; }
+
+	public CurrentTreeResource Clone() => new CurrentTreeResource {
+		Data = this.Data,                // keep template reference
+		Amount = this.Amount,            // snapshot amount
+		LastUpdated = this.LastUpdated
+	};
+
+
 };
 public class TreeModel
 {
@@ -34,9 +43,20 @@ public class TreeModel
 	public bool IsBeingChopped { get; set; }
 
 	/// <summary>
+	/// True if the root is currently being removed.
+	/// </summary>
+	public bool IsBeingStumped { get; set; } = false;
+
+	/// <summary>
+	/// True if the tree is removed from the world and no longer exists.
+	/// </summary>
+	public bool IsRemoved { get; set; } = false;
+
+	/// <summary>
 	/// True if the tree is currently falling down.
 	/// <summary>
 	public bool IsFalling { get; set; } = false;
+
 
 
 	public readonly Dictionary<string, CurrentTreeResource> CurrentResources = new();
@@ -70,20 +90,18 @@ public class TreeModel
 		{
 			throw new ArgumentException($"Initial state '{initialState}' not found in tree data.");
 		}
-		foreach (var kvp in Data.ProducedResource)
-		{
-			CurrentResources[kvp.ResourceId] = new()
-			{
-				Amount = 0,
-				LastUpdated = DateTime.UtcNow
-			};
-		}
+
+		InitializeCurrentResources();
 	}
 
+	public void Update()
+	{
+		UpdateCurrentResources();
+		UpdateCurrentStates();
+	}
 	public void MoveToNextState()
 	{
-		var currentState = Data.States[_currentStateIndex];
-		if (currentState.State == TREE_STATE.STUMP) return;
+		if (_currentStateIndex != Data.States.Count - 1 && Data.States[_currentStateIndex + 1].State == TREE_STATE.STUMP) return;
 		if (_currentStateIndex < Data.States.Count - 1)
 		{
 			_currentStateIndex++;
@@ -112,14 +130,36 @@ public class TreeModel
 		}
 	}
 
-	public void UpdateCurrentResources()
+	private void InitializeCurrentResources()
+	{
+		foreach (var kvp in Data.ProducedResource)
+		{
+			if (kvp.IsChoppingRequired || kvp.IsStumpingRequired)
+			{
+				CurrentResources[kvp.ResourceId] = new()
+				{
+					Amount = kvp.MaxCapacity,
+					LastUpdated = DateTime.UtcNow,
+					Data = kvp
+				};
+				continue;
+			}
+			CurrentResources[kvp.ResourceId] = new()
+			{
+				Amount = 0,
+				LastUpdated = DateTime.UtcNow,
+				Data = kvp
+			};
+		}
+	}
+	private void UpdateCurrentResources()
 	{
 		foreach (var resource in Data.ProducedResource)
 		{
 			var prodPerState = resource.ProductionPerState;
 			prodPerState.TryGetValue(CurrentState.State, out var productionRate);
 
-			if (!resource.IsChoppingRequired)
+			if (!resource.IsChoppingRequired && !resource.IsStumpingRequired)
 			{
 				if (HasResourcePassedInterval(resource))
 				{
@@ -144,49 +184,71 @@ public class TreeModel
 		return false;
 	}
 
-	private void StartChopping()
+	public void StartChopping()
 	{
 		if (IsBeingChopped || IsFalling) return;
 
 		IsBeingChopped = true;
 		IsFalling = false;
 	}
-	private void StartFalling()
+	public void StartFalling()
 	{
-		if (IsFalling || IsBeingChopped) return;
+		if (IsFalling) return;
 
-		IsFalling = true;
 		IsBeingChopped = false;
+		IsFalling = true;
 	}
-	private void CancelChopping()
+	public void CancelChopping()
 	{
 		if (!IsBeingChopped) return;
 
 		IsBeingChopped = false;
 		IsFalling = false;
 	}
-	private Dictionary<string, CurrentTreeResource> CompleteChopping()
+	public void FinishChopping()
 	{
-		if (!IsBeingChopped) return null;
-
 		IsBeingChopped = false;
 		IsFalling = false;
-		var resources = CurrentResources;
+		CurrentState = Data.States.FirstOrDefault(s => s.State == TREE_STATE.STUMP);
+	}
 
-		foreach (var resource in Data.ProducedResource)
+	public void StartStumping()
+	{
+		if (IsBeingStumped || IsFalling) return;
+
+		IsBeingStumped = true;
+		IsFalling = false;
+	}
+	public void CancelStumping()
+	{
+		if (!IsBeingStumped) return;
+
+		IsBeingStumped = false;
+		IsFalling = false;
+	}
+	public void FinishStumping()
+	{
+		if (!IsBeingStumped) return;
+		IsRemoved = true;
+	}
+
+	public Dictionary<string, CurrentTreeResource> ClaimResource()
+	{
+		// Make a shallow copy of the dictionary
+		var claimedResources = new Dictionary<string, CurrentTreeResource>();
+
+		foreach (var kvp in CurrentResources)
 		{
-			if (resource.IsChoppingRequired)
-			{
-				if (resources.TryGetValue(resource.ResourceId, out var currentResource))
-				{
-					currentResource.Amount = resource.ProductionPerState[CurrentState.State];
-					currentResource.LastUpdated = DateTime.UtcNow;
-				}
-			}
+			if (kvp.Value.Data.IsChoppingRequired && CurrentState.State != TREE_STATE.STUMP) continue;
+			if (kvp.Value.Data.IsStumpingRequired && IsRemoved) continue;
+			RootProvider.Logger.Dump(kvp.Value);
+			claimedResources[kvp.Value.Data.ResourceId] = kvp.Value.Clone();
+			kvp.Value.Amount = 0;
+			kvp.Value.LastUpdated = DateTime.UtcNow;
 		}
 
-		CurrentState = Data.States.FirstOrDefault(s => s.State == TREE_STATE.STUMP);
-
-		return resources;
+		return claimedResources;
 	}
+
+	
 }

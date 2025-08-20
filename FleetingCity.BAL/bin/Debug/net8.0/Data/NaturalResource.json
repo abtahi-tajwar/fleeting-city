@@ -5,5 +5,6 @@
   { "Name": "Maple Wood", "Id": "wood_maple", "Type": "NATURAL" },
   { "Name": "Cherry Wood","Id": "wood_cherry","Type": "NATURAL" },
   { "Name": "Pine Sap",   "Id": "sap_pine",   "Type": "NATURAL" },
-  { "Name": "Maple Sap",  "Id": "sap_maple",  "Type": "NATURAL" }
+  { "Name": "Maple Sap",  "Id": "sap_maple",  "Type": "NATURAL" },
+  { "Name": "Oak Sapling",  "Id": "sap_oak",  "Type": "NATURAL" }
 ]

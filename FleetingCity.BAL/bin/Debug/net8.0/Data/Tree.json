@@ -8,20 +8,32 @@
       {
         "ResourceId": "wood_oak",
         "Quantity": 10,
-        "MaxCapacity": 100,
+        "MaxCapacity": 10,
         "IsChoppingRequired": true,
+        "IsStumpingRequired": false,
         "ProductionIntervalInMinutes": null,
         "ProductionPerState": {
           "MATURE": 10,
           "STUMP": 2
         }
+      },
+      {
+        "ResourceId": "sap_oak",
+        "Quantity": 10,
+        "MaxCapacity": 1,
+        "IsChoppingRequired": true,
+        "IsStumpingRequired": false,
+        "ProductionIntervalInMinutes": null,
+        "ProductionPerState": {
+          "STUMP": 1
+        }
       }
     ],
     "HarvestableStates": ["MATURE"],
     "States": [
-      { "State": "SAPLING", "GrowingDurationInMinutes": 0.2 },
-      { "State": "YOUNG",   "GrowingDurationInMinutes": 0.2 },
-      { "State": "MATURE",  "GrowingDurationInMinutes": 0.2 },
+      { "State": "SAPLING", "GrowingDurationInMinutes": 0.1 },
+      { "State": "YOUNG",   "GrowingDurationInMinutes": 0.1 },
+      { "State": "MATURE",  "GrowingDurationInMinutes": 0.1 },
       { "State": "STUMP",   "GrowingDurationInMinutes": 0 }
     ]
   },

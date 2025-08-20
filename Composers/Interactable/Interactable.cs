@@ -14,6 +14,9 @@ public partial class Interactable : Node
 	[Export]
 	public Label HintLabel;
 
+	[Export]
+	public bool IsInteractionDisabled { get; private set; } = false;
+
 	// Signals
 	[Signal]
 	public delegate void InteractionZoneEnteredEventHandler(CharacterBody2D character);
@@ -36,10 +39,6 @@ public partial class Interactable : Node
 	{
 		_interactionKeyName = GetActionKeyName("interact");
 		_interactionCancelKeyName = GetActionKeyName("stop_interact");
-		foreach (var item in InteractableHintData.Instance.Data)
-		{
-			GD.Print($"id: {item.Key}, label: {item.Value.Label}");
-		}
 		if (HintLabel != null
 			|| (GameManager.IsPlatformMobile && HintLabel != null)) HintLabel.Visible = false;
 		_area = GetNode<Area2D>("InteractBoundary");
@@ -73,7 +72,7 @@ public partial class Interactable : Node
 
 	private void OnInteractionPressed()
 	{
-		if (InteractingCharacter != null)
+		if (!IsInteractionDisabled && InteractingCharacter != null)
 		{
 			EventBus.Instance.EmitInteractionCommand(InteractionType);
 			EmitSignal(SignalName.InteractionCommand, InteractionType.ToString());
@@ -84,7 +83,7 @@ public partial class Interactable : Node
 
 	private void OnInteractionStop()
 	{
-		if (InteractingCharacter != null)
+		if (!IsInteractionDisabled && InteractingCharacter != null)
 		{
 			EventBus.Instance.EmitInteractionStopCommand(InteractionType.ToString());
 			EmitSignal(SignalName.InteractionStopCommand, InteractionType.ToString());
@@ -104,20 +103,23 @@ public partial class Interactable : Node
 	public void UpdateInteraction(INTERACTION newInteraction)
 	{
 		InteractionType = newInteraction;
+		SetHint();
+	}
+	
+	public void DisableInteraction()
+	{
+		IsInteractionDisabled = true;
+		if (HintLabel != null) HintLabel.Visible = false;
 	}
 
 	private void OnBodyEntered(Node body)
 	{
-		if (body is Player character)
+		if (!IsInteractionDisabled && body is Player character)
 		{
 			InteractingCharacter = character;
 			if (HintLabel != null && !GameManager.IsPlatformMobile)
 			{
 				HintLabel.Visible = true;
-				foreach (var item in InteractableHintData.Instance.Data)
-				{
-					GD.Print($"id: {item.Key}, label: {item.Value.Label}");
-				}
 				SetHint();
 			}
 			EmitSignal(SignalName.InteractionZoneEntered, character);
@@ -126,7 +128,7 @@ public partial class Interactable : Node
 	}
 	private void OnBodyExited(Node body)
 	{
-		if (body is Player character)
+		if (!IsInteractionDisabled && body is Player character)
 		{
 			if (HintLabel != null) HintLabel.Visible = false;
 			EmitSignal(SignalName.InteractionZoneExited, body);

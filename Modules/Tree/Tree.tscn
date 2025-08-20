@@ -125,9 +125,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dct6t")
 }],
-"loop": true,
+"loop": false,
 "name": &"falling",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -143,6 +143,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"mature",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"removed",
 "speed": 5.0
 }, {
 "frames": [{
@@ -163,6 +171,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_p4gf1")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"stumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vabe0")
 }],
 "loop": true,
@@ -173,14 +192,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgp2i"]
 size = Vector2(17.5, 14)
 
-[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer")]
+[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer", "FallTimer", "StumpTimer")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_stck6")
 TreeType = "oak_tree"
 InteractableNode = NodePath("Interactable")
 TreeSprite = NodePath("MainSprite")
-ChopTimer = NodePath("Timer")
+ChopTimer = NodePath("Node2D/ChopTimer")
+FallTimer = NodePath("Node2D/FallTimer")
+StumpTimer = NodePath("Node2D/StumpTimer")
 
 [node name="Interactable" parent="." node_paths=PackedStringArray("HintLabel") instance=ExtResource("1_vmncd")]
 InteractionType = 3
@@ -195,7 +216,7 @@ position = Vector2(-1, 0)
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_stck6")
-animation = &"mature"
+animation = &"removed"
 autoplay = "idle"
 offset = Vector2(0, -25)
 
@@ -217,6 +238,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "Press E to Chop"
 horizontal_alignment = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="ChopTimer" type="Timer" parent="Node2D"]
+wait_time = 3.0
+one_shot = true
+
+[node name="FallTimer" type="Timer" parent="Node2D"]
+one_shot = true
+
+[node name="StumpTimer" type="Timer" parent="Node2D"]
+wait_time = 3.0
+one_shot = true
 
 [editable path="Interactable"]

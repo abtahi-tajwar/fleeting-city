@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using FleetingCity.BAL.Data;
 using FleetingCity.BAL.Enum;
 using FleetingCity.BAL.Model;
@@ -13,6 +14,10 @@ public partial class Tree : Node2D
 	public AnimatedSprite2D TreeSprite;
 	[Export]
 	public Godot.Timer ChopTimer;
+	[Export]
+	public Godot.Timer FallTimer;
+	[Export]
+	public Godot.Timer StumpTimer;
 
 	// publics
 	public TreeModel Model;
@@ -27,28 +32,87 @@ public partial class Tree : Node2D
 		InteractableNode.InteractionCommand += OnInteractionCommand;
 		InteractableNode.InteractionStopCommand += OnInteractionStopCommand;
 
-		Model = new TreeModel(TreeType);
-
+		Model = new TreeModel(TreeType, TREE_STATE.MATURE);
+		LoadAnimation();
 		GlobalTimer.Instance.Timeout += OnTimerTimeout;
+		ChopTimer.Timeout += OnChopTimerTimeout;
+		FallTimer.Timeout += FinishChopping;
+		StumpTimer.Timeout += FinishStumping;
+	}
+	public override void _Process(double delta)
+	{
+		if (!ChopTimer.IsStopped()) GD.Print($"Timer started: {ChopTimer.TimeLeft} seconds left");
 	}
 
 	private void OnTimerTimeout()
 	{
-		GD.Print($"Timer checking in tree");
-		Model.UpdateCurrentResources();
-		Model.UpdateCurrentStates();
+		Model.Update();
 		LoadAnimation();
+	}
+	private void OnChopTimerTimeout()
+	{
+		Model.StartFalling();
+		FallTimer.Start();
+		LoadAnimation();
+	}
+
+	private void FinishChopping()
+	{
+		Model.FinishChopping();
+		var resources = Model.ClaimResource();
+
+		if (resources != null && resources.Count > 0)
+		{
+			foreach (var resource in resources)
+			{
+				GD.Print($"Chopped {resource.Value.Amount} of {resource.Key}");
+			}
+		}
+		LoadAnimation();
+		InteractableNode.StopInteraction();
+		InteractableNode.UpdateInteraction(INTERACTION.STUMP_TREE);
+	}
+	private void FinishStumping()
+	{
+		GD.Print("Stumping should finish");
+		Model.FinishStumping();
+		var resources = Model.ClaimResource();
+
+		if (resources != null && resources.Count > 0)
+		{
+			foreach (var resource in resources)
+			{
+				GD.Print($"Chopped {resource.Value.Amount} of {resource.Key}");
+			}
+		}
+		LoadAnimation();
+		InteractableNode.StopInteraction();
+		InteractableNode.DisableInteraction();
+
+		RemoveNode();
 	}
 	private void OnInteractionCommand(string interaction)
 	{
 		INTERACTION interactionType = Enum.Parse<INTERACTION>(interaction, true);
 		if (interactionType == INTERACTION.CHOP_TREE)
 		{
-			GD.Print($"Chopping tree of type: {TreeType}");
-			// Add logic to handle tree chopping
-			// For example, remove the tree from the scene or play an animation
+			Model.StartChopping();
+			ChopTimer.Start();
 			LoadAnimation();
 		}
+		else if (interactionType == INTERACTION.STUMP_TREE)
+		{
+			if (Model.IsBeingChopped || Model.IsFalling)
+			{
+				GD.Print("Cannot remove trunk while tree is being chopped or is falling.");
+				return;
+			}
+			GD.Print("Stumping should start");
+			Model.StartStumping();
+			StumpTimer.Start();
+			LoadAnimation();
+		}
+
 		else
 		{
 			GD.Print($"Unhandled interaction: {interaction} for tree type: {TreeType}");
@@ -59,6 +123,19 @@ public partial class Tree : Node2D
 		INTERACTION interactionType = Enum.Parse<INTERACTION>(interaction, true);
 		if (interactionType == INTERACTION.CHOP_TREE)
 		{
+			if (Model.IsFalling) 
+			{
+				GD.Print("Cannot stop chopping while tree is falling.");
+				return;
+			}
+			Model.CancelChopping();
+			ChopTimer.Stop();
+			LoadAnimation();
+		}
+		else if (interactionType == INTERACTION.STUMP_TREE)
+		{
+			Model.CancelStumping();
+			StumpTimer.Stop();
 			LoadAnimation();
 		}
 		else
@@ -87,8 +164,20 @@ public partial class Tree : Node2D
 		{
 			if (Model.CurrentState.State == TREE_STATE.STUMP)
 			{
-				TreeSprite.Play("stump");
-			} else if (Model.CurrentState.State == TREE_STATE.SAPLING)
+				if (Model.IsBeingStumped)
+				{
+					TreeSprite.Play("stumping");
+				}
+				else if (Model.IsRemoved)
+				{
+					TreeSprite.Play("removed");
+				}
+				else
+				{
+					TreeSprite.Play("stump");
+				}
+			}
+			else if (Model.CurrentState.State == TREE_STATE.SAPLING)
 			{
 				TreeSprite.Play("sapling");
 			}
@@ -108,6 +197,12 @@ public partial class Tree : Node2D
 			}
 		}
 	}
-	
+
+
+	public void RemoveNode()
+	{
+		if (Model.IsRemoved) QueueFree();
+		else GD.PushError($"At {GetTree()}: Cannot remove tree node because it is not removed yet. Please ensure the tree is removed before calling this method.");
+	}
 
 }

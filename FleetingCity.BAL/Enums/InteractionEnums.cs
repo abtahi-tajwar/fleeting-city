@@ -7,5 +7,5 @@ public enum INTERACTION
     HARVEST,
     TALK,
     CHOP_TREE,
-    REMOVE_TRUNK
+    STUMP_TREE
 }
