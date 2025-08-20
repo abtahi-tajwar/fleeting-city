@@ -27,4 +27,7 @@ metadata/_edit_group_ = true
 [node name="Tree" parent="." index="7" instance=ExtResource("2_jyrq1")]
 position = Vector2(108.474, -77.535)
 
+[node name="Tree2" parent="." index="8" instance=ExtResource("2_jyrq1")]
+position = Vector2(-95, 0)
+
 [editable path="WorldBound"]

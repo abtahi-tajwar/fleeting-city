@@ -30,7 +30,7 @@ public partial class EventBus : Node
     [Signal]
     public delegate void InteractionStopEventHandler();
     [Signal]
-    public delegate void InteractionCommandEventHandler(INTERACTION interaction);
+    public delegate void InteractionCommandEventHandler(INTERACTION interaction, Node2D sender);
     [Signal]
     public delegate void InteractionStopCommandEventHandler(string interactionType);
     [Signal]
@@ -87,9 +87,9 @@ public partial class EventBus : Node
     {
         EmitSignal(SignalName.SelectedUnitChanged);
     }
-    public void EmitInteractionCommand(INTERACTION interactionType)
+    public void EmitInteractionCommand(INTERACTION interactionType, Node2D sender)
     {
-        EmitSignal(SignalName.InteractionCommand, interactionType.ToString());
+        EmitSignal(SignalName.InteractionCommand, interactionType.ToString(), sender);
     }
     public void EmitInteractionPressed()
     {

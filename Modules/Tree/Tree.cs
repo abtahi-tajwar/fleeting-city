@@ -35,6 +35,7 @@ public partial class Tree : Node2D
 		InteractableNode.InteractionStopCommand += OnInteractionStopCommand;
 
 		Model = new TreeModel(TreeType, TREE_STATE.MATURE);
+		Model.Id = $"{Name}";
 		LoadAnimation();
 		GlobalTimer.Instance.Timeout += OnTimerTimeout;
 		ChopTimer.Timeout += OnChopTimerTimeout;

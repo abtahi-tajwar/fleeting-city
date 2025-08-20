@@ -37,6 +37,7 @@ project/assembly_name="Fleeting City"
 ActionButton=""
 Settler=""
 walkable=""
+farmable_tree=""
 
 [input]
 

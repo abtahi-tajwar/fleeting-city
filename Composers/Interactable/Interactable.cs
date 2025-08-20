@@ -4,7 +4,7 @@ using Godot;
 using Microsoft.VisualBasic;
 using System;
 
-public partial class Interactable : Node
+public partial class Interactable : Node2D
 {
 	private Area2D _area;
 
@@ -37,6 +37,7 @@ public partial class Interactable : Node
 
 	public override void _Ready()
 	{
+		
 		_interactionKeyName = GetActionKeyName("interact");
 		_interactionCancelKeyName = GetActionKeyName("stop_interact");
 		if (HintLabel != null
@@ -66,15 +67,15 @@ public partial class Interactable : Node
 
 	private void ConnectToEventBus()
 	{
-		EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
-		EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
+		// EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
+		// EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
 	}
 
 	private void OnInteractionPressed()
 	{
 		if (!IsInteractionDisabled && InteractingCharacter != null)
 		{
-			EventBus.Instance.EmitInteractionCommand(InteractionType);
+			EventBus.Instance.EmitInteractionCommand(InteractionType, this);
 			EmitSignal(SignalName.InteractionCommand, InteractionType.ToString());
 			GD.Print($"Interaction command emitted for {InteractionType}");
 			HintLabel.Text = $"Press {_interactionCancelKeyName} to stop {InteractionType}";
@@ -105,7 +106,7 @@ public partial class Interactable : Node
 		InteractionType = newInteraction;
 		SetHint();
 	}
-	
+
 	public void DisableInteraction()
 	{
 		IsInteractionDisabled = true;
@@ -116,6 +117,8 @@ public partial class Interactable : Node
 	{
 		if (!IsInteractionDisabled && body is Player character)
 		{
+			EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
+			EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
 			InteractingCharacter = character;
 			if (HintLabel != null && !GameManager.IsPlatformMobile)
 			{
@@ -128,6 +131,8 @@ public partial class Interactable : Node
 	}
 	private void OnBodyExited(Node body)
 	{
+		EventBus.Instance.Disconnect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
+		EventBus.Instance.Disconnect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
 		if (!IsInteractionDisabled && body is Player character)
 		{
 			if (HintLabel != null) HintLabel.Visible = false;

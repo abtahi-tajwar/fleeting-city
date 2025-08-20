@@ -192,7 +192,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgp2i"]
 size = Vector2(17.5, 14)
 
-[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer", "FallTimer", "StumpTimer", "ProgressBar")]
+[node name="Tree" type="Node2D" node_paths=PackedStringArray("InteractableNode", "TreeSprite", "ChopTimer", "FallTimer", "StumpTimer", "ProgressBar") groups=["farmable_tree"]]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_stck6")
