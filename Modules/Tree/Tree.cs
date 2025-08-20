@@ -89,7 +89,7 @@ public partial class Tree : Node2D
 			}
 		}
 		LoadAnimation();
-		InteractableNode.StopInteraction();
+		InteractableNode.FinishInteraction(INTERACTION.STUMP_TREE);
 		InteractableNode.UpdateInteraction(INTERACTION.STUMP_TREE);
 	}
 	private void FinishStumping()
@@ -106,7 +106,7 @@ public partial class Tree : Node2D
 			}
 		}
 		LoadAnimation();
-		InteractableNode.StopInteraction();
+		InteractableNode.FinishInteraction(null);
 		InteractableNode.DisableInteraction();
 
 		RemoveNode();

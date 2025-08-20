@@ -69,6 +69,17 @@ public partial class Interactable : Node2D
 	{
 		// EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
 		// EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
+		if (!EventBus.Instance.IsConnected("InteractionPressed", new Callable(this, nameof(OnInteractionPressed))))
+			EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
+		if (!EventBus.Instance.IsConnected("InteractionStop", new Callable(this, nameof(OnInteractionStop))))
+			EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
+	}
+	private void DisconnectToEventBus()
+	{
+		if (EventBus.Instance.IsConnected("InteractionPressed", new Callable(this, nameof(OnInteractionPressed))))
+			EventBus.Instance.Disconnect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
+		if (EventBus.Instance.IsConnected("InteractionStop", new Callable(this, nameof(OnInteractionStop))))
+			EventBus.Instance.Disconnect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
 	}
 
 	private void OnInteractionPressed()
@@ -86,17 +97,17 @@ public partial class Interactable : Node2D
 	{
 		if (!IsInteractionDisabled && InteractingCharacter != null)
 		{
-			EventBus.Instance.EmitInteractionStopCommand(InteractionType.ToString());
+			EventBus.Instance.EmitInteractionStopCommand(InteractionType);
 			EmitSignal(SignalName.InteractionStopCommand, InteractionType.ToString());
 			SetHint();
 		}
 	}
 
-	public void StopInteraction()
+	public void FinishInteraction(Nullable<INTERACTION> newInteraction)
 	{
 		if (InteractingCharacter != null)
 		{
-			EventBus.Instance.EmitInteractionStopCommand(InteractionType.ToString());
+			EventBus.Instance.EmitInteractionStopCommand(newInteraction ?? InteractionType);
 			SetHint();
 		}
 	}
@@ -109,6 +120,7 @@ public partial class Interactable : Node2D
 
 	public void DisableInteraction()
 	{
+		OnBodyExited(InteractingCharacter);
 		IsInteractionDisabled = true;
 		if (HintLabel != null) HintLabel.Visible = false;
 	}
@@ -117,8 +129,7 @@ public partial class Interactable : Node2D
 	{
 		if (!IsInteractionDisabled && body is Player character)
 		{
-			EventBus.Instance.Connect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
-			EventBus.Instance.Connect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
+			ConnectToEventBus();
 			InteractingCharacter = character;
 			if (HintLabel != null && !GameManager.IsPlatformMobile)
 			{
@@ -126,13 +137,12 @@ public partial class Interactable : Node2D
 				SetHint();
 			}
 			EmitSignal(SignalName.InteractionZoneEntered, character);
-			EventBus.Instance.EmitInteractionZoneEntered(InteractionType);
+			EventBus.Instance.EmitInteractionZoneEntered(InteractionType, IsInteractionDisabled);
 		}
 	}
 	private void OnBodyExited(Node body)
 	{
-		EventBus.Instance.Disconnect("InteractionPressed", new Callable(this, nameof(OnInteractionPressed)));
-		EventBus.Instance.Disconnect("InteractionStop", new Callable(this, nameof(OnInteractionStop)));
+		DisconnectToEventBus();
 		if (!IsInteractionDisabled && body is Player character)
 		{
 			if (HintLabel != null) HintLabel.Visible = false;

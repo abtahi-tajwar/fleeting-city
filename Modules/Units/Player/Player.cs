@@ -101,7 +101,7 @@ public partial class Player : CharacterBody2D
 		Position = Position.Clamp(boundRect.Position, boundRect.End);
 	}
 
-	private void OnInteractionCommand(string interactionStr)
+	private void OnInteractionCommand(string interactionStr, Node2D sender)
 	{
 		var interactionType = (INTERACTION)Enum.Parse(typeof(INTERACTION), interactionStr, true);
 		IsInteracting = true;
