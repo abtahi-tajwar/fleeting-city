@@ -32,6 +32,10 @@ window/stretch/aspect="keep_width"
 
 project/assembly_name="Fleeting City"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/composers/plugin.cfg")
+
 [global_group]
 
 ActionButton=""

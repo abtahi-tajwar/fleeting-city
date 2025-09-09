@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using FleetingCity.BAL.Data;
+using FleetingCity.BAL.Dto;
 using FleetingCity.BAL.Enum;
 using FleetingCity.BAL.Model;
 using Godot;
@@ -21,6 +22,9 @@ public partial class Tree : Node2D
 	[Export]
 	public ProgressBar ProgressBar;
 
+	[Export]
+	public TREE_STATE InitialState = TREE_STATE.SAPLING;
+
 	// publics
 	public TreeModel Model;
 
@@ -34,7 +38,7 @@ public partial class Tree : Node2D
 		InteractableNode.InteractionCommand += OnInteractionCommand;
 		InteractableNode.InteractionStopCommand += OnInteractionStopCommand;
 
-		Model = new TreeModel(TreeType, TREE_STATE.MATURE);
+		Model = new TreeModel(TreeType, InitialState);
 		Model.Id = $"{Name}";
 		LoadAnimation();
 		GlobalTimer.Instance.Timeout += OnTimerTimeout;
@@ -79,15 +83,7 @@ public partial class Tree : Node2D
 	private void FinishChopping()
 	{
 		Model.FinishChopping();
-		var resources = Model.ClaimResource();
-
-		if (resources != null && resources.Count > 0)
-		{
-			foreach (var resource in resources)
-			{
-				GD.Print($"Chopped {resource.Value.Amount} of {resource.Key}");
-			}
-		}
+		ClaimResources();
 		LoadAnimation();
 		InteractableNode.FinishInteraction(INTERACTION.STUMP_TREE);
 		InteractableNode.UpdateInteraction(INTERACTION.STUMP_TREE);
@@ -96,20 +92,26 @@ public partial class Tree : Node2D
 	{
 		GD.Print("Stumping should finish");
 		Model.FinishStumping();
+		ClaimResources();
+		LoadAnimation();
+		InteractableNode.FinishInteraction(null);
+		InteractableNode.DisableInteraction();
+
+		RemoveNode();
+	}
+
+	private void ClaimResources()
+	{
 		var resources = Model.ClaimResource();
 
 		if (resources != null && resources.Count > 0)
 		{
 			foreach (var resource in resources)
 			{
+				PlayerInventory.Instance.AddResource(resource.Key, (int)Math.Floor(resource.Value.Amount));
 				GD.Print($"Chopped {resource.Value.Amount} of {resource.Key}");
 			}
 		}
-		LoadAnimation();
-		InteractableNode.FinishInteraction(null);
-		InteractableNode.DisableInteraction();
-
-		RemoveNode();
 	}
 	private void OnInteractionCommand(string interaction)
 	{

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://b5u14wmn35ijq"]
+[gd_scene load_steps=13 format=4 uid="uid://b5u14wmn35ijq"]
 
 [ext_resource type="PackedScene" uid="uid://bsrv5uef8ua7e" path="res://Modules/Units/Player/player.tscn" id="2_ufl4h"]
 [ext_resource type="PackedScene" uid="uid://bhr44w7i2cwxo" path="res://Modules/World/WorldBound.tscn" id="3_58y5n"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="6_uc7fm"]
 [ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="7_56e3h"]
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="8_eumj5"]
+[ext_resource type="PackedScene" uid="uid://dnk2hjffd5ghr" path="res://Modules/UI/InventoryScreen/inventory_screen.tscn" id="10_orcbb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eumj5"]
 texture = ExtResource("8_eumj5")
@@ -577,5 +578,7 @@ zoom = Vector2(3.5, 3.5)
 script = ExtResource("4_yga4i")
 
 [node name="InputManager" parent="Camera2D" instance=ExtResource("5_orcbb")]
+
+[node name="InventoryScreen" parent="." instance=ExtResource("10_orcbb")]
 
 [editable path="WorldBound"]

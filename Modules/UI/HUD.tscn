@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvnw0jfd4pyif"]
+[gd_scene load_steps=11 format=3 uid="uid://cvnw0jfd4pyif"]
 
 [ext_resource type="PackedScene" uid="uid://c0a7gkbx7qhts" path="res://Debug/MousePosition/MousePosition.tscn" id="1_6w5ua"]
 [ext_resource type="PackedScene" uid="uid://bhl1mpmjatwdb" path="res://Debug/ProcessDebug/ProcessDebug.tscn" id="2_b21t2"]
@@ -6,7 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dpa0i2j65dmlv" path="res://Modules/UI/VirtualJoystick/VirtualJoystick.tscn" id="3_b21t2"]
 [ext_resource type="PackedScene" uid="uid://dl570yu5fjx30" path="res://Modules/UI/InteractionButton/InteractionButton.tscn" id="4_s7k6r"]
 [ext_resource type="PackedScene" uid="uid://c6i2l35801ccn" path="res://Debug/ToggleMobileMode/ToggleMobileMode.tscn" id="7_drm30"]
+[ext_resource type="Texture2D" uid="uid://cmyodl1hrh0kx" path="res://assets/game/UI/Buttons/Button_Blue_9Slides.png" id="7_rjit6"]
 [ext_resource type="PackedScene" uid="uid://dbs3spsx8dbn" path="res://Debug/TouchEmulator/TouchEmulator.tscn" id="8_rjit6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rjit6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_drm30"]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -82,5 +87,39 @@ layout_mode = 2
 [node name="MousePosition" parent="Container/MarginContainer/VBoxContainer" instance=ExtResource("1_6w5ua")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Container"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MenuBar" type="HBoxContainer" parent="Container/MarginContainer2"]
+layout_mode = 2
+
+[node name="InventoryButton" type="PanelContainer" parent="Container/MarginContainer2/MenuBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_rjit6")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Container/MarginContainer2/MenuBar/InventoryButton"]
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_rjit6")
+
+[node name="PanelContainer" type="PanelContainer" parent="Container/MarginContainer2/MenuBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_drm30")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Container/MarginContainer2/MenuBar/PanelContainer"]
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("7_rjit6")
 
 [node name="TouchEmulator" parent="." instance=ExtResource("8_rjit6")]

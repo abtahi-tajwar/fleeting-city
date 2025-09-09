@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxi1wu2rnyk4g" path="res://assets/game/environment/tree/common.png" id="1_p4gf1"]
 [ext_resource type="Script" uid="uid://b4v0ha3xgicc" path="res://Modules/Tree/Tree.cs" id="1_stck6"]
-[ext_resource type="PackedScene" uid="uid://p2yey6ny634o" path="res://Composers/Interactable/Interactable.tscn" id="1_vmncd"]
+[ext_resource type="PackedScene" uid="uid://dsork2s5qgf6y" path="res://Composers/Interactable/Interactable.tscn" id="1_vmncd"]
 [ext_resource type="Texture2D" uid="uid://cslkqpmy0kwsi" path="res://assets/game/environment/tree/test_grow.png" id="4_gwjg6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stck6"]
@@ -226,7 +226,7 @@ position = Vector2(-1, 0)
 
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_stck6")
-animation = &"idle"
+animation = &"sapling"
 autoplay = "idle"
 offset = Vector2(0, -25)
 

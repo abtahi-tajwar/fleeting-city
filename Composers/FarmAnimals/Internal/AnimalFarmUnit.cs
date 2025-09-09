@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class AnimalFarmUnit : CharacterBody2D
 {
 	public Godot.Timer MovementTimer;
@@ -52,6 +53,6 @@ public partial class AnimalFarmUnit : CharacterBody2D
 		_movementService.StartMovementTo(Position);
 	}
 
-	
-	
+
+
 }

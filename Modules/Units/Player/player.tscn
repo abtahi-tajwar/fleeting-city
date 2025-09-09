@@ -1,9 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://bsrv5uef8ua7e"]
+[gd_scene load_steps=34 format=3 uid="uid://bsrv5uef8ua7e"]
 
 [ext_resource type="Script" uid="uid://crk333j8aaiks" path="res://Modules/Units/Player/Player.cs" id="1_trhtq"]
 [ext_resource type="Shader" uid="uid://cbp8htoi1wtto" path="res://shaders/TestShader.gdshader" id="1_vk3r0"]
 [ext_resource type="Texture2D" uid="uid://coxvaww2qi78x" path="res://assets/game/player/demo_player.png" id="2_1n4l5"]
 [ext_resource type="PackedScene" uid="uid://cxaoctvhmti50" path="res://Composers/SelectionArea/SelectionArea.tscn" id="4_n1vyh"]
+[ext_resource type="Script" uid="uid://ckthg652kf82f" path="res://Modules/Units/Player/PlayerInventory.cs" id="5_afi3g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vk3r0"]
 shader = ExtResource("1_vk3r0")
@@ -238,3 +239,6 @@ metadata/_edit_group_ = true
 
 [node name="SelectionArea" parent="." instance=ExtResource("4_n1vyh")]
 position = Vector2(0, -14)
+
+[node name="PlayerInventory" type="Node2D" parent="."]
+script = ExtResource("5_afi3g")

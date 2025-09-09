@@ -1,5 +1,6 @@
 using FleetingCity.BAL.Helper;
 using FleetingCity.BAL.Model;
+using FleetingCity.BAL.Service;
 
 namespace FleetingCity.BAL.Module;
 
@@ -11,6 +12,6 @@ public abstract class IProducedResourceModel
 
     public IResourceModel GetResource()
     {
-        return Helper.Helper.GetResource(ResourceId);
+        return ResourceService.GetResource(ResourceId);
     }
 }

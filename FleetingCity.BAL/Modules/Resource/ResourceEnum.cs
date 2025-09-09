@@ -11,3 +11,19 @@ public enum RESOURCE_TYPE
     [JsonPropertyName("MATERIAL")]
     MATERIAL
 }
+
+public enum CONSUMABLE_TYPE
+{
+    [JsonPropertyName("EDIBLE")]
+    EDIBLE,
+    [JsonPropertyName("POTION")]
+    POTION
+}
+
+public enum TOOL_TYPE
+{
+    [JsonPropertyName("WEAPON")]
+    WEAPON,
+    [JsonPropertyName("FARMING")]
+    FARMING
+}

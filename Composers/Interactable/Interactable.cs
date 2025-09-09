@@ -26,6 +26,8 @@ public partial class Interactable : Node2D
 	public delegate void InteractionCommandEventHandler(string interactionType);
 	[Signal]
 	public delegate void InteractionStopCommandEventHandler(string interactionType);
+	[Signal]
+	public delegate void InteractionFinishCommandEventHandler(string interactionType);
 
 	// publics
 	public Player InteractingCharacter { get; private set; }
@@ -108,6 +110,7 @@ public partial class Interactable : Node2D
 		if (InteractingCharacter != null)
 		{
 			EventBus.Instance.EmitInteractionStopCommand(newInteraction ?? InteractionType);
+			EmitSignal(SignalName.InteractionFinishCommand, InteractionType.ToString());
 			SetHint();
 		}
 	}

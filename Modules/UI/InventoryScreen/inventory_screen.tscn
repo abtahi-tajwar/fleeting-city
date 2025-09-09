@@ -1,0 +1,164 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnk2hjffd5ghr"]
+
+[ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_f43vv"]
+[ext_resource type="FontFile" uid="uid://cato6nu8x3dlt" path="res://assets/font/Minecraft.ttf" id="3_hmvdq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f43vv"]
+texture = ExtResource("1_f43vv")
+region_rect = Rect2(435.138, 362.794, 10.7007, 4.17587)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f43vv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmcra"]
+texture = ExtResource("1_f43vv")
+region_rect = Rect2(428.519, 368.36, 14.6156, 15.2681)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmcra"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nh02g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4j8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hmvdq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fvwg"]
+
+[node name="InventoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_f43vv")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f43vv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuickItem" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/QuickItem"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="QuickItem2" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/QuickItem2"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="QuickItem3" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/QuickItem3"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="QuickItem4" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/QuickItem4"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="Spacer" type="MarginContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Tools" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Tools"]
+layout_mode = 2
+theme_type_variation = &"Empty"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2fvwg")
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Tools/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_hmvdq")
+theme_override_font_sizes/font_size = 50
+text = "Tools"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Tools"]
+layout_mode = 2
+
+[node name="ToolItem" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Tools/HFlowContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Tools/HFlowContainer/ToolItem"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="Spacer2" type="MarginContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Consumable" type="VBoxContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Consumable"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Panel/MarginContainer/HBoxContainer/Consumable"]
+layout_mode = 2
