@@ -29,3 +29,5 @@ layout_mode = 2
 
 [node name="InventoryPickableItem" parent="Resources/HFlowContainer" instance=ExtResource("3_dsw0y")]
 layout_mode = 2
+
+[editable path="Resources/HFlowContainer/InventoryPickableItem"]
