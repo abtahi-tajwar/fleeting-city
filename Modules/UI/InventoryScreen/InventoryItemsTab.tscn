@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://dvf87by21d64u"]
+
+[ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_gjbxx"]
+[ext_resource type="FontFile" uid="uid://cato6nu8x3dlt" path="res://assets/font/Minecraft.ttf" id="2_ctdk6"]
+[ext_resource type="PackedScene" uid="uid://btm8wwe1662fc" path="res://Modules/UI/InventoryScreen/InventoryPickableItem.tscn" id="3_hkbho"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f43vv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmcra"]
+texture = ExtResource("1_gjbxx")
+region_rect = Rect2(428.519, 368.36, 14.6156, 15.2681)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmcra"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nh02g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4j8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hmvdq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fvwg"]
+
+[node name="InventoryItems" type="HBoxContainer"]
+visible = false
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f43vv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuickItem" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/QuickItem"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="QuickItem2" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/QuickItem2"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="QuickItem3" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/QuickItem3"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="QuickItem4" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/QuickItem4"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="Spacer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Tools" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Tools"]
+layout_mode = 2
+theme_type_variation = &"Empty"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2fvwg")
+
+[node name="Label" type="Label" parent="Tools/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ctdk6")
+theme_override_font_sizes/font_size = 50
+text = "Tools"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Tools"]
+layout_mode = 2
+
+[node name="InventoryPickableItem" parent="Tools/HFlowContainer" instance=ExtResource("3_hkbho")]
+layout_mode = 2
+
+[node name="Spacer2" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Consumable" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Consumable"]
+layout_mode = 2
+theme_type_variation = &"Empty"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2fvwg")
+
+[node name="Label" type="Label" parent="Consumable/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ctdk6")
+theme_override_font_sizes/font_size = 50
+text = "Consumables"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Consumable"]
+layout_mode = 2
+
+[node name="InventoryPickableItem" parent="Consumable/HFlowContainer" instance=ExtResource("3_hkbho")]
+layout_mode = 2

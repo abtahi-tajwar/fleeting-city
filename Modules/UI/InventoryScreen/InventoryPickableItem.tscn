@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://btm8wwe1662fc"]
+
+[ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_3oe0f"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nmcra"]
+texture = ExtResource("1_3oe0f")
+region_rect = Rect2(428.519, 368.36, 14.6156, 15.2681)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nmcra"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nh02g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4j8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hmvdq"]
+
+[node name="ToolItem" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 100)
+theme_override_styles/panel = SubResource("StyleBoxTexture_nmcra")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nmcra")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_nh02g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x4j8i")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hmvdq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2

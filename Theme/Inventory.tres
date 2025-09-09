@@ -1,6 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b4bxhrdg7uo4s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o8j6h"]
-
-[resource]
-Label/styles/Empty = SubResource("StyleBoxEmpty_o8j6h")

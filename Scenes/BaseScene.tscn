@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d4exletsx3xcr" path="res://Core/SettlerManager/SettlerManager.tscn" id="6_uc7fm"]
 [ext_resource type="PackedScene" uid="uid://cx0naigkjpfc0" path="res://Core/GameManager/GameManager.tscn" id="7_56e3h"]
 [ext_resource type="Texture2D" uid="uid://ba06lhvvtc7om" path="res://assets/game/environment/Tilemap_Flat.png" id="8_eumj5"]
-[ext_resource type="PackedScene" uid="uid://dnk2hjffd5ghr" path="res://Modules/UI/InventoryScreen/inventory_screen.tscn" id="10_orcbb"]
+[ext_resource type="PackedScene" uid="uid://dnk2hjffd5ghr" path="res://Modules/UI/InventoryScreen/InventoryScreen.tscn" id="10_orcbb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eumj5"]
 texture = ExtResource("8_eumj5")
