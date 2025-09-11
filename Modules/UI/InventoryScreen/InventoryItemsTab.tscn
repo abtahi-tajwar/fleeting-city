@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_gjbxx"]
 [ext_resource type="FontFile" uid="uid://cato6nu8x3dlt" path="res://assets/font/Minecraft.ttf" id="2_ctdk6"]
-[ext_resource type="PackedScene" uid="uid://btm8wwe1662fc" path="res://Modules/UI/InventoryScreen/InventoryPickableItem.tscn" id="3_hkbho"]
+[ext_resource type="PackedScene" uid="uid://btm8wwe1662fc" path="res://Modules/UI/InventoryScreen/InventoryPickableSupplySlot.tscn" id="3_hkbho"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f43vv"]
 

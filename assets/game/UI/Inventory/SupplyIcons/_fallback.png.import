@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciori3jhcgpad"
-path="res://.godot/imported/wood.png-a65e9f4a142572429837c1e2e866fe91.ctex"
+uid="uid://b5d3kiv2umqdu"
+path="res://.godot/imported/_fallback.png-af521e28090218e4dea30959570e1d45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/game/UI/Inventory/item_icons/wood.png"
-dest_files=["res://.godot/imported/wood.png-a65e9f4a142572429837c1e2e866fe91.ctex"]
+source_file="res://assets/game/UI/Inventory/SupplyIcons/_fallback.png"
+dest_files=["res://.godot/imported/_fallback.png-af521e28090218e4dea30959570e1d45.ctex"]
 
 [params]
 

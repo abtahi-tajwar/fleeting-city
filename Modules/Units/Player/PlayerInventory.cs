@@ -37,6 +37,7 @@ public partial class PlayerInventory : Node2D
         InventoryModel.AddResource(
             new InventoryModelAddResourceDto(resourceId, amount)
         );
+        EventBus.Instance.EmitInventorySupplyClaimed();
     }
 
     public override void _ExitTree()

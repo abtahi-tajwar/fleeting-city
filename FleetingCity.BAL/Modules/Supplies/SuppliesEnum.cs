@@ -2,6 +2,16 @@ using System.Text.Json.Serialization;
 
 namespace FleetingCity.BAL.Enum;
 
+public enum SUPPLY_TYPE
+{
+    [JsonPropertyName("RESOURCE")]
+    RESOURCE,
+    [JsonPropertyName("CONSUMABLE")]
+    CONSUMABLE,
+    [JsonPropertyName("TOOL")]
+    TOOL
+}
+
 public enum RESOURCE_TYPE
 {
     [JsonPropertyName("FOOD")]

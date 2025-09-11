@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnk2hjffd5ghr"]
+[gd_scene load_steps=12 format=3 uid="uid://dnk2hjffd5ghr"]
 
 [ext_resource type="Script" uid="uid://bqcb0jlugproq" path="res://Modules/UI/InventoryScreen/InventoryScreen.cs" id="1_fjksm"]
 [ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_hbvm4"]
 [ext_resource type="Theme" uid="uid://b4bxhrdg7uo4s" path="res://Theme/InventoryItems.tres" id="2_fjksm"]
+[ext_resource type="PackedScene" uid="uid://dfv50w6bcu1r3" path="res://Modules/UI/InventoryScreen/InventorySupplySlot.tscn" id="2_ugoes"]
 [ext_resource type="PackedScene" uid="uid://dvf87by21d64u" path="res://Modules/UI/InventoryScreen/InventoryItemsTab.tscn" id="3_7uru5"]
+[ext_resource type="PackedScene" uid="uid://btm8wwe1662fc" path="res://Modules/UI/InventoryScreen/InventoryPickableSupplySlot.tscn" id="3_t3aeb"]
 [ext_resource type="Texture2D" uid="uid://rnpvhwm6x3o2" path="res://assets/game/UI/Inventory/inventory_close_icon.png" id="4_7uru5"]
-[ext_resource type="PackedScene" uid="uid://7musyylobywv" path="res://Modules/UI/InventoryScreen/InventoryResourcesTab.tscn" id="4_ugoes"]
+[ext_resource type="PackedScene" uid="uid://7musyylobywv" path="res://Modules/UI/InventoryScreen/InventoryResourcesTab/InventoryResourcesTab.tscn" id="4_ugoes"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f43vv"]
 texture = ExtResource("1_hbvm4")
@@ -23,6 +25,8 @@ ResourcesTabButton = NodePath("Parent/Panel/MarginContainer/VBoxContainer/Margin
 ItemsTab = NodePath("Parent/Panel/MarginContainer/VBoxContainer/InventoryItemsTab")
 ResourcesTab = NodePath("Parent/Panel/MarginContainer/VBoxContainer/InventoryResourcesTab")
 CloseButtonDesktop = NodePath("Parent/Panel/MarginContainer/VBoxContainer/MarginContainer/Tabs/CloseButton/CloseButtonDesktop")
+SupplySlot = ExtResource("2_ugoes")
+SupplyPickableSlot = ExtResource("3_t3aeb")
 
 [node name="Parent" type="Control" parent="."]
 layout_mode = 3
@@ -141,9 +145,7 @@ layout_mode = 2
 theme = ExtResource("2_fjksm")
 
 [node name="InventoryItemsTab" parent="Parent/Panel/MarginContainer/VBoxContainer" instance=ExtResource("3_7uru5")]
-visible = true
 layout_mode = 2
 
 [node name="InventoryResourcesTab" parent="Parent/Panel/MarginContainer/VBoxContainer" instance=ExtResource("4_ugoes")]
-visible = false
 layout_mode = 2

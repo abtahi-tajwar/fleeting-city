@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://7musyylobywv"]
+
+[ext_resource type="Script" uid="uid://c54w47mfn5ssn" path="res://Modules/UI/InventoryScreen/InventoryResourcesTab/InventoryResourcesTab.cs" id="1_epbx4"]
+[ext_resource type="FontFile" uid="uid://cato6nu8x3dlt" path="res://assets/font/Minecraft.ttf" id="2_67x7e"]
+[ext_resource type="PackedScene" uid="uid://dfv50w6bcu1r3" path="res://Modules/UI/InventoryScreen/InventorySupplySlot.tscn" id="3_c3ivw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fvwg"]
+
+[node name="InventoryResourcesTab" type="HBoxContainer" node_paths=PackedStringArray("SupplySlotsContainer")]
+size_flags_vertical = 3
+script = ExtResource("1_epbx4")
+SupplySlotsContainer = NodePath("Resources/HFlowContainer")
+
+[node name="Resources" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Resources"]
+layout_mode = 2
+theme_type_variation = &"Empty"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2fvwg")
+
+[node name="Label" type="Label" parent="Resources/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_67x7e")
+theme_override_font_sizes/font_size = 50
+text = "Resources"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Resources"]
+layout_mode = 2
+
+[node name="SupplySlot" parent="Resources/HFlowContainer" instance=ExtResource("3_c3ivw")]
+layout_mode = 2
