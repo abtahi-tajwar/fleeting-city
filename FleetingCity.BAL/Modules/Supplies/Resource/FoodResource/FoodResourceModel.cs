@@ -9,6 +9,7 @@ public class FoodResourceModel : IResourceModel
     // Properties
     public string Name { get; set; }
     public string Id { get; set; }
-    public RESOURCE_TYPE Type { get; set; }
+    public RESOURCE_TYPE Type { get; set; } = RESOURCE_TYPE.FOOD;
+    public SUPPLY_TYPE SupplyType { get; set; } = SUPPLY_TYPE.RESOURCE;
     public Dictionary<NUTRITION_TYPE, float> NutritionalComposition { get; set; }
 }

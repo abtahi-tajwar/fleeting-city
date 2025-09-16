@@ -1,11 +1,13 @@
 using FleetingCity.BAL.Enum;
 using Godot;
 using System;
+using System.Diagnostics;
 
 
 public partial class InventoryScreen : CanvasLayer
 {
 	public static InventoryScreen Instance { get; private set; }
+
 	[Export]
 	public INVENTORY_SCREEN CurrentScreen;
 	[Export]
@@ -24,6 +26,10 @@ public partial class InventoryScreen : CanvasLayer
 	public PackedScene SupplyPickableSlot;
 	[Export]
 	public string IconPath = $"res://assets/game/UI/Inventory/SupplyIcons";
+
+	#nullable enable
+	public string? SelectedSlot { get; set; } = null;
+	#nullable disable
 
 	public override void _EnterTree()
 	{
@@ -94,9 +100,16 @@ public partial class InventoryScreen : CanvasLayer
 		}
 	}
 
+	private void OnSlotClicked(string selectedSupplyId, string supplyType)
+	{
+		var type = Enum.Parse<SUPPLY_TYPE>(supplyType, true);
+		GD.Print("Clicked on", selectedSupplyId, type.ToString());
+	}
+
 	private void ConnectToEventBus()
 	{
 		EventBus.Instance.Connect("InventorySupplyClaimed", new Callable(this, nameof(OnSupplyClaimed)));
+		EventBus.Instance.Connect("InventorySlotClicked", new Callable(this, nameof(OnSlotClicked)));
 	}
 
 }

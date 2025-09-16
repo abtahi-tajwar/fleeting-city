@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://m5q2hx8iicd5"]
+
+[ext_resource type="PackedScene" uid="uid://b5u14wmn35ijq" path="res://Scenes/BaseScene.tscn" id="1_3a3vd"]
+
+[node name="BaseScene" instance=ExtResource("1_3a3vd")]
+
+[editable path="WorldBound"]

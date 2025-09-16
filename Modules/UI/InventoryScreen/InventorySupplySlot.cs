@@ -9,6 +9,8 @@ public partial class InventorySupplySlot : PanelContainer
 	public Control CountLabelContainer;
 	[Export]
 	public TextureRect Icon;
+	[Export]
+	public Button DesktopButton;
 
 	// publics
 	public int Count { get; set; } = 0;
@@ -23,6 +25,7 @@ public partial class InventorySupplySlot : PanelContainer
 	{
 		_countLabel = CountLabelContainer.GetNode<Label>("Label");
 		if (_countLabel == null) GD.PrintErr("No child Label found inside Count container");
+		DesktopButton.Pressed += HandleClick;
 	}
 	public override void _Process(double delta)
 	{
@@ -49,5 +52,9 @@ public partial class InventorySupplySlot : PanelContainer
 		Icon.Texture = tex;
 		_countLabel.Text = Count.ToString();
 
+	}
+	public void HandleClick()
+	{
+	EventBus.Instance.EmitInventorySlotClicked(SupplyId, SupplyType);
 	}
 }

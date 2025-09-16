@@ -3,8 +3,7 @@ using FleetingCity.BAL.Utils;
 
 namespace FleetingCity.BAL.Model;
 
-public interface IResourceModel : IGameDataModel
+public interface IResourceModel : ISupplyModel
 {
-    string Name { get; set; }
     RESOURCE_TYPE Type { get; set; }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnk2hjffd5ghr"]
+[gd_scene load_steps=13 format=3 uid="uid://dnk2hjffd5ghr"]
 
 [ext_resource type="Script" uid="uid://bqcb0jlugproq" path="res://Modules/UI/InventoryScreen/InventoryScreen.cs" id="1_fjksm"]
 [ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_hbvm4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://btm8wwe1662fc" path="res://Modules/UI/InventoryScreen/InventoryPickableSupplySlot.tscn" id="3_t3aeb"]
 [ext_resource type="Texture2D" uid="uid://rnpvhwm6x3o2" path="res://assets/game/UI/Inventory/inventory_close_icon.png" id="4_7uru5"]
 [ext_resource type="PackedScene" uid="uid://7musyylobywv" path="res://Modules/UI/InventoryScreen/InventoryResourcesTab/InventoryResourcesTab.tscn" id="4_ugoes"]
+[ext_resource type="PackedScene" uid="uid://cmu2lq4f3g8ii" path="res://Modules/UI/InventoryScreen/SupplyDetailsScreen/SupplyDetailsScreen.tscn" id="9_4omr4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f43vv"]
 texture = ExtResource("1_hbvm4")
@@ -149,3 +150,11 @@ layout_mode = 2
 
 [node name="InventoryResourcesTab" parent="Parent/Panel/MarginContainer/VBoxContainer" instance=ExtResource("4_ugoes")]
 layout_mode = 2
+
+[node name="SupplyDetailsScreen" parent="Parent" instance=ExtResource("9_4omr4")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 1920.0
+offset_right = 2807.0

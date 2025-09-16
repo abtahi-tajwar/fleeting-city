@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmu2lq4f3g8ii"]
+
+[ext_resource type="Script" uid="uid://dxu53yjmxct60" path="res://Modules/UI/InventoryScreen/SupplyDetailsScreen/SupplyDetailsScreen.cs" id="1_276o5"]
+[ext_resource type="Theme" uid="uid://b4bxhrdg7uo4s" path="res://Theme/InventoryItems.tres" id="1_j7881"]
+[ext_resource type="Texture2D" uid="uid://rnpvhwm6x3o2" path="res://assets/game/UI/Inventory/inventory_close_icon.png" id="2_276o5"]
+[ext_resource type="Texture2D" uid="uid://ciori3jhcgpad" path="res://assets/game/UI/Inventory/SupplyIcons/wood.png" id="3_gh5wy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3aeb"]
+bg_color = Color(0.105614, 0.105614, 0.105614, 1)
+
+[node name="SupplyDetailsScreen" type="Panel" node_paths=PackedStringArray("Title", "Icon")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = 1.0
+offset_right = 887.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t3aeb")
+script = ExtResource("1_276o5")
+Title = NodePath("VBoxContainer/TitleContainer/HBoxContainer/Label")
+Icon = NodePath("VBoxContainer/ItemImage/PanelContainer/TextureRect")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TitleContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_j7881")
+theme_override_font_sizes/font_size = 50
+text = "Item Name"
+
+[node name="CloseButton" type="PanelContainer" parent="VBoxContainer/TitleContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/TitleContainer/HBoxContainer/CloseButton"]
+layout_mode = 2
+texture = ExtResource("2_276o5")
+expand_mode = 2
+
+[node name="CloseButtonDesktop" type="Button" parent="VBoxContainer/TitleContainer/HBoxContainer/CloseButton"]
+layout_mode = 2
+theme = ExtResource("1_j7881")
+
+[node name="ItemImage" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ItemImage"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ItemImage/PanelContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_gh5wy")
+expand_mode = 2
+stretch_mode = 4

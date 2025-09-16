@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfv50w6bcu1r3"]
+[gd_scene load_steps=10 format=3 uid="uid://dfv50w6bcu1r3"]
 
 [ext_resource type="Script" uid="uid://bqixb7xju3whe" path="res://Modules/UI/InventoryScreen/InventorySupplySlot.cs" id="1_calry"]
 [ext_resource type="Texture2D" uid="uid://4atuh8it0rx3" path="res://assets/game/UI/Mediavel.png" id="1_xckox"]
@@ -15,20 +15,21 @@ region = Rect2(427.844, 367.89, 16.09, 16.2839)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jad2"]
 bg_color = Color(0.741176, 0.584314, 0.517647, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
-[node name="InventorySupplySlot" type="PanelContainer" node_paths=PackedStringArray("CountLabelContainer", "Icon")]
-custom_minimum_size = Vector2(100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_calry"]
+atlas = ExtResource("1_xckox")
+region = Rect2(259.735, 371.522, 24.6987, 25.8214)
+
+[node name="InventorySupplySlot" type="PanelContainer" node_paths=PackedStringArray("CountLabelContainer", "Icon", "DesktopButton")]
+custom_minimum_size = Vector2(200, 200)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_calry")
 script = ExtResource("1_calry")
 CountLabelContainer = NodePath("Panel/Count")
 Icon = NodePath("Icon")
+DesktopButton = NodePath("Button")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
@@ -51,15 +52,24 @@ anchor_left = 0.506
 anchor_top = 0.997
 anchor_right = 0.506
 anchor_bottom = 0.997
-offset_left = -33.6
-offset_top = -14.7
-offset_right = 34.4
-offset_bottom = 0.299995
+offset_left = -101.2
+offset_top = -43.4
+offset_right = 98.8
+offset_bottom = 0.600006
 theme_override_styles/panel = SubResource("StyleBoxFlat_4jad2")
 
 [node name="Label" type="Label" parent="Panel/Count"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_h2wnc")
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 35
 text = "21"
+
+[node name="SelectMarker" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_calry")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("3_h2wnc")

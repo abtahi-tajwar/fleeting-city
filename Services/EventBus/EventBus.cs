@@ -35,8 +35,13 @@ public partial class EventBus : Node
 	public delegate void InteractionStopCommandEventHandler(string interactionType);
 	[Signal]
 	public delegate void SelectedUnitChangedEventHandler();
+
+	#region Inventory
 	[Signal]
 	public delegate void InventorySupplyClaimedEventHandler();
+	[Signal]
+	public delegate void InventorySlotClickedEventHandler(string selectedSupplyId, string supplyType);
+	#endregion
 
 
 	public override void _EnterTree()
@@ -124,6 +129,10 @@ public partial class EventBus : Node
 	public void EmitInventorySupplyClaimed()
 	{
 		EmitSignal(SignalName.InventorySupplyClaimed);
+	}
+	public void EmitInventorySlotClicked(string selectedSupplyId, SUPPLY_TYPE supplyType)
+	{
+		EmitSignal(SignalName.InventorySlotClicked, selectedSupplyId, supplyType.ToString());
 	}
 	#endregion
 }
