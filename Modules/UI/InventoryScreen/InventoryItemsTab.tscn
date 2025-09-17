@@ -21,7 +21,6 @@ region_rect = Rect2(428.519, 368.36, 14.6156, 15.2681)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fvwg"]
 
 [node name="InventoryItems" type="HBoxContainer"]
-visible = false
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

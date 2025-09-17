@@ -88,7 +88,7 @@ public partial class SupplyDetailsScreen : Control
 		if (SelectedSupply != null)
 		{
 			Title.Text = SelectedSupply.Name;
-			var supplyIcon = $"{InventoryScreen.Instance.IconPath}/{SelectedSupply.Id}";
+			var supplyIcon = $"{InventoryScreen.Instance.IconPath}/{SelectedSupply.Id}.png";
 			var fallbackIcon = $"{InventoryScreen.Instance.IconPath}/_fallback.png";
 			Texture2D tex;
 			if (ResourceLoader.Exists(supplyIcon))                                  // <- prevents error log

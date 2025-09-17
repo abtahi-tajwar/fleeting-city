@@ -146,6 +146,7 @@ layout_mode = 2
 theme = ExtResource("2_fjksm")
 
 [node name="InventoryItemsTab" parent="Parent/Panel/MarginContainer/VBoxContainer" instance=ExtResource("3_7uru5")]
+visible = false
 layout_mode = 2
 
 [node name="InventoryResourcesTab" parent="Parent/Panel/MarginContainer/VBoxContainer" instance=ExtResource("4_ugoes")]
