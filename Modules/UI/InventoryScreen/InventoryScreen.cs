@@ -1,4 +1,5 @@
 using FleetingCity.BAL.Enum;
+using FleetingCity.BAL.Service;
 using Godot;
 using System;
 using System.Diagnostics;
@@ -104,7 +105,8 @@ public partial class InventoryScreen : CanvasLayer
 	{
 		var type = Enum.Parse<SUPPLY_TYPE>(supplyType, true);
 		GD.Print("Clicked on", selectedSupplyId, type.ToString());
-		// SupplyDetailsScreen.Instance.SetSelectedSupply();
+		var selectedSupply = SupplyService.GetById(selectedSupplyId);
+		SupplyDetailsScreen.Instance.SetSelectedSupply(selectedSupply);
 		SupplyDetailsScreen.Instance.OpenScreen();
 	}
 
