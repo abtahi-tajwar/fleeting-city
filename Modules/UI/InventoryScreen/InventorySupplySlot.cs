@@ -55,6 +55,6 @@ public partial class InventorySupplySlot : PanelContainer
 	}
 	public void HandleClick()
 	{
-	EventBus.Instance.EmitInventorySlotClicked(SupplyId, SupplyType);
+		EventBus.Instance.EmitInventorySlotClicked(SupplyId, SupplyType);
 	}
 }

@@ -157,4 +157,6 @@ anchors_preset = 0
 anchor_left = 0.0
 anchor_right = 0.0
 offset_left = 1920.0
+offset_top = 0.0
 offset_right = 2807.0
+offset_bottom = 1079.0

@@ -8,7 +8,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t3aeb"]
 bg_color = Color(0.105614, 0.105614, 0.105614, 1)
 
-[node name="SupplyDetailsScreen" type="Panel" node_paths=PackedStringArray("Title", "Icon")]
+[node name="SupplyDetailsScreen" type="Panel" node_paths=PackedStringArray("Title", "Icon", "CloseDesktopButton")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -19,6 +19,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_t3aeb")
 script = ExtResource("1_276o5")
 Title = NodePath("VBoxContainer/TitleContainer/HBoxContainer/Label")
 Icon = NodePath("VBoxContainer/ItemImage/PanelContainer/TextureRect")
+CloseDesktopButton = NodePath("VBoxContainer/TitleContainer/HBoxContainer/CloseButton/CloseButtonDesktop")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

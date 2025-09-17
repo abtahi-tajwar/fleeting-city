@@ -104,6 +104,8 @@ public partial class InventoryScreen : CanvasLayer
 	{
 		var type = Enum.Parse<SUPPLY_TYPE>(supplyType, true);
 		GD.Print("Clicked on", selectedSupplyId, type.ToString());
+		// SupplyDetailsScreen.Instance.SetSelectedSupply();
+		SupplyDetailsScreen.Instance.OpenScreen();
 	}
 
 	private void ConnectToEventBus()
